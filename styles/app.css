@@ -1,0 +1,1267 @@
+/* Page-level */
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:#050506;overflow-x:clip}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-hover)}
+
+/* Keyframes */
+@keyframes msaFade{from{opacity:0}to{opacity:1}}
+@keyframes msaRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes msaUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes msaHeroIn{from{opacity:0;transform:scale(1.05)}to{opacity:1;transform:scale(1)}}
+@keyframes msaSpark{0%,100%{opacity:.18}50%{opacity:.42}}
+@keyframes msaPulse{0%,100%{box-shadow:0 0 0 0 rgba(227,30,36,.5)}50%{box-shadow:0 0 0 14px rgba(227,30,36,0)}}
+
+/* Reveal animation for [data-anim] blocks */
+[data-anim]{transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)}
+[data-anim].msa-off{opacity:0;transform:translateY(24px)}
+@media (prefers-reduced-motion:reduce){
+  [data-msa=heroimg],[data-msa=heroline]{animation:none !important;opacity:1 !important;transform:none !important}
+  [data-anim]{transition:none !important}
+  [data-anim].msa-off{opacity:1 !important;transform:none !important}
+}
+
+/* Anchor scroll offset */
+[data-msa=sec]{scroll-margin-top:96px}
+
+/* Nav link underline hover */
+[data-msa=navlink]{position:relative;padding:8px 0;white-space:nowrap;font-family:var(--font-body);font-weight:700;font-size:15px;color:var(--text-body);text-decoration:none;cursor:pointer}
+[data-msa=navlink]::after{content:"";position:absolute;inset-inline-start:0;bottom:0;height:2px;width:0;background:var(--accent);transition:width var(--dur-base) var(--ease-out)}
+[data-msa=navlink]:hover{color:var(--white)}
+[data-msa=navlink]:hover::after{width:100%}
+
+/* Card / feature hover */
+[data-msa=card],[data-msa=feature],[data-msa=coach]{transition:var(--transition-control)}
+[data-msa=card]:hover,[data-msa=feature]:hover,[data-msa=coach]:hover{border-color:var(--red-a42) !important}
+[data-msa=card]:hover [data-msa=thumbimg],[data-msa=feature]:hover [data-msa=thumbimg],[data-msa=coach]:hover [data-msa=thumbimg]{transform:scale(1.05) !important}
+[data-msa=card]:hover [data-msa=num]{color:var(--white) !important}
+[data-msa=card]:hover [data-msa=cardtitle]{transform:translateX(-4px)}
+[data-msa=cardtitle]{transition:transform var(--dur-base) var(--ease-out)}
+[data-msa=menubtn]:hover{border-color:var(--red-a42) !important;background:var(--red-a08) !important}
+[data-msa=card]:active,[data-msa=feature]:active,[data-msa=coach]:active{transform:translateY(1px)}
+[data-msa=card]:focus-visible,[data-msa=feature]:focus-visible,[data-msa=coach]:focus-visible{outline:2px solid var(--focus-ring);outline-offset:3px}
+[data-msa=thumbimg]{transition:transform var(--dur-slow) var(--ease-out)}
+
+/* Menu panel (mobile) */
+[data-msa=menupanel]{position:absolute;top:calc(var(--nav-height) + 6px);inset-inline-end:clamp(12px,3vw,26px);z-index:60;display:none;flex-direction:column;gap:2px;min-width:230px;padding:14px;background:var(--bg-surface);border:1.5px solid var(--red-a42);border-radius:var(--radius-md);box-shadow:var(--shadow-lift)}
+[data-msa=menupanel][data-open="1"]{display:flex;animation:msaRise var(--dur-base) var(--ease-out)}
+[data-msa=menupanel] a{padding:12px 14px;border-radius:var(--radius-sm);color:var(--text-body);font-weight:700;font-size:15px;text-decoration:none}
+[data-msa=menupanel] a:hover{background:var(--red-a08);color:var(--white)}
+
+/* Responsive breakpoints */
+@media (max-width:1100px){
+  [data-msa=herofig]{display:none !important}
+  [data-msa=hero-grid]{grid-template-columns:minmax(0,1fr) !important}
+  [data-msa=about-grid]{grid-template-columns:minmax(0,1fr) !important}
+  [data-msa=contact-grid]{grid-template-columns:minmax(0,1fr) !important}
+}
+@media (max-width:860px){
+  [data-msa=navlinks]{display:none !important}
+}
+@media (min-width:861px){
+  [data-msa=menubtn]{display:none !important}
+}
+@media (max-width:720px){
+  [data-msa=modalwrap]{padding:0 !important;align-items:stretch !important}
+  [data-msa=modal]{width:100% !important;max-height:none !important;height:100% !important;border-radius:0 !important;border:0 !important}
+  [data-msa=modalhead]{position:sticky;top:0;z-index:2;background:var(--bg-surface)}
+  [data-msa=schedule-scroll]{overflow-x:auto}
+}
+@media (max-width:620px){
+  [data-msa=coach]{flex-direction:row !important}
+  [data-msa=coach] [data-msa=coach-photo]{flex:0 0 132px !important;aspect-ratio:auto !important;min-height:150px}
+  [data-msa=pricecards]{grid-template-columns:minmax(0,1fr) !important}
+}
+
+/* Button component */
+.ms-btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-4);height:46px;padding:0 var(--space-7);border-radius:var(--radius-md);font-family:var(--font-body);font-weight:var(--fw-bold);font-size:var(--fs-body);line-height:1;letter-spacing:var(--ls-caps);white-space:nowrap;text-decoration:none;cursor:pointer;transition:var(--transition-control);border:var(--border-strong) solid transparent}
+.ms-btn[disabled],.ms-btn[aria-disabled=true]{opacity:.38;pointer-events:none;cursor:not-allowed}
+.ms-btn:active{transform:translateY(1px)}
+.ms-btn--sm{height:36px;padding:0 var(--space-6);font-size:var(--fs-caption)}
+.ms-btn--md{height:46px;padding:0 var(--space-7);font-size:var(--fs-body)}
+.ms-btn--lg{height:56px;padding:0 var(--space-9);font-size:var(--fs-title-3)}
+.ms-btn--primary{background:var(--accent);color:var(--text-on-accent);border-color:transparent}
+.ms-btn--primary:hover{background:var(--accent-hover);color:var(--text-on-accent);box-shadow:var(--glow-red)}
+.ms-btn--primary:active{background:var(--accent-press)}
+.ms-btn--secondary{background:transparent;color:var(--white);border-color:var(--accent)}
+.ms-btn--secondary:hover{background:var(--red-a08);color:var(--accent-hover)}
+.ms-btn--secondary:active{background:var(--red-a16);border-color:var(--accent-press);color:var(--accent-hover)}
+.ms-btn--ghost{background:transparent;color:var(--text-body);border-color:transparent}
+.ms-btn--ghost:hover{color:var(--white)}
+.ms-btn--ghost:active{color:var(--text-muted)}
+
+/* Icon button */
+.ms-iconbtn{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--radius-md);background:transparent;color:var(--text-body);border:var(--border-strong) solid transparent;cursor:pointer;transition:var(--transition-control)}
+.ms-iconbtn:hover{background:var(--red-a08);color:var(--accent-hover)}
+
+/* Remember callout */
+.ms-remember{display:flex;align-items:center;justify-content:center;gap:var(--space-5);padding:13px 22px;min-height:58px;box-sizing:border-box;border:var(--border-callout);border-radius:var(--radius-md);background:var(--surface-callout);color:var(--white)}
+.ms-remember-text{font-family:var(--font-body);font-weight:var(--fw-bold);font-size:17.5px;line-height:var(--lh-snug);color:var(--white);text-align:center}
+
+/* Section eyebrow (RTL: dash leads at the right, text trails to the left) */
+.ms-eyebrow{display:flex;align-items:center;justify-content:flex-start;gap:12px;font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--gray-300);text-transform:uppercase;direction:rtl}
+.ms-eyebrow::before{content:"";flex:0 0 auto;width:26px;height:2px;background:var(--accent)}
+
+/* Section shell */
+.ms-section{position:relative;padding:clamp(60px,7.5vw,116px) clamp(20px,4vw,42px);border-bottom:1.5px solid var(--rule-accent)}
+.ms-section-inner{max-width:var(--container-max);margin:0 auto}
+.ms-section-head{display:flex;flex-direction:column;gap:14px;max-width:760px;margin-bottom:clamp(38px,5vw,68px)}
+.ms-section-title{margin:0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(38px,5.4vw,76px);line-height:.94;letter-spacing:-0.01em;color:var(--text-display)}
+.ms-section-sub{margin:0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(22px,2.6vw,33px);line-height:1.04;letter-spacing:-.01em;color:var(--accent)}
+.ms-section-lead{margin:8px 0 0;max-width:56ch;font-size:17px;line-height:1.5;color:var(--text-body)}
+
+/* Program card (discipline) */
+[data-msa=feature]{position:relative;display:flex;flex-direction:column;background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md);overflow:hidden;cursor:pointer;text-decoration:none;color:inherit}
+[data-msa=feature] [data-msa=thumb]{position:relative;aspect-ratio:4/3;overflow:hidden;background:#000}
+[data-msa=feature] [data-msa=thumbimg]{width:100%;height:100%;object-fit:cover;filter:saturate(.7) contrast(1.08) brightness(.78)}
+[data-msa=feature] [data-msa=thumb]::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,6,.94) 0%,rgba(5,5,6,.35) 55%,rgba(5,5,6,.05) 100%);pointer-events:none}
+[data-msa=feature] .ms-feature-num{position:absolute;top:14px;inset-inline-start:18px;font-family:var(--font-display);font-weight:700;font-size:44px;line-height:.9;color:var(--accent);text-shadow:0 2px 20px rgba(0,0,0,.75);z-index:2}
+[data-msa=feature] .ms-feature-body{display:flex;flex-direction:column;gap:6px;padding:18px 22px 22px;flex:1 1 auto}
+[data-msa=feature] .ms-feature-term{font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--text-faint);direction:ltr;text-align:right}
+[data-msa=feature] .ms-feature-title{margin:0;font-family:var(--font-display-he);font-weight:700;font-size:30px;line-height:1.02;letter-spacing:-.01em;color:var(--white)}
+[data-msa=feature] .ms-feature-desc{margin:4px 0 0;font-size:15px;line-height:1.5;color:var(--text-body)}
+[data-msa=feature]:hover .ms-feature-num{color:var(--white)}
+[data-msa=feature]:hover .ms-feature-title{transform:translateX(-4px);transition:transform var(--dur-base) var(--ease-out)}
+
+/* Coach card */
+[data-msa=coach]{display:flex;flex-direction:column;background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md);overflow:hidden}
+[data-msa=coach] [data-msa=coach-photo]{position:relative;aspect-ratio:1/1;overflow:hidden;background:#111}
+[data-msa=coach] [data-msa=thumbimg]{width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(1.06) brightness(.86)}
+[data-msa=coach] [data-msa=coach-photo]::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,6,.7) 0%,rgba(5,5,6,.05) 55%,rgba(5,5,6,0) 100%);pointer-events:none}
+[data-msa=coach] .ms-coach-body{padding:18px 22px 22px;display:flex;flex-direction:column;gap:6px}
+[data-msa=coach] .ms-coach-role{font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--accent);direction:ltr;text-align:right;text-transform:uppercase}
+[data-msa=coach] .ms-coach-name{margin:2px 0 0;font-family:var(--font-display-he);font-weight:700;font-size:30px;line-height:1;letter-spacing:-.01em;color:var(--white)}
+[data-msa=coach] .ms-coach-bio{margin:6px 0 0;font-size:14.5px;line-height:1.5;color:var(--text-body)}
+
+/* Schedule table */
+.ms-schedule{width:100%;border-collapse:collapse;background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md);overflow:hidden;min-width:760px}
+.ms-schedule th,.ms-schedule td{padding:14px 16px;text-align:right;border-bottom:1px solid var(--white-a08);vertical-align:top}
+.ms-schedule thead th{background:var(--ink-800);font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--text-faint);text-transform:uppercase;border-bottom:1.5px solid var(--rule-accent)}
+.ms-schedule tbody th{background:var(--ink-800);font-family:var(--font-display-he);font-weight:700;font-size:22px;line-height:1;letter-spacing:-.01em;color:var(--white);width:120px;border-inline-end:1px solid var(--white-a08)}
+.ms-schedule tbody tr:last-child td,.ms-schedule tbody tr:last-child th{border-bottom:0}
+.ms-schedule td.ms-slot{position:relative}
+.ms-slot-time{display:block;font-family:var(--font-display);font-weight:700;font-size:20px;line-height:1;color:var(--accent);letter-spacing:0}
+.ms-slot-name{display:block;margin-top:4px;font-family:var(--font-body);font-weight:700;font-size:14px;color:var(--white)}
+.ms-slot-coach{display:block;margin-top:2px;font-family:var(--font-body);font-weight:400;font-size:12.5px;color:var(--text-muted)}
+.ms-slot-empty{color:var(--text-faint);font-size:13px}
+
+/* Pricing tiers */
+[data-msa=pricecards]{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,26px)}
+.ms-tier{display:flex;flex-direction:column;background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md);padding:clamp(24px,3vw,34px);gap:14px;position:relative;overflow:hidden}
+.ms-tier--featured{border-color:var(--accent);background:linear-gradient(180deg,var(--red-a08) 0%,var(--bg-surface) 60%)}
+.ms-tier--featured::before{content:"הכי פופולרי";position:absolute;top:14px;inset-inline-end:14px;padding:5px 10px;font-size:10px;font-weight:700;letter-spacing:.18em;color:var(--white);background:var(--accent);border-radius:999px;text-transform:uppercase}
+.ms-tier-name{margin:0;font-family:var(--font-display-he);font-weight:700;font-size:33px;line-height:1;letter-spacing:-.01em;color:var(--white)}
+.ms-tier-eyebrow{font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--text-faint);direction:ltr;text-align:right;text-transform:uppercase}
+.ms-tier-price{display:flex;align-items:baseline;gap:6px;margin:6px 0 4px}
+.ms-tier-price .ms-tier-price-num{font-family:var(--font-display);font-weight:700;font-size:64px;line-height:.9;color:var(--accent);letter-spacing:-.01em}
+.ms-tier-price .ms-tier-price-cur{font-family:var(--font-display);font-weight:700;font-size:28px;color:var(--accent);line-height:1}
+.ms-tier-price .ms-tier-price-per{font-size:13px;color:var(--text-muted)}
+.ms-tier-list{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:8px}
+.ms-tier-list li{position:relative;padding-inline-start:22px;font-size:15px;line-height:1.45;color:var(--text-body)}
+.ms-tier-list li::before{content:"";position:absolute;inset-inline-start:0;top:.55em;width:10px;height:2px;background:var(--accent)}
+.ms-tier .ms-btn{margin-top:auto}
+
+/* FAQ */
+.ms-faq{border-top:1.5px solid var(--rule-accent)}
+.ms-faq-item{border-bottom:1px solid var(--white-a08)}
+.ms-faq-q{width:100%;background:transparent;border:0;padding:22px 4px;display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;color:var(--white);font-family:var(--font-body);font-weight:700;font-size:19px;line-height:1.35;letter-spacing:0;text-align:right;transition:color var(--dur-fast) var(--ease-out)}
+.ms-faq-q:hover{color:var(--accent)}
+.ms-faq-q .ms-faq-icon{flex:0 0 auto;width:32px;height:32px;border-radius:999px;border:2px solid var(--white-a12);display:flex;align-items:center;justify-content:center;color:var(--text-body);transition:var(--transition-control)}
+.ms-faq-item[data-open="1"] .ms-faq-icon{background:var(--accent);border-color:var(--accent);color:var(--white);transform:rotate(45deg)}
+.ms-faq-a{max-height:0;overflow:hidden;transition:max-height var(--dur-slow) var(--ease-out)}
+.ms-faq-a-inner{padding:0 4px 22px;max-width:66ch;font-size:16px;line-height:1.55;color:var(--text-body)}
+
+/* Contact panel */
+.ms-contact-card{background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md);padding:clamp(24px,3vw,34px);display:flex;flex-direction:column;gap:20px}
+.ms-contact-row{display:flex;gap:14px;align-items:flex-start}
+.ms-contact-row svg{flex:0 0 auto;color:var(--accent);margin-top:2px}
+.ms-contact-label{font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--text-faint);text-transform:uppercase;display:block;margin-bottom:2px}
+.ms-contact-val{font-family:var(--font-body);font-size:16.5px;line-height:1.5;color:var(--white)}
+.ms-contact-val a{color:var(--white)}
+.ms-contact-val a:hover{color:var(--accent)}
+
+/* Footer */
+.ms-footer{border-top:var(--rule-weight) solid var(--rule-accent);padding:var(--space-12) var(--page-pad) var(--space-9);background:var(--bg-page)}
+.ms-footer-inner{max-width:var(--container-max);margin:0 auto;display:flex;flex-wrap:wrap;gap:var(--space-12);align-items:flex-start}
+.ms-footer-brand{flex:1 1 280px}
+.ms-footer-tagline{margin-top:var(--space-6);font-family:var(--font-display-he);font-weight:var(--fw-black);font-size:var(--fs-title-3);line-height:var(--lh-title);color:var(--white)}
+.ms-footer-links{flex:0 1 200px;display:flex;flex-direction:column;gap:var(--space-4)}
+.ms-footer-links a{font-family:var(--font-body);font-size:var(--fs-body-sm);color:var(--text-body);text-decoration:none}
+.ms-footer-links a:hover{color:var(--white)}
+.ms-footer-eyebrow{max-width:var(--container-max);margin:var(--space-12) auto 0;padding-top:var(--space-6);border-top:var(--border-card);font-family:var(--font-body);font-weight:var(--fw-bold);font-size:var(--fs-micro);letter-spacing:var(--ls-eyebrow);color:var(--text-faint);direction:ltr;text-align:center;text-transform:uppercase}
+.ms-footer-eyebrow em{font-style:normal;color:var(--accent)}
+
+/* Modal helpers */
+body.ms-scroll-lock{overflow:hidden}
+html.ms-scroll-lock{overflow:hidden}
+
+/* Trial CTA — full-bleed impressive red block */
+.ms-cta-block{position:relative;display:block;width:100%;box-sizing:border-box;overflow:hidden;background-color:#C4181D;background-image:radial-gradient(120% 90% at 50% 40%,#F02830 0%,#C4181D 55%,#8A0F13 100%);color:#ffffff;padding:clamp(80px,11vw,150px) clamp(20px,4vw,42px);border-top:1.5px solid var(--rule-accent);border-bottom:1.5px solid var(--rule-accent);text-align:center}
+.ms-cta-block-mark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-display);font-weight:700;font-size:clamp(220px,36vw,520px);line-height:.85;letter-spacing:-.02em;color:rgba(255,255,255,.06);pointer-events:none;user-select:none;z-index:1;white-space:nowrap}
+.ms-cta-block-inner{position:relative;z-index:2;max-width:1000px;margin-inline:auto;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.ms-cta-block-eyebrow{font-family:var(--font-body);font-weight:700;font-size:clamp(11px,1vw,13px);letter-spacing:.42em;color:rgba(255,255,255,.72);text-transform:uppercase}
+.ms-cta-block-title{margin:6px 0 0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(64px,11vw,148px);line-height:.86;letter-spacing:-.02em;color:var(--white);text-shadow:0 4px 40px rgba(0,0,0,.35)}
+.ms-cta-block-lead{margin:8px 0 0;max-width:52ch;font-family:var(--font-body);font-weight:500;font-size:clamp(17px,1.5vw,22px);line-height:1.5;color:rgba(255,255,255,.92)}
+.ms-cta-block-actions{margin-top:20px;display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.ms-cta-block-btn{height:60px;padding:0 var(--space-9);font-size:var(--fs-title-3);border-radius:var(--radius-md)}
+.ms-cta-block-btn--solid{background:var(--white);color:var(--accent);border-color:transparent;box-shadow:0 12px 40px rgba(0,0,0,.28)}
+.ms-cta-block-btn--solid:hover{background:#F5F5F5;color:var(--accent-press);box-shadow:0 16px 50px rgba(0,0,0,.35),0 0 0 6px rgba(255,255,255,.14);transform:translateY(-1px)}
+.ms-cta-block-btn--solid:active{transform:translateY(0);background:#EDEDED}
+.ms-cta-block-btn--ghost{background:transparent;color:var(--white);border-color:var(--white)}
+.ms-cta-block-btn--ghost:hover{background:rgba(255,255,255,.1);color:var(--white)}
+.ms-cta-block-btn--ghost:active{background:rgba(255,255,255,.18);color:var(--white)}
+.ms-cta-block-fine{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 14px;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13.5px;letter-spacing:.06em;color:rgba(255,255,255,.78);text-transform:uppercase}
+.ms-cta-block-fine a{color:rgba(255,255,255,.88);text-decoration:none;border-bottom:1.5px solid rgba(255,255,255,.28);padding-bottom:2px;transition:var(--transition-control)}
+.ms-cta-block-fine a:hover{color:var(--white);border-bottom-color:var(--white)}
+@media (prefers-reduced-motion:no-preference){.ms-cta-block-btn--solid{animation:msaPulseWhite 2.4s var(--ease-out) infinite}}
+@keyframes msaPulseWhite{0%,100%{box-shadow:0 12px 40px rgba(0,0,0,.28),0 0 0 0 rgba(255,255,255,.5)}50%{box-shadow:0 12px 40px rgba(0,0,0,.28),0 0 0 18px rgba(255,255,255,0)}}
+@media (max-width:720px){
+  .ms-cta-block-actions{width:100%;flex-direction:column;align-items:stretch}
+  .ms-cta-block-btn{width:100%;height:54px;font-size:var(--fs-body)}
+  .ms-cta-block-title{letter-spacing:-.015em}
+}
+
+/* Form components (used for trial + contact) */
+.ms-form{display:flex;flex-direction:column;gap:14px;padding:24px clamp(20px,3vw,32px) 28px}
+.ms-contact-form{background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md);padding:clamp(22px,2.6vw,30px)}
+.ms-field{display:flex;flex-direction:column;gap:6px;flex:1 1 0;min-width:0}
+.ms-field label{font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--text-faint);text-transform:uppercase}
+.ms-field input,.ms-field select,.ms-field textarea{background:var(--ink-800);border:1.5px solid var(--white-a08);border-radius:var(--radius-sm);padding:12px 14px;color:var(--white);font-family:var(--font-body);font-size:16px;line-height:1.3;transition:var(--transition-control);width:100%;box-sizing:border-box}
+.ms-field input:focus,.ms-field select:focus,.ms-field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--red-a16)}
+.ms-field-row{display:flex;gap:14px;flex-wrap:wrap}
+.ms-form-actions{display:flex;justify-content:flex-end;margin-top:6px}
+.ms-form-note{margin:8px 0 0;font-size:12.5px;color:var(--text-muted);text-align:end}
+.ms-form-success{padding:24px 32px 28px;text-align:center;background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md)}
+.ms-form-success h4{margin:0 0 6px;font-family:var(--font-display-he);font-weight:700;font-size:33px;color:var(--white)}
+.ms-form-success p{margin:0;color:var(--text-body)}
+
+/* --- New components for MMA content --- */
+
+/* Header icon chips (WhatsApp / Call) */
+.ms-chipbtn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;background:transparent;border:1.5px solid var(--white-a12);color:var(--white);text-decoration:none;transition:var(--transition-control)}
+.ms-chipbtn:hover{background:var(--red-a08);border-color:var(--accent);color:var(--accent-hover)}
+.ms-chipbtn--wa{color:#25D366;border-color:rgba(37,211,102,.35)}
+.ms-chipbtn--wa:hover{background:rgba(37,211,102,.12);border-color:#25D366;color:#25D366}
+
+/* Hero — Cinematic v2 (fight-poster) */
+.ms-hero-v2{position:relative;isolation:isolate;overflow:hidden;height:82vh;height:82svh;max-height:780px;min-height:560px;background:var(--ink-900);direction:ltr;display:grid;grid-template-columns:minmax(0,62fr) minmax(0,38fr);color:var(--gray-100);font-family:var(--font-body)}
+
+/* Media stage */
+.ms-hero-v2__media{position:relative;grid-column:1 / 2;overflow:hidden;background:var(--ink-850)}
+.ms-hero-v2__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 38%;filter:saturate(.82) contrast(1.14) brightness(.94);transform:scale(1.04);animation:msaV2In 1.8s cubic-bezier(.2,.7,.2,1) both}
+.ms-hero-v2__grain{position:absolute;inset:-20%;background:radial-gradient(circle at 20% 40%,rgba(255,255,255,.05),transparent 55%),radial-gradient(circle at 80% 20%,rgba(227,30,36,.10),transparent 60%);mix-blend-mode:screen;pointer-events:none}
+.ms-hero-v2__veil--right{position:absolute;top:0;bottom:0;right:0;width:52%;background:linear-gradient(to right,transparent 0%,rgba(5,5,6,.35) 30%,rgba(5,5,6,.85) 68%,var(--ink-900) 100%);pointer-events:none}
+.ms-hero-v2__veil--bottom{position:absolute;left:0;right:0;bottom:0;height:60%;background:linear-gradient(to top,var(--ink-900) 0%,rgba(5,5,6,.85) 22%,rgba(5,5,6,.4) 55%,transparent 100%);pointer-events:none}
+.ms-hero-v2__slash{position:absolute;left:-6%;right:38%;top:62%;height:8px;background:var(--red-500);box-shadow:0 0 0 1px rgba(0,0,0,.35),0 18px 60px rgba(227,30,36,.45);transform:rotate(-8deg);transform-origin:left center;animation:msaV2Slash 1.1s cubic-bezier(.7,.02,.2,1) .55s both;pointer-events:none}
+
+/* Poster typographic layer */
+.ms-hero-v2__poster{position:absolute;inset:0;z-index:2;pointer-events:none;direction:ltr;font-family:var(--font-display);font-weight:700;color:var(--white);line-height:.82;letter-spacing:-.02em}
+/* Wordmark: red-outlined stack at the TOP of the image, above the subjects — no interruption */
+.ms-hero-v2__wordmark{position:absolute;top:clamp(20px,4vh,54px);left:clamp(24px,3.4vw,60px);right:clamp(24px,3.4vw,60px);display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(80px,11vw,180px);line-height:.86;letter-spacing:-.005em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.5px var(--red-500);text-stroke:1.5px var(--red-500);filter:drop-shadow(0 4px 40px rgba(227,30,36,.28));animation:msaV2Type 1.1s cubic-bezier(.2,.7,.2,1) .3s both}
+.ms-hero-v2__wordmark span{display:block}
+.ms-hero-v2__wordmark span:first-child{padding-inline-start:.1em}
+.ms-hero-v2__wordmark span:last-child{padding-inline-start:1.8em}
+/* Soft dark gradient at the top so the outline reads over lighter areas of the image */
+.ms-hero-v2__poster::before{content:"";position:absolute;top:0;left:0;right:0;height:55%;background:linear-gradient(to bottom,rgba(5,5,6,.55) 0%,rgba(5,5,6,.15) 50%,transparent 100%);pointer-events:none}
+.ms-hero-v2__vertical{position:absolute;left:clamp(14px,1.6vw,26px);bottom:clamp(28px,5vh,60px);font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:.42em;color:var(--gray-300);writing-mode:vertical-rl;transform:rotate(180deg);text-transform:uppercase}
+
+/* Right-side content column */
+.ms-hero-v2__content-wrap{position:relative;z-index:3;grid-column:2 / 3;direction:rtl;display:flex;align-items:center;justify-content:flex-start;padding:clamp(70px,7vw,96px) clamp(28px,4vw,56px) clamp(64px,6vw,88px);background:transparent}
+.ms-hero-v2__content{max-width:520px;width:100%;display:flex;flex-direction:column;animation:msaV2Up .8s cubic-bezier(.2,.7,.2,1) .55s both}
+.ms-hero-v2__sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+.ms-hero-v2__eyebrow{display:flex;align-items:center;gap:14px;font-family:var(--font-body);font-weight:700;font-size:12px;letter-spacing:.18em;color:var(--gray-300);text-transform:uppercase;margin-bottom:22px}
+.ms-hero-v2__eyebrow-rule{display:inline-block;width:44px;height:1.5px;background:var(--red-500)}
+
+.ms-hero-v2__sub{font-family:var(--font-display);font-weight:700;font-size:clamp(44px,5.2vw,78px);line-height:.96;letter-spacing:-.01em;color:var(--red-500);display:flex;flex-wrap:wrap;gap:0 .18em;text-shadow:0 6px 32px rgba(227,30,36,.25);margin-bottom:26px}
+.ms-hero-v2__sub span{white-space:nowrap}
+.ms-hero-v2__sub span:nth-child(2){color:var(--white)}
+.ms-hero-v2__sub span:nth-child(3){color:var(--red-500)}
+
+.ms-hero-v2__lead{margin:0 0 32px;max-width:38ch;font-family:var(--font-body);font-weight:400;font-size:clamp(15px,1.05vw,17px);line-height:1.6;color:var(--gray-100)}
+
+.ms-hero-v2__cta{display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+.ms-hero-v2__btn{height:54px;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:0 clamp(22px,2.2vw,30px);font-family:var(--font-body);font-weight:700;font-size:14.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:1.5px solid transparent;border-radius:0;transition:transform .18s ease,background .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease;cursor:pointer;min-width:186px}
+.ms-hero-v2__btn--primary{background:var(--red-500);color:var(--white);box-shadow:0 12px 36px -14px rgba(227,30,36,.7),inset 0 0 0 1px rgba(255,255,255,.06)}
+.ms-hero-v2__btn--primary:hover{background:var(--red-400);transform:translateY(-1px);box-shadow:0 18px 44px -14px rgba(255,59,66,.8)}
+.ms-hero-v2__btn--primary svg{transition:transform .2s ease}
+.ms-hero-v2__btn--primary:hover svg{transform:translateX(-4px)}
+.ms-hero-v2__btn--ghost{background:transparent;color:var(--white);border-color:rgba(255,255,255,.28)}
+.ms-hero-v2__btn--ghost:hover{border-color:var(--red-500);color:var(--red-300)}
+.ms-hero-v2__btn svg{flex:0 0 auto}
+
+.ms-hero-v2__fine{margin-top:28px;display:flex;align-items:center;flex-wrap:wrap;gap:12px;font-family:var(--font-body);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-300)}
+.ms-hero-v2__fine a{color:var(--white);text-decoration:none;border-bottom:1.5px solid rgba(255,255,255,.22);padding-bottom:2px;transition:color .18s ease,border-color .18s ease}
+.ms-hero-v2__fine a:hover{color:var(--red-400);border-bottom-color:var(--red-500)}
+.ms-hero-v2__fine-dot{width:5px;height:5px;border-radius:50%;background:var(--red-500);display:inline-block}
+
+@keyframes msaV2In{0%{transform:scale(1.10);filter:saturate(.55) contrast(1.05) brightness(.72)}100%{transform:scale(1.04);filter:saturate(.82) contrast(1.14) brightness(.94)}}
+@keyframes msaV2Type{0%{opacity:0;transform:translateY(24px) skewY(2deg)}100%{opacity:1;transform:translateY(0) skewY(0)}}
+@keyframes msaV2Up{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes msaV2Slash{0%{transform:rotate(-8deg) scaleX(0);opacity:0}100%{transform:rotate(-8deg) scaleX(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.ms-hero-v2 *{animation:none !important;transform:none !important}}
+
+@media (max-width:1180px){
+  .ms-hero-v2{grid-template-columns:minmax(0,58fr) minmax(0,42fr)}
+  .ms-hero-v2__wordmark{font-size:clamp(72px,10vw,140px)}
+}
+@media (max-width:820px){
+  .ms-hero-v2{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(260px,42vh) auto;direction:rtl;height:auto;min-height:auto;max-height:none}
+  .ms-hero-v2__media{grid-column:1 / -1}
+  .ms-hero-v2__media img{object-position:50% 32%}
+  .ms-hero-v2__veil--right{top:auto;right:0;left:0;bottom:0;width:auto;height:52%;background:linear-gradient(to bottom,transparent 0%,rgba(5,5,6,.6) 45%,var(--ink-900) 100%)}
+  .ms-hero-v2__content-wrap{grid-column:1 / -1;padding:clamp(28px,5vw,44px) clamp(20px,5vw,32px) clamp(88px,14vw,120px)}
+  .ms-hero-v2__wordmark{top:14px;left:14px;right:14px;font-size:clamp(48px,13vw,96px)}
+  .ms-hero-v2__wordmark span:last-child{padding-inline-start:1em}
+  .ms-hero-v2__vertical{display:none}
+  .ms-hero-v2__sub{font-size:clamp(38px,10vw,56px)}
+  .ms-hero-v2__cta{flex-direction:row}
+  .ms-hero-v2__btn{flex:1 1 0;min-width:0;padding:0 14px;font-size:13.5px}
+}
+@media (max-width:420px){
+  .ms-hero-v2__btn{height:50px}
+  .ms-hero-v2__lead br{display:none}
+}
+
+/* Legacy chip class kept as no-op so old rules don't break */
+.ms-chips{display:none}
+
+/* About value pills (legacy) */
+.ms-pill{padding:14px 16px;background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md);font-family:var(--font-display-he);font-weight:700;font-size:20px;line-height:1;letter-spacing:-.01em;color:var(--white);text-align:center}
+
+/* About section — rebuilt */
+.ms-about-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.9fr);gap:clamp(32px,5vw,80px);align-items:stretch}
+.ms-about-copy{display:flex;flex-direction:column}
+.ms-about-copy .ms-section-lead strong{color:var(--white);font-weight:700}
+.ms-about-body{margin:14px 0 0;max-width:60ch;font-size:16px;line-height:1.65;color:var(--text-body)}
+
+.ms-about-side{display:flex;flex-direction:column;gap:clamp(20px,2.6vw,30px);justify-content:space-between}
+.ms-about-side > .ms-about-quote{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
+.ms-about-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;background:linear-gradient(180deg,var(--bg-surface) 0%,var(--bg-raised) 100%);border:1px solid var(--white-a08);border-radius:var(--radius-md);overflow:hidden}
+.ms-about-stat{padding:clamp(20px,2.6vw,30px) clamp(14px,2vw,22px);position:relative;transition:background var(--dur-fast) var(--ease-out)}
+.ms-about-stat + .ms-about-stat{border-inline-start:1px solid var(--white-a08)}
+.ms-about-stat:hover{background:rgba(227,30,36,.04)}
+.ms-about-stat-num{font-family:var(--font-display);font-weight:700;font-size:clamp(52px,5vw,72px);line-height:.85;letter-spacing:-.02em;color:var(--accent);text-align:right}
+.ms-about-stat-num sup{font-size:.7em;font-weight:700;vertical-align:middle;position:static;line-height:1;color:var(--accent);margin-inline-start:.04em}
+.ms-about-stat-label{margin-top:10px;font-size:13px;line-height:1.4;color:var(--text-muted);letter-spacing:.005em;text-align:right}
+@media (max-width:520px){.ms-about-stats{grid-template-columns:minmax(0,1fr)}.ms-about-stat + .ms-about-stat{border-inline-start:0;border-top:1px solid var(--white-a08)}}
+
+.ms-about-quote{position:relative;margin:0;padding:clamp(26px,3vw,36px) clamp(24px,3vw,32px);padding-inline-end:clamp(52px,6vw,80px);background:linear-gradient(180deg,var(--bg-surface) 0%,var(--bg-raised) 100%);border:1px solid var(--white-a08);border-inline-end:2px solid var(--accent);border-radius:var(--radius-md);overflow:hidden}
+.ms-about-quote-mark{position:absolute;top:6px;inset-inline-end:20px;font-family:var(--font-display);font-weight:700;font-size:110px;line-height:.7;color:var(--red-a16);pointer-events:none;user-select:none}
+.ms-about-quote blockquote{margin:0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(20px,2vw,26px);line-height:1.3;letter-spacing:-.005em;color:var(--white)}
+.ms-about-quote figcaption{margin-top:16px;padding-top:14px;border-top:1px solid var(--white-a08);display:flex;align-items:center;gap:10px;font-family:var(--font-body);font-weight:700;font-size:12px;letter-spacing:.16em;color:var(--accent);text-transform:uppercase}
+.ms-about-quote figcaption::before{content:"";flex:0 0 auto;width:20px;height:2px;background:var(--accent);border-radius:2px}
+
+/* Inline link with arrow */
+.ms-inlinelink{color:var(--accent);font-weight:700;font-size:14px;text-decoration:none}
+.ms-inlinelink:hover{color:var(--accent-hover);text-decoration:underline;text-underline-offset:3px}
+
+/* What sets us apart — differentiator grid */
+.ms-diffgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,22px)}
+@media (max-width:900px){.ms-diffgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.ms-diffgrid{grid-template-columns:minmax(0,1fr)}}
+.ms-diff{background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md);padding:22px 22px 24px;position:relative;transition:var(--transition-control)}
+.ms-diff:hover{border-color:var(--red-a42)}
+.ms-diff-num{font-family:var(--font-display);font-weight:700;font-size:32px;line-height:.9;color:var(--accent);letter-spacing:-.01em}
+.ms-diff h3{margin:8px 0 4px;font-family:var(--font-display-he);font-weight:700;font-size:24px;line-height:1.05;letter-spacing:-.01em;color:var(--white)}
+.ms-diff p{margin:0;font-size:14.5px;line-height:1.5;color:var(--text-body)}
+
+/* Audience cards (Kids / Teens / Adults) */
+.ms-audience-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,26px)}
+.ms-aud{position:relative;display:flex;flex-direction:column;gap:10px;padding:clamp(24px,3vw,32px);background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md);overflow:hidden;transition:var(--transition-control)}
+.ms-aud:hover{border-color:var(--red-a42)}
+.ms-aud-num{position:absolute;top:14px;inset-inline-end:20px;font-family:var(--font-display);font-weight:700;font-size:64px;line-height:.9;color:var(--red-a16);letter-spacing:-.01em;pointer-events:none;user-select:none}
+.ms-aud-term{font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--accent);direction:ltr;text-align:right;text-transform:uppercase}
+.ms-aud h3{margin:2px 0 0;font-family:var(--font-display-he);font-weight:700;font-size:44px;line-height:.95;letter-spacing:-.01em;color:var(--white)}
+.ms-aud p{margin:6px 0 0;font-size:15px;line-height:1.55;color:var(--text-body);max-width:38ch}
+.ms-aud .ms-btn{margin-top:auto;align-self:flex-start}
+@media (max-width:820px){.ms-audience-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Meet the coach — magazine-style layout */
+.ms-coachlay{display:grid;grid-template-columns:minmax(0,0.95fr) minmax(0,1.1fr);gap:clamp(28px,4vw,60px);align-items:stretch}
+.ms-coach-figure{margin:0;display:flex;align-self:stretch}
+.ms-coach-photo-big{position:relative;width:100%;min-height:520px;max-height:720px;overflow:hidden;border-radius:var(--radius-md);border:1px solid var(--white-a08);background:#0A0A0C;isolation:isolate}
+.ms-coach-photo-big img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 22%;filter:saturate(.82) contrast(1.06) brightness(.94);transition:transform 1.2s var(--ease-out)}
+.ms-coach-photo-big:hover img{transform:scale(1.03)}
+.ms-coach-photo-veil{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,6,.92) 0%,rgba(5,5,6,.28) 55%,rgba(5,5,6,.05) 100%);z-index:1}
+.ms-coach-badge{position:absolute;top:20px;inset-inline-start:20px;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;background:var(--accent);color:var(--white);font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;border-radius:999px;box-shadow:0 8px 24px rgba(227,30,36,.35);direction:ltr}
+.ms-coach-caption{position:absolute;left:0;right:0;bottom:0;padding:26px 28px;z-index:2}
+.ms-coach-caption-name{font-family:var(--font-display-he);font-weight:700;font-size:clamp(38px,4vw,56px);line-height:.95;letter-spacing:-.01em;color:var(--white);text-shadow:0 2px 20px rgba(0,0,0,.6)}
+.ms-coach-caption-role{margin-top:6px;font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--accent);direction:ltr;text-transform:uppercase}
+
+.ms-coach-copy{position:relative;padding-inline-start:22px;display:flex;flex-direction:column;justify-content:center}
+.ms-coach-copy::before{content:"";position:absolute;top:8px;bottom:8px;inset-inline-start:0;width:2px;background:linear-gradient(180deg,var(--accent) 0%,var(--red-a42) 40%,transparent 100%)}
+.ms-coach-pull{margin:0 0 26px;padding:0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(34px,4vw,54px);line-height:1.05;letter-spacing:-.015em;color:var(--accent);max-width:none;width:100%;text-wrap:balance}
+.ms-coach-copy p{margin:0 0 16px;font-size:16.5px;line-height:1.65;color:var(--text-body)}
+.ms-coach-copy p:last-of-type{margin-bottom:0}
+
+.ms-coach-cred{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px}
+.ms-coach-cred span{display:inline-flex;align-items:center;padding:9px 16px;background:rgba(255,255,255,.04);border:1.5px solid var(--white-a12);border-radius:999px;font-family:var(--font-body);font-weight:600;font-size:13px;color:var(--white);transition:var(--transition-control)}
+.ms-coach-cred span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:999px;background:var(--accent);margin-inline-end:8px;flex:0 0 auto}
+.ms-coach-cred span:hover{border-color:var(--red-a42);background:var(--red-a08)}
+
+.ms-coach-actions{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+
+@media (max-width:900px){
+  .ms-coachlay{grid-template-columns:minmax(0,1fr)}
+  .ms-coach-photo-big{aspect-ratio:4/5;min-height:0;max-height:600px}
+  .ms-coach-copy{padding-inline-start:16px}
+}
+
+/* Values */
+.ms-values{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,22px)}
+.ms-value{position:relative;padding:26px 24px 28px;background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md);overflow:hidden;transition:var(--transition-control)}
+.ms-value:hover{border-color:var(--red-a42)}
+.ms-value-num{font-family:var(--font-display);font-weight:700;font-size:34px;line-height:.9;color:var(--accent);letter-spacing:-.01em}
+.ms-value h3{margin:8px 0 4px;font-family:var(--font-display-he);font-weight:700;font-size:32px;line-height:1;letter-spacing:-.01em;color:var(--white)}
+.ms-value p{margin:0;font-size:15px;line-height:1.5;color:var(--text-body)}
+@media (max-width:960px){.ms-values{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.ms-values{grid-template-columns:minmax(0,1fr)}}
+
+/* Benefits list — "What you get" */
+.ms-benefits{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0;border-top:1.5px solid var(--rule-accent)}
+.ms-benefits li{display:flex;align-items:baseline;gap:14px;padding:22px 6px;border-bottom:1.5px solid var(--rule-accent);font-family:var(--font-display-he);font-weight:700;font-size:24px;line-height:1.1;letter-spacing:-.01em;color:var(--white)}
+.ms-benefits li .ms-b-num{font-family:var(--font-display);font-weight:700;font-size:34px;color:var(--accent);flex:0 0 auto;line-height:.9}
+
+/* Testimonials */
+.ms-quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2.4vw,26px)}
+.ms-quote{position:relative;margin:0;padding:clamp(30px,3.6vw,44px) clamp(28px,3.2vw,40px) clamp(24px,3vw,32px);background:linear-gradient(180deg,var(--bg-surface) 0%,var(--bg-raised) 100%);border:1px solid var(--white-a08);border-radius:var(--radius-md);overflow:hidden;transition:var(--transition-control);display:flex;flex-direction:column}
+.ms-quote:hover{border-color:var(--red-a42);transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
+.ms-quote-mark{position:absolute;top:18px;inset-inline-end:26px;font-family:var(--font-display);font-weight:700;font-size:clamp(120px,10vw,180px);line-height:.7;color:var(--red-a16);pointer-events:none;user-select:none;text-shadow:0 2px 20px rgba(227,30,36,.08)}
+.ms-quote blockquote{margin:0;padding-top:clamp(28px,3.4vw,42px);font-family:var(--font-body);font-weight:500;font-size:clamp(16.5px,1.35vw,19px);line-height:1.65;color:var(--white);position:relative;z-index:2;flex:1 1 auto}
+.ms-quote figcaption{margin-top:22px;padding-top:18px;border-top:1px solid var(--white-a08);display:flex;align-items:center;gap:12px;font-family:var(--font-body);font-size:14px;line-height:1.4;color:var(--text-muted);position:relative;z-index:2}
+.ms-quote figcaption::before{content:"";flex:0 0 auto;width:24px;height:2px;background:var(--accent);border-radius:2px}
+.ms-quote figcaption strong{color:var(--white);font-weight:700;font-size:15px;letter-spacing:-.005em}
+.ms-quote figcaption span[aria-hidden]{color:var(--accent);font-weight:700;opacity:.6}
+@media (max-width:820px){.ms-quotes{grid-template-columns:minmax(0,1fr)}}
+
+/* Fixed mobile action bar (≤860px only) */
+.ms-mobar{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;gap:8px;padding:10px calc(12px + env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left));background:rgba(5,5,6,.94);backdrop-filter:saturate(140%) blur(14px);-webkit-backdrop-filter:saturate(140%) blur(14px);border-top:1.5px solid var(--rule-accent)}
+.ms-mobar-btn{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 6px;height:56px;font-family:var(--font-body);font-weight:700;font-size:11.5px;letter-spacing:.02em;text-decoration:none;color:var(--white);background:rgba(255,255,255,.05);border:1.5px solid var(--white-a12);border-radius:var(--radius-sm);transition:var(--transition-control)}
+.ms-mobar-btn:active{transform:translateY(1px)}
+.ms-mobar-btn--wa{flex:2 1 0;background:#25D366;color:#052506;border-color:#25D366}
+.ms-mobar-btn--wa:hover{background:#20c25c;color:#052506}
+.ms-mobar-btn--trial{background:var(--accent);color:var(--white);border-color:var(--accent)}
+.ms-mobar-btn--trial:hover{background:var(--accent-hover);color:var(--white)}
+@media (max-width:860px){
+  .ms-mobar{display:flex}
+  body{padding-bottom:78px}
+  /* Simplify header on mobile — the mobile action bar handles primary conversion */
+  header .ms-chipbtn{display:none !important}
+}
+
+
+
+/* =========================================================
+   RESPONSIVE PASS · TABLET (641–1100px) — designer proposal
+   ========================================================= */
+
+
+/* ---------------------------------------------------------------------------
+   0 · Global tablet-band resets (641–1100px)
+   ------------------------------------------------------------------------ */
+@media (min-width:641px) and (max-width:1100px){
+  /* Section head bottom margin — give tablet layouts a bit more air. */
+  .ms-section-head{margin-bottom:clamp(32px,4.4vw,54px)}
+
+  /* Section title cap — the 5.4vw ceiling looks huge on iPad portrait
+     (~41–55px) but the min of 38px is fine. Nudge min up slightly. */
+  .ms-section-title{font-size:clamp(42px,5vw,64px)}
+}
+
+
+/* ---------------------------------------------------------------------------
+   1 · Sticky header — 861–1100px is the risky range (nav visible + chips)
+   ------------------------------------------------------------------------ */
+@media (min-width:861px) and (max-width:1100px){
+  /* Reduce nav gap so 6 links + 3 chip-btns + trial CTA fit without wrapping. */
+  [data-msa=navlinks]{gap:clamp(12px,1.8vw,18px) !important}
+  [data-msa=navlink]{font-size:14px}
+
+  /* Chip buttons shrink a hair. */
+  .ms-chipbtn{width:38px;height:38px}
+
+  /* Trial button (sm) — trim padding so it survives 861–960 width. */
+  header .ms-btn.ms-btn--sm{padding:0 var(--space-5);font-size:12.5px;height:34px}
+}
+
+@media (min-width:641px) and (max-width:860px){
+  /* Header on this band relies on the burger; the mobile action bar takes
+     over conversion. Make sure nav is definitely hidden, burger visible.
+     (Live app.css already handles this — defensive.) */
+  [data-msa=navlinks]{display:none !important}
+  [data-msa=menubtn]{display:inline-flex !important}
+}
+
+
+/* ---------------------------------------------------------------------------
+   2 · Mobile action bar — must ONLY appear ≤860px
+   ------------------------------------------------------------------------ */
+@media (min-width:861px) and (max-width:1100px){
+  .ms-mobar{display:none !important}
+  /* Live app.css adds `body{padding-bottom:78px}` inside its ≤860 media, so
+     nothing to reset here — but be explicit to guard cascade order. */
+  body{padding-bottom:0}
+}
+
+
+/* ---------------------------------------------------------------------------
+   3 · Hero (.ms-hero-v2) — the hardest tablet section
+   ------------------------------------------------------------------------ */
+
+/* 3a · 1024–1100px: soften the split so the RTL right column has room. */
+@media (min-width:1024px) and (max-width:1100px){
+  .ms-hero-v2{grid-template-columns:minmax(0,54fr) minmax(0,46fr);min-height:520px;max-height:680px;height:74vh;height:74svh}
+  .ms-hero-v2__content-wrap{padding:clamp(60px,6vw,84px) clamp(24px,3.2vw,42px) clamp(56px,5vw,72px)}
+  .ms-hero-v2__content{max-width:460px}
+  .ms-hero-v2__sub{font-size:clamp(44px,5vw,64px);margin-bottom:22px}
+  .ms-hero-v2__lead{font-size:15.5px;margin-bottom:26px;max-width:34ch}
+  .ms-hero-v2__cta{gap:10px}
+  .ms-hero-v2__btn{min-width:170px;padding:0 20px;font-size:13.5px}
+  .ms-hero-v2__wordmark{font-size:clamp(60px,8.6vw,108px)}
+}
+
+/* 3b · 821–1023px: force a single-column stacked hero — image on top,
+   content below. The live rule kicks in only at ≤820, leaving 821–1023
+   in a broken narrow-column state. Mirror the ≤820 approach up to 1023. */
+@media (min-width:641px) and (max-width:1023px){
+  .ms-hero-v2{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:minmax(300px,44vh) auto;
+    direction:rtl;
+    height:auto;
+    min-height:auto;
+    max-height:none;
+  }
+  .ms-hero-v2__media{grid-column:1 / -1}
+  .ms-hero-v2__media img{object-position:50% 30%}
+  .ms-hero-v2__veil--right{
+    top:auto;right:0;left:0;bottom:0;
+    width:auto;height:48%;
+    background:linear-gradient(to bottom,transparent 0%,rgba(5,5,6,.6) 45%,var(--ink-900) 100%);
+  }
+  .ms-hero-v2__content-wrap{
+    grid-column:1 / -1;
+    padding:clamp(36px,4vw,52px) clamp(28px,4vw,44px) clamp(56px,7vw,80px);
+    justify-content:center;
+  }
+  .ms-hero-v2__content{max-width:640px;margin-inline:auto;text-align:right}
+  .ms-hero-v2__sub{font-size:clamp(44px,7.5vw,68px);margin-bottom:22px;justify-content:flex-start}
+  .ms-hero-v2__lead{font-size:16px;line-height:1.6;max-width:52ch;margin-bottom:28px}
+  .ms-hero-v2__cta{flex-direction:row;flex-wrap:wrap;gap:12px}
+  .ms-hero-v2__btn{flex:0 1 auto;min-width:200px;padding:0 22px;font-size:14px}
+  .ms-hero-v2__wordmark{
+    top:clamp(16px,2vw,26px);
+    left:clamp(20px,3vw,32px);
+    right:clamp(20px,3vw,32px);
+    font-size:clamp(60px,10vw,110px);
+  }
+  .ms-hero-v2__wordmark span:last-child{padding-inline-start:1.1em}
+  .ms-hero-v2__vertical{display:none}
+  .ms-hero-v2__fine{margin-top:22px;font-size:11.5px;gap:10px}
+}
+
+/* 3c · 641–767px: image stage a bit taller so it doesn't feel like a strip. */
+@media (min-width:641px) and (max-width:767px){
+  .ms-hero-v2{grid-template-rows:minmax(280px,40vh) auto}
+  .ms-hero-v2__wordmark{font-size:clamp(56px,11vw,88px)}
+  .ms-hero-v2__wordmark span:last-child{padding-inline-start:.9em}
+  .ms-hero-v2__cta{flex-direction:column;align-items:stretch}
+  .ms-hero-v2__btn{width:100%;min-width:0}
+}
+
+
+/* ---------------------------------------------------------------------------
+   4 · About section
+   ------------------------------------------------------------------------ */
+@media (min-width:641px) and (max-width:1100px){
+  /* The live app.css collapses .ms-about-grid to 1-col at ≤1100, good.
+     But the aside sits below without enough top separation. */
+  .ms-about-grid{gap:clamp(28px,4vw,48px) !important}
+  .ms-about-side{gap:clamp(18px,2.4vw,26px)}
+}
+
+@media (min-width:641px) and (max-width:767px){
+  /* Stats: 3-col at this width squishes big numerals. Go 3-row stacked with
+     horizontal-ish layout: number + label on same row. */
+  .ms-about-stats{grid-template-columns:minmax(0,1fr)}
+  .ms-about-stat{display:flex;align-items:baseline;gap:18px;padding:20px 22px}
+  .ms-about-stat + .ms-about-stat{
+    border-inline-start:0;
+    border-top:1px solid var(--white-a08);
+  }
+  .ms-about-stat-num{font-size:52px;flex:0 0 auto}
+  .ms-about-stat-label{margin-top:0;font-size:14px;flex:1 1 auto}
+  .ms-about-quote{padding-inline-end:clamp(48px,8vw,68px)}
+  .ms-about-quote-mark{font-size:88px;top:2px;inset-inline-end:16px}
+}
+
+@media (min-width:768px) and (max-width:1100px){
+  /* Keep 3-col stats but tighten padding so the numerals don't touch borders. */
+  .ms-about-stat{padding:clamp(18px,2.4vw,26px) clamp(12px,1.6vw,18px)}
+  .ms-about-stat-num{font-size:clamp(46px,5.4vw,60px)}
+  .ms-about-stat-label{font-size:12.5px;margin-top:8px}
+}
+
+
+/* ---------------------------------------------------------------------------
+   5 · Programs — 6 discipline cards
+   ------------------------------------------------------------------------ */
+@media (min-width:641px) and (max-width:899px){
+  /* Force 2-col so cards are wide enough for the 30px H3. */
+  #programs > .ms-section-inner > div[style*="grid-template-columns"]{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+  [data-msa=feature] .ms-feature-title{font-size:26px}
+  [data-msa=feature] .ms-feature-body{padding:16px 20px 20px}
+  [data-msa=feature] .ms-feature-num{font-size:38px}
+}
+
+@media (min-width:900px) and (max-width:1100px){
+  /* 3-col grid stays but shrink type slightly to prevent overflow. */
+  #programs > .ms-section-inner > div[style*="grid-template-columns"]{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:clamp(14px,1.8vw,20px) !important;
+  }
+  [data-msa=feature] .ms-feature-title{font-size:24px;line-height:1.05}
+  [data-msa=feature] .ms-feature-desc{font-size:14px}
+  [data-msa=feature] .ms-feature-body{padding:16px 18px 20px;gap:5px}
+  [data-msa=feature] .ms-feature-num{font-size:38px;top:12px;inset-inline-start:14px}
+}
+
+
+/* ---------------------------------------------------------------------------
+   6 · Differentiators (.ms-diffgrid) — currently 3-col ≥901px, 2-col ≤900,
+   1-col ≤560. Between 901–1100 the H3 wraps ugly. Keep 2-col to 1023.
+   ------------------------------------------------------------------------ */
+@media (min-width:641px) and (max-width:1023px){
+  .ms-diffgrid{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+}
+@media (min-width:1024px) and (max-width:1100px){
+  .ms-diffgrid{gap:clamp(14px,1.6vw,18px)}
+  .ms-diff{padding:20px 20px 22px}
+  .ms-diff h3{font-size:22px}
+  .ms-diff p{font-size:14px}
+}
+
+
+/* ---------------------------------------------------------------------------
+   7 · Audience cards (Kids / Teens / Adults)
+   ------------------------------------------------------------------------ */
+@media (min-width:641px) and (max-width:899px){
+  /* Currently jumps 3→1 at 820px. Give it a 2-col band that reads nicely,
+     with the 3rd card (adults) spanning full width so nothing looks orphaned. */
+  .ms-audience-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:16px}
+  .ms-audience-grid > .ms-aud:last-child{grid-column:1 / -1}
+  .ms-aud h3{font-size:38px}
+  .ms-aud-num{font-size:56px;top:12px;inset-inline-end:16px}
+  .ms-aud{padding:24px}
+}
+
+@media (min-width:900px) and (max-width:1100px){
+  /* 3-col with tighter type so the 44px H3 doesn't dominate narrow cards. */
+  .ms-audience-grid{gap:clamp(14px,1.8vw,20px)}
+  .ms-aud{padding:clamp(20px,2.4vw,26px)}
+  .ms-aud h3{font-size:clamp(34px,3.4vw,40px)}
+  .ms-aud p{font-size:14.5px;max-width:32ch}
+  .ms-aud-num{font-size:54px;top:12px;inset-inline-end:16px}
+}
+
+
+/* ---------------------------------------------------------------------------
+   8 · Coach (.ms-coachlay)
+   Live rule collapses to 1-col at ≤900. 901–1100 is where fixes are needed.
+   ------------------------------------------------------------------------ */
+@media (min-width:901px) and (max-width:1100px){
+  .ms-coachlay{
+    grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);
+    gap:clamp(24px,3vw,40px);
+  }
+  .ms-coach-photo-big{min-height:440px;max-height:600px}
+  .ms-coach-caption-name{font-size:clamp(32px,3.4vw,44px)}
+  .ms-coach-copy{padding-inline-start:18px}
+  .ms-coach-pull{font-size:clamp(28px,3.4vw,40px);margin-bottom:20px}
+  .ms-coach-copy p{font-size:15.5px;line-height:1.6;margin-bottom:14px}
+  .ms-coach-cred{margin-top:20px;gap:6px}
+  .ms-coach-cred span{padding:7px 13px;font-size:12px}
+  .ms-coach-actions{margin-top:22px}
+  .ms-coach-actions .ms-btn{height:44px;padding:0 18px;font-size:14px}
+}
+
+@media (min-width:641px) and (max-width:900px){
+  /* Single-column already applies via live rule. Constrain photo aspect
+     and cap pull-quote size for readability. */
+  .ms-coach-photo-big{aspect-ratio:16/11;min-height:0;max-height:520px}
+  .ms-coach-photo-big img{object-position:62% 20%}
+  .ms-coach-caption{padding:22px 24px}
+  .ms-coach-caption-name{font-size:clamp(30px,4.6vw,44px)}
+  .ms-coach-pull{font-size:clamp(28px,4.4vw,42px)}
+  .ms-coach-copy p{font-size:16px;line-height:1.6}
+  .ms-coach-cred{gap:7px}
+  .ms-coach-cred span{padding:8px 14px;font-size:12.5px}
+}
+
+
+/* ---------------------------------------------------------------------------
+   9 · Red CTA block (.ms-cta-block) — "אל תחכה. התחל עכשיו."
+   ------------------------------------------------------------------------ */
+@media (min-width:641px) and (max-width:1100px){
+  .ms-cta-block{padding:clamp(64px,9vw,110px) clamp(24px,4vw,42px)}
+  /* Cap title so 11vw doesn't blow past 100px on iPad landscape and
+     start clipping the inner container. */
+  .ms-cta-block-title{
+    font-size:clamp(60px,9.5vw,104px);
+    line-height:.88;
+    letter-spacing:-.02em;
+  }
+  .ms-cta-block-lead{font-size:clamp(16px,1.6vw,19px);max-width:46ch}
+  /* Eyebrow letter-spacing 0.42em on Hebrew-neighbor Latin can cause
+     visual imbalance in this width band; tighten a touch. */
+  .ms-cta-block-eyebrow{letter-spacing:.32em}
+  .ms-cta-block-mark{font-size:clamp(220px,28vw,380px)}
+  .ms-cta-block-actions{gap:12px;margin-top:22px}
+  .ms-cta-block-btn{height:54px;padding:0 var(--space-8);font-size:var(--fs-body)}
+  .ms-cta-block-fine{margin-top:20px;font-size:12.5px}
+}
+
+@media (min-width:641px) and (max-width:767px){
+  /* Buttons full-width feels safer at this narrow tablet width. */
+  .ms-cta-block-actions{width:100%;flex-direction:row;justify-content:center}
+  .ms-cta-block-btn{flex:1 1 220px}
+}
+
+
+/* ---------------------------------------------------------------------------
+   10 · Testimonials (.ms-quotes) — 2×2 grid
+   Live rule: 1-col at ≤820. Between 821–1100 (2-col) the quote-mark is
+   too big and the mark position overlaps figcaption.
+   ------------------------------------------------------------------------ */
+@media (min-width:641px) and (max-width:820px){
+  /* Live rule already collapses to 1-col — just tighten the quote mark. */
+  .ms-quote{padding:clamp(28px,3.4vw,38px) clamp(24px,3vw,32px) clamp(22px,2.8vw,28px)}
+  .ms-quote-mark{font-size:clamp(96px,14vw,140px);top:14px;inset-inline-end:22px}
+  .ms-quote blockquote{padding-top:clamp(22px,3vw,32px);font-size:16.5px;line-height:1.6}
+}
+
+@media (min-width:821px) and (max-width:1100px){
+  .ms-quotes{gap:clamp(14px,2vw,22px)}
+  .ms-quote{padding:clamp(26px,3vw,36px) clamp(24px,3vw,32px) clamp(22px,2.6vw,28px)}
+  .ms-quote-mark{font-size:clamp(96px,10vw,140px);top:14px;inset-inline-end:22px}
+  .ms-quote blockquote{padding-top:clamp(22px,2.8vw,32px);font-size:16.5px;line-height:1.6}
+  .ms-quote figcaption{margin-top:18px;padding-top:14px;font-size:13px}
+}
+
+
+/* ---------------------------------------------------------------------------
+   11 · FAQ
+   ------------------------------------------------------------------------ */
+@media (min-width:641px) and (max-width:1100px){
+  .ms-faq-q{padding:20px 4px;font-size:17.5px;gap:14px}
+  .ms-faq-q .ms-faq-icon{width:30px;height:30px}
+  .ms-faq-a-inner{padding:0 4px 20px;font-size:15.5px;line-height:1.55}
+}
+
+
+/* ---------------------------------------------------------------------------
+   12 · Contact section
+   Live rule collapses contact-grid to 1-col at ≤1100 already. Fine-tune.
+   ------------------------------------------------------------------------ */
+@media (min-width:641px) and (max-width:1100px){
+  [data-msa=contact-grid]{gap:clamp(20px,3vw,32px) !important}
+  .ms-contact-card{padding:clamp(22px,3vw,30px);gap:18px}
+  .ms-contact-form{padding:clamp(22px,2.6vw,28px)}
+  .ms-form-actions{justify-content:stretch}
+  .ms-form-actions .ms-btn{width:100%}
+}
+
+@media (min-width:641px) and (max-width:767px){
+  /* Two-select field-row is tight for Hebrew option labels; stack it. */
+  .ms-field-row{flex-direction:column;gap:14px}
+}
+
+
+/* ---------------------------------------------------------------------------
+   13 · Footer
+   ------------------------------------------------------------------------ */
+@media (min-width:641px) and (max-width:1100px){
+  .ms-footer{padding:var(--space-11) clamp(24px,4vw,42px) var(--space-9)}
+  .ms-footer-inner{gap:clamp(28px,4vw,48px)}
+  .ms-footer-brand{flex:1 1 260px}
+  .ms-footer-links{flex:1 1 180px}
+  .ms-footer-tagline{font-size:22px}
+}
+
+
+/* ---------------------------------------------------------------------------
+   14 · Anchor scroll offset — header height stays 76px in this range,
+   ensure sections don't underlap.
+   ------------------------------------------------------------------------ */
+@media (min-width:641px) and (max-width:1100px){
+  [data-msa=sec]{scroll-margin-top:88px}
+}
+
+
+/* =========================================================
+   RESPONSIVE PASS · MOBILE (≤640px) — designer proposal
+   ========================================================= */
+
+/* ---- Global overflow safety net (mobile only) ---------------------------- */
+@media (max-width:640px){
+  html,body{max-width:100%;overflow-x:clip}
+  /* Section padding a touch tighter — 20px is already the clamp floor,
+     but the ms-section-inner children still need micro-headroom on 320px. */
+  .ms-section{padding-inline:16px}
+  /* Add extra room under body so the fixed mobar never overlaps the very last CTA/submit */
+  body{padding-bottom:calc(84px + env(safe-area-inset-bottom)) !important}
+}
+
+@media (max-width:380px){
+  .ms-section{padding-inline:14px}
+}
+
+@media (max-width:320px){
+  .ms-section{padding-inline:12px}
+}
+
+/* ---- 1. Sticky header --------------------------------------------------- */
+@media (max-width:640px){
+  /* Tighten header side padding + reduce gap so the trial pill + hamburger fit */
+  header[style*="position:sticky"]{
+    padding:0 14px !important;
+    gap:10px !important;
+  }
+  /* Small trial button in header — shrink so it doesn't fight hamburger for width */
+  header .ms-btn.ms-btn--sm{
+    height:38px;
+    padding:0 12px;
+    font-size:12.5px;
+    letter-spacing:.02em;
+  }
+  /* Ensure hamburger stays a compliant 44px tap target */
+  [data-msa=menubtn]{
+    width:44px !important;
+    height:44px !important;
+    flex:0 0 44px;
+  }
+  /* Logo type: keep readable but slightly smaller */
+  header a[href="#top"] img{width:32px !important}
+  header a[href="#top"] span[dir="ltr"] > span:first-child{font-size:11px !important}
+  header a[href="#top"] span[dir="ltr"] > span:last-child{font-size:8.5px !important;letter-spacing:.36em !important}
+}
+
+@media (max-width:380px){
+  /* At iPhone SE 1st gen, drop trial CTA label to a shorter form isn't possible without HTML change — instead shrink further */
+  header .ms-btn.ms-btn--sm{
+    height:36px;
+    padding:0 10px;
+    font-size:11.5px;
+  }
+  header[style*="position:sticky"]{padding:0 10px !important;gap:8px !important}
+  header a[href="#top"]{gap:8px !important}
+}
+
+@media (max-width:320px){
+  /* On very old iPhone SE the AFULA·MMA sub-line risks pushing everything */
+  header a[href="#top"] span[dir="ltr"] > span:last-child{display:none !important}
+  header a[href="#top"] img{width:28px !important}
+}
+
+/* ---- 2. Hero (.ms-hero-v2) --------------------------------------------- */
+@media (max-width:640px){
+  /* Content column: give it comfortable side padding + push bottom clear of mobar */
+  .ms-hero-v2__content-wrap{
+    padding:28px 18px calc(104px + env(safe-area-inset-bottom)) !important;
+  }
+  /* Sub-headline "כוח. ביטחון. משמעת." — allow wrapping and tame the size */
+  .ms-hero-v2__sub{
+    font-size:clamp(34px,9.5vw,52px) !important;
+    line-height:.98;
+    gap:0 .14em;
+    margin-bottom:20px;
+  }
+  /* Lead paragraph — clamp min so it stays legible */
+  .ms-hero-v2__lead{
+    font-size:15.5px !important;
+    margin-bottom:24px;
+    max-width:none;
+  }
+  /* Eyebrow — subtle tightening */
+  .ms-hero-v2__eyebrow{
+    font-size:11px;
+    margin-bottom:16px;
+    gap:10px;
+  }
+  .ms-hero-v2__eyebrow-rule{width:32px}
+  /* Wordmark overlay — cap it so it never crashes into content */
+  .ms-hero-v2__wordmark{
+    font-size:clamp(40px,12vw,72px) !important;
+    top:10px !important;
+    left:12px !important;
+    right:12px !important;
+  }
+  /* Fine print row (phone · address) — allow neat wrap */
+  .ms-hero-v2__fine{
+    font-size:11.5px;
+    gap:8px;
+    margin-top:22px;
+  }
+}
+
+/* Hero CTA row — the site's own 820px rule sets flex:row with flex:1 1 0.
+   On very narrow phones, side-by-side buttons crush. Stack full-width. */
+@media (max-width:420px){
+  .ms-hero-v2__cta{
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:10px !important;
+  }
+  .ms-hero-v2__cta > .ms-btn,
+  .ms-hero-v2__cta > a{
+    width:100% !important;
+    min-height:48px;
+    font-size:14.5px !important;
+  }
+}
+
+/* ---- 3. About — stat trio + quote card --------------------------------- */
+@media (max-width:640px){
+  /* Existing rule stacks at ≤520; move that up to 640 so 521–640 also breathes */
+  .ms-about-stats{grid-template-columns:minmax(0,1fr) !important}
+  .ms-about-stat + .ms-about-stat{
+    border-inline-start:0 !important;
+    border-top:1px solid var(--white-a08);
+  }
+  .ms-about-stat{padding:20px 18px}
+  .ms-about-stat-num{font-size:52px}
+  /* Quote card decorative "״" — clamp so it doesn't overflow the card padding */
+  .ms-about-quote{
+    padding:22px 20px;
+    padding-inline-end:54px;
+  }
+  .ms-about-quote-mark{
+    font-size:76px !important;
+    top:2px !important;
+    inset-inline-end:12px !important;
+  }
+  .ms-about-quote blockquote{font-size:18.5px;line-height:1.35}
+  .ms-about-body{font-size:15.5px;line-height:1.6}
+}
+
+/* ---- 4. Programs — 6 discipline cards ---------------------------------- */
+@media (max-width:640px){
+  /* index.html uses an INLINE style: grid-template-columns:repeat(auto-fill,minmax(300px,1fr))
+     — 300px min will overflow on 320-360px viewports. Force a single column. */
+  #programs > .ms-section-inner > div[style*="grid-template-columns"]{
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:16px !important;
+  }
+  [data-msa=feature] .ms-feature-body{padding:16px 18px 20px}
+  [data-msa=feature] .ms-feature-title{font-size:24px;line-height:1.05}
+  [data-msa=feature] .ms-feature-desc{font-size:14.5px}
+  [data-msa=feature] .ms-feature-num{font-size:36px;top:10px;inset-inline-start:14px}
+  [data-msa=feature] [data-msa=thumb]{aspect-ratio:16/10}
+}
+
+/* ---- 5. Differentiators — 3 → 2 → 1 ------------------------------------ */
+@media (max-width:640px){
+  /* Original stacks at 560px; move to 640 for real single-column phones */
+  .ms-diffgrid{grid-template-columns:minmax(0,1fr) !important;gap:12px}
+  .ms-diff{padding:20px 18px 20px}
+  .ms-diff h3{font-size:22px}
+  .ms-diff p{font-size:14.5px}
+  .ms-diff-num{font-size:28px}
+}
+
+/* ---- 6. Audience — Kids / Teens / Adults -------------------------------- */
+@media (max-width:640px){
+  /* Already stacks at 820 via app.css — just tighten padding and huge num decoration */
+  .ms-aud{padding:22px 20px}
+  .ms-aud h3{font-size:36px}
+  .ms-aud-num{font-size:52px;top:10px;inset-inline-end:14px}
+  .ms-aud p{font-size:14.5px;max-width:none}
+  .ms-aud .ms-btn{width:100%}
+}
+
+/* ---- 7. Coach — photo + credentials chips + CTAs ----------------------- */
+@media (max-width:640px){
+  .ms-coach-photo-big{
+    aspect-ratio:4/5;
+    min-height:0 !important;
+    max-height:460px;
+  }
+  .ms-coach-photo-big img{object-position:60% 24%}
+  .ms-coach-badge{top:14px;font-size:10px;padding:6px 10px;letter-spacing:.16em}
+  .ms-coach-caption{padding:18px 20px}
+  .ms-coach-caption-name{font-size:34px}
+  .ms-coach-pull{
+    font-size:26px !important;
+    line-height:1.1;
+    margin-bottom:20px;
+  }
+  .ms-coach-copy{padding-inline-start:14px}
+  .ms-coach-copy p{font-size:15.5px;line-height:1.6}
+  .ms-coach-cred{gap:6px;margin-top:20px}
+  .ms-coach-cred span{
+    padding:7px 12px;
+    font-size:12px;
+    letter-spacing:.005em;
+  }
+  .ms-coach-cred span::before{
+    width:5px;
+    height:5px;
+    margin-inline-end:6px;
+  }
+  .ms-coach-actions{gap:8px;margin-top:22px}
+  .ms-coach-actions .ms-btn{flex:1 1 100%;width:100%}
+}
+
+@media (max-width:380px){
+  .ms-coach-photo-big{max-height:400px}
+  .ms-coach-caption-name{font-size:30px}
+  .ms-coach-pull{font-size:24px !important}
+}
+
+/* ---- 8. Red CTA block --------------------------------------------------- */
+@media (max-width:640px){
+  .ms-cta-block{
+    padding:64px 18px !important;
+  }
+  /* Massive "01" ghost mark — cap it, it's decorative and can murder mobile paint */
+  .ms-cta-block-mark{
+    font-size:clamp(160px,60vw,240px) !important;
+  }
+  .ms-cta-block-title{
+    font-size:clamp(48px,13.5vw,72px) !important;
+    line-height:.9;
+    letter-spacing:-.02em;
+  }
+  .ms-cta-block-lead{font-size:16px}
+  /* Reinforce existing 720px stack — sizes and safe layout */
+  .ms-cta-block-actions{width:100%;gap:10px}
+  .ms-cta-block-btn{
+    width:100% !important;
+    height:52px !important;
+    font-size:15px !important;
+    padding:0 18px !important;
+    min-width:0;
+  }
+  .ms-cta-block-fine{
+    margin-top:18px;
+    font-size:12px;
+    letter-spacing:.04em;
+  }
+}
+
+@media (max-width:380px){
+  .ms-cta-block-title{font-size:clamp(42px,14vw,58px) !important}
+  .ms-cta-block-lead{font-size:15px}
+}
+
+/* ---- 9. Testimonials — 2×2 → 1 col ------------------------------------- */
+@media (max-width:640px){
+  /* Already stacks at 820. Tighten card + shrink decorative quote glyph. */
+  .ms-quote{padding:26px 22px 22px}
+  .ms-quote blockquote{
+    font-size:16px !important;
+    line-height:1.6;
+    padding-top:24px;
+  }
+  .ms-quote-mark{
+    font-size:88px !important;
+    top:12px !important;
+    inset-inline-end:18px !important;
+  }
+  .ms-quote figcaption{
+    margin-top:18px;
+    padding-top:14px;
+    font-size:13px;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .ms-quote figcaption strong{font-size:14px}
+}
+
+/* ---- 10. FAQ accordion -------------------------------------------------- */
+@media (max-width:640px){
+  .ms-faq-q{
+    font-size:16.5px !important;
+    padding:20px 4px !important;
+    line-height:1.35;
+    gap:12px;
+    min-height:56px; /* tap target */
+    align-items:flex-start;
+  }
+  .ms-faq-q > span:first-child{flex:1 1 auto;padding-top:4px}
+  .ms-faq-q .ms-faq-icon{
+    width:30px;
+    height:30px;
+    flex:0 0 30px;
+    margin-top:2px;
+  }
+  .ms-faq-a-inner{
+    font-size:15px !important;
+    line-height:1.6;
+    padding:0 4px 20px !important;
+  }
+}
+
+@media (max-width:380px){
+  .ms-faq-q{font-size:15.5px !important;padding:18px 2px !important}
+}
+
+/* ---- 11. Contact — info card + form ------------------------------------ */
+@media (max-width:640px){
+  .ms-contact-card{
+    padding:20px 18px !important;
+    gap:16px;
+  }
+  .ms-contact-row{gap:12px}
+  .ms-contact-row svg{width:20px;height:20px;flex-basis:20px}
+  .ms-contact-row > div{min-width:0;flex:1 1 auto}
+  .ms-contact-label{font-size:10.5px;letter-spacing:.16em}
+  .ms-contact-val{font-size:15.5px;line-height:1.45;word-break:break-word}
+  /* Two-button row at the bottom of contact card — stack full-width */
+  .ms-contact-card > div[style*="flex-wrap:wrap"] .ms-btn{
+    flex:1 1 100%;
+    width:100%;
+  }
+
+  /* Form */
+  .ms-contact-form{padding:20px 18px !important}
+  .ms-form{gap:12px;padding:0 !important}
+  .ms-field input,
+  .ms-field select,
+  .ms-field textarea{
+    font-size:16px; /* iOS: keep ≥16 to prevent zoom-on-focus */
+    padding:11px 12px;
+    min-height:46px;
+  }
+  .ms-field label{font-size:10.5px;letter-spacing:.16em}
+  .ms-form-actions{margin-top:8px}
+  .ms-form-actions .ms-btn{width:100%;min-height:52px;font-size:15px}
+  .ms-form-note{font-size:12px;text-align:start;line-height:1.5}
+  .ms-form-success{padding:22px 20px}
+  .ms-form-success h4{font-size:28px}
+}
+
+/* Field-row with 2 selects: at 480px force column stack */
+@media (max-width:480px){
+  .ms-field-row{flex-direction:column;gap:12px}
+  .ms-field-row .ms-field{width:100%}
+}
+
+/* ---- 12. Footer --------------------------------------------------------- */
+@media (max-width:640px){
+  .ms-footer{padding:44px 18px 36px}
+  .ms-footer-inner{
+    gap:32px;
+    flex-direction:column;
+  }
+  .ms-footer-brand,
+  .ms-footer-links{flex:1 1 100%;width:100%}
+  .ms-footer-brand a img{width:96px !important}
+  .ms-footer-tagline{font-size:22px;margin-top:12px}
+  .ms-footer-links{gap:10px}
+  .ms-footer-links a{font-size:14.5px}
+  .ms-footer-eyebrow{
+    margin-top:32px;
+    padding-top:20px;
+    font-size:10px;
+    letter-spacing:.32em;
+  }
+}
+
+/* ---- 13. Fixed mobile action bar (.ms-mobar) --------------------------- */
+@media (max-width:640px){
+  .ms-mobar{
+    gap:6px;
+    padding:8px calc(10px + env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left));
+  }
+  .ms-mobar-btn{
+    height:56px;
+    min-height:48px;
+    padding:6px 4px;
+    font-size:11px;
+    letter-spacing:0;
+    gap:2px;
+    border-radius:10px;
+  }
+  .ms-mobar-btn svg{width:18px;height:18px}
+  /* WhatsApp button keeps flex:2 from base; make sure it doesn't crush the others */
+  .ms-mobar-btn--wa{flex:1.6 1 0}
+}
+
+@media (max-width:380px){
+  .ms-mobar-btn{font-size:10.5px;padding:6px 3px}
+  .ms-mobar-btn svg{width:16px;height:16px}
+  .ms-mobar{gap:5px}
+}
+
+@media (max-width:320px){
+  /* iPhone SE 1st gen: labels get seriously tight — drop letter labels to icons only */
+  .ms-mobar-btn span{font-size:10px}
+  .ms-mobar-btn{height:52px}
+}
+
+/* ---- 14. RTL edge cases ------------------------------------------------- */
+@media (max-width:640px){
+  /* Coach credential dot — verify it appears at the *reading start* (right side in RTL).
+     Since ::before uses margin-inline-end, it correctly lands to the RIGHT of the text
+     visually. This override is defensive against any stylesheet ordering issues. */
+  .ms-coach-cred span::before{
+    margin-inline-end:6px;
+    margin-inline-start:0;
+  }
+  /* Testimonial figcaption dot separator — keep centred inline in RTL flow */
+  .ms-quote figcaption span[aria-hidden]{margin:0 2px}
+  /* Contact val links: ensure LTR phone doesn't misalign in RTL flow */
+  .ms-contact-val[dir="ltr"]{text-align:start}
+}
+
+/* ---- 15. Hero fine-print stack ≤380 ------------------------------------ */
+@media (max-width:380px){
+  .ms-hero-v2__fine{
+    font-size:11px;
+    gap:6px;
+  }
+  .ms-hero-v2__fine-dot{width:4px;height:4px}
+}
+
+/* ---- 16. Anchor scroll offset — nudge for mobar --------------------------
+   Mobar is bottom-fixed and header is top-sticky. Keep default 96px top offset
+   from app.css (scroll-margin-top:96px) — that's fine for phones since nav-height
+   remains 76px. No override needed. */
+
+/* ---- 17. Guard: any element that used vw-only sizing should not overflow --- */
+@media (max-width:640px){
+  .ms-section-title{
+    font-size:clamp(32px,8.5vw,44px) !important;
+    line-height:.98;
+  }
+  .ms-section-lead{font-size:15.5px;line-height:1.55}
+  .ms-section-head{margin-bottom:26px;gap:10px}
+  .ms-eyebrow{font-size:10.5px;letter-spacing:.16em}
+  .ms-eyebrow::before{width:20px}
+}
+
+
+/* =========================================================
+   Floating WhatsApp action button (replaces the 3-button bar)
+   ========================================================= */
+.ms-fab{position:fixed;right:calc(16px + env(safe-area-inset-right));bottom:calc(20px + env(safe-area-inset-bottom));z-index:80;display:none;align-items:center;justify-content:center;width:60px;height:60px;border-radius:999px;background:#25D366;color:#052506;box-shadow:0 12px 32px rgba(37,211,102,.4),0 2px 8px rgba(0,0,0,.5);border:2px solid rgba(255,255,255,.12);text-decoration:none;transition:transform .2s var(--ease-out),box-shadow .2s var(--ease-out)}
+.ms-fab:hover{transform:scale(1.06);box-shadow:0 18px 40px rgba(37,211,102,.55),0 4px 14px rgba(0,0,0,.5);color:#052506}
+.ms-fab:active{transform:scale(.95)}
+.ms-fab svg{display:block}
+@keyframes msaFabPulse{0%,100%{box-shadow:0 12px 32px rgba(37,211,102,.4),0 2px 8px rgba(0,0,0,.5),0 0 0 0 rgba(37,211,102,.55)}50%{box-shadow:0 12px 32px rgba(37,211,102,.4),0 2px 8px rgba(0,0,0,.5),0 0 0 16px rgba(37,211,102,0)}}
+@media (prefers-reduced-motion:no-preference){.ms-fab{animation:msaFabPulse 2.6s var(--ease-out) infinite}}
+
+/* Show FAB ≤860, hide it ≥861. Override the old mobar body-padding reservation. */
+@media (max-width:860px){
+  .ms-fab{display:inline-flex}
+  .ms-mobar{display:none !important}
+  body{padding-bottom:calc(20px + env(safe-area-inset-bottom)) !important}
+}
+@media (min-width:861px){
+  .ms-fab{display:none !important}
+}

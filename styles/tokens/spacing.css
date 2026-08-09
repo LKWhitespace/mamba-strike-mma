@@ -1,0 +1,27 @@
+:root{
+/* Not a 4/8 grid — these are the real measurements off the
+   printed booklet and posters. Do not snap them. */
+--space-1:3px;
+--space-2:6px;
+--space-3:8px;
+--space-4:10px;
+--space-5:13px;
+--space-6:16px;
+--space-7:22px;
+--space-8:26px;
+--space-9:34px;
+--space-10:42px;
+--space-11:56px;
+--space-12:72px;
+--space-13:96px;
+--space-14:128px;
+
+/* Layout */
+--page-pad:42px;
+--page-pad-tight:34px;
+--page-pad-sm:24px;
+--gutter:24px;
+--container-max:1240px;
+--container-narrow:760px;
+--nav-height:76px;
+}

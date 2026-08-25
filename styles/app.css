@@ -1403,6 +1403,9 @@ html.ms-scroll-lock{overflow:hidden}
 .ms-programs-fine a{color:var(--white);text-decoration:underline;text-underline-offset:3px}
 .ms-programs-fine a:hover{color:var(--red-400)}
 
+/* Phone number: keep LTR digits but align right in RTL layout */
+.ms-contact-val[dir="ltr"]{text-align:right;unicode-bidi:plaintext}
+
 /* Inline form errors (a11y) */
 .ms-field-err{margin:6px 0 0;font-family:var(--font-body);font-size:13px;color:#ff6b6b;line-height:1.4}
 .ms-field input[aria-invalid="true"],.ms-field select[aria-invalid="true"],.ms-field textarea[aria-invalid="true"]{border-color:var(--accent);box-shadow:0 0 0 3px rgba(227,30,36,.16)}

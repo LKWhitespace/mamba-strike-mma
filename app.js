@@ -91,6 +91,23 @@
     });
   }
 
+  // ------ FAB visibility: only show after user scrolls past hero ------
+  var heroSec = document.querySelector('.ms-hero-v2');
+  if(heroSec && 'IntersectionObserver' in window){
+    var fabObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        // If hero is at least 10% visible → hide FAB (hero already has WhatsApp CTA)
+        // If hero is out of view → show FAB
+        if(entry.intersectionRatio > 0.1){
+          document.body.classList.remove('ms-fab-visible');
+        } else {
+          document.body.classList.add('ms-fab-visible');
+        }
+      });
+    }, {threshold:[0, 0.1, 0.5]});
+    fabObs.observe(heroSec);
+  }
+
   // ------ Reveal-on-scroll (IntersectionObserver, with sibling stagger) ------
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var anim = document.querySelectorAll('[data-anim]');

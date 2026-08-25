@@ -1379,9 +1379,11 @@ html.ms-scroll-lock{overflow:hidden}
 @keyframes msaFabPulse{0%,100%{box-shadow:0 12px 32px rgba(37,211,102,.4),0 2px 8px rgba(0,0,0,.5),0 0 0 0 rgba(37,211,102,.55)}50%{box-shadow:0 12px 32px rgba(37,211,102,.4),0 2px 8px rgba(0,0,0,.5),0 0 0 16px rgba(37,211,102,0)}}
 @media (prefers-reduced-motion:no-preference){.ms-fab{animation:msaFabPulse 2.6s var(--ease-out) infinite}}
 
-/* Show FAB ≤860, hide it ≥861. Override the old mobar body-padding reservation. */
+/* FAB visibility: mobile only, and only once the user has scrolled past the hero.
+   JS toggles body.ms-fab-visible via IntersectionObserver on .ms-hero-v2. */
 @media (max-width:860px){
-  .ms-fab{display:inline-flex}
+  .ms-fab{display:inline-flex;opacity:0;transform:translateY(20px) scale(.85);pointer-events:none;transition:opacity .3s var(--ease-out),transform .3s var(--ease-out)}
+  body.ms-fab-visible .ms-fab{opacity:1;transform:none;pointer-events:auto}
   .ms-mobar{display:none !important}
   body{padding-bottom:calc(20px + env(safe-area-inset-bottom)) !important}
 }

@@ -1,8 +1,238 @@
-@import url("tokens/fonts.css");
-@import url("tokens/colors.css");
-@import url("tokens/typography.css");
-@import url("tokens/spacing.css");
-@import url("tokens/borders.css");
-@import url("tokens/effects.css");
-@import url("tokens/motion.css");
-@import url("tokens/base.css");
+/* Google Fonts loaded via <link rel="preconnect"> + preload in <head>.
+   Kept here for token reference. Font families:
+   - Karantina 700 (condensed display, Hebrew + Latin)
+   - Heebo 400/700/900 (bilingual body / UI) */
+:root{
+/* ── Base ink ─────────────────────────────────────────── */
+--ink-1000:#000000;
+--ink-900:#050506;
+--ink-850:#0A0A0C;
+--ink-800:#111113;
+--ink-750:#17171A;
+--ink-700:#1E1E22;
+--ink-600:#232327;
+
+/* ── Mamba red ────────────────────────────────────────── */
+--red-300:#FF6167;
+--red-400:#FF3B42;
+--red-500:#E31E24;
+--red-600:#B3161B;
+--red-700:#7E1013;
+
+/* ── Neutrals ─────────────────────────────────────────── */
+--white:#FFFFFF;
+--gray-050:#F2F2F2;
+--gray-100:#EDEDF0;
+--gray-300:#B4B4BC;
+--gray-350:#AEAEB6;
+--gray-400:#A8A8B0;
+--gray-500:#8E8E96;
+--gray-600:#6E6E76;
+--gray-700:#5A5A62;
+
+/* ── Alphas (rules, washes, veils) ────────────────────── */
+--red-a42:rgba(227,30,36,0.42);
+--red-a30:rgba(227,30,36,0.30);
+--red-a16:rgba(227,30,36,0.16);
+--red-a08:rgba(227,30,36,0.08);
+--red-a05:rgba(227,30,36,0.05);
+--white-a12:rgba(255,255,255,0.12);
+--white-a08:rgba(255,255,255,0.08);
+--white-a04:rgba(255,255,255,0.04);
+--ink-a82:rgba(5,5,6,0.82);
+--ink-a45:rgba(5,5,6,0.45);
+
+/* ── Semantic surfaces ────────────────────────────────── */
+--bg-page:var(--ink-900);
+--bg-surface:var(--ink-850);
+--bg-raised:var(--ink-800);
+--bg-sunken:var(--ink-1000);
+--surface-callout:linear-gradient(180deg,var(--red-a16) 0%,var(--red-a05) 100%);
+--surface-accent:var(--red-500);
+--surface-veil:var(--ink-a82);
+
+/* ── Semantic text ────────────────────────────────────── */
+--text-display:var(--white);
+--text-heading:var(--gray-050);
+--text-term:var(--gray-100);
+--text-body:var(--gray-350);
+--text-body-dim:var(--gray-400);
+--text-muted:var(--gray-500);
+--text-faint:var(--gray-700);
+--text-accent:var(--red-500);
+--text-on-accent:var(--white);
+
+/* ── Semantic lines & accents ─────────────────────────── */
+--accent:var(--red-500);
+--accent-hover:var(--red-400);
+--accent-press:var(--red-600);
+--rule-accent:var(--red-a42);
+--border-subtle:var(--white-a08);
+--border-accent:var(--red-500);
+--focus-ring:var(--red-400);
+
+/* ── Status. Intentional addition: the print source only
+      uses red/white/black. Kept muted so red stays the
+      loudest colour on any screen. ────────────────────── */
+--status-danger:var(--red-500);
+--status-success:#35C46B;
+--status-warning:#F2A93B;
+}
+:root{
+/* ── Families ─────────────────────────────────────────────
+   Karantina covers both scripts in one condensed display face,
+   so Hebrew and Latin headlines share the same voice. Its
+   heaviest weight is 700 — never ask it for 900.
+   USE IT ONLY AT 24px AND ABOVE. Buttons, labels, small
+   card titles, table cells and anything under 24px take
+   --font-body at --fw-bold. */
+--font-display:'Karantina',sans-serif;
+--font-display-he:'Karantina',sans-serif;
+--font-body:'Heebo',system-ui,-apple-system,sans-serif;
+--font-numeric:'Karantina',sans-serif;
+
+/* ── Weights ──────────────────────────────────────────── */
+--fw-light:300; /* @kind font */
+--fw-regular:400; /* @kind font */
+--fw-medium:500; /* @kind font */
+--fw-bold:700; /* @kind font */
+--fw-black:700; /* @kind font */ /* display ceiling — Karantina stops at 700 */
+
+/* ── Size scale (lifted from the printed booklet) ─────── */
+--fs-display-1:120px;
+--fs-display-2:96px;
+--fs-display-3:76px;
+--fs-display-4:64px;
+--fs-title-1:44px;
+--fs-title-2:33px;
+--fs-title-3:26px;
+--fs-lead:18px;
+--fs-body:17px;
+--fs-body-sm:15px;
+--fs-caption:13px;
+--fs-micro:11px;
+--fs-micro-xs:10px;
+
+/* ── Fluid web headline sizes ─────────────────────────── */
+--fs-hero:clamp(64px,9vw,120px); /* @kind font */
+--fs-section:clamp(46px,6vw,84px); /* @kind font */
+--fs-sub:clamp(24px,2.6vw,33px); /* @kind font */
+
+/* ── Line heights ─────────────────────────────────────── */
+--lh-display:0.94; /* @kind font */
+--lh-title:1.04; /* @kind font */
+--lh-term:0.9; /* @kind font */
+--lh-snug:1.3; /* @kind font */
+--lh-body:1.45; /* @kind font */
+--lh-relaxed:1.5; /* @kind font */
+
+/* ── Tracking ─────────────────────────────────────────── */
+--ls-display:-0.01em; /* @kind font */
+--ls-caps:0.01em; /* @kind font */
+--ls-eyebrow:0.42em; /* @kind font */
+--ls-eyebrow-tight:0.18em; /* @kind font */
+}
+:root{
+/* Not a 4/8 grid — these are the real measurements off the
+   printed booklet and posters. Do not snap them. */
+--space-1:3px;
+--space-2:6px;
+--space-3:8px;
+--space-4:10px;
+--space-5:13px;
+--space-6:16px;
+--space-7:22px;
+--space-8:26px;
+--space-9:34px;
+--space-10:42px;
+--space-11:56px;
+--space-12:72px;
+--space-13:96px;
+--space-14:128px;
+
+/* Layout */
+--page-pad:42px;
+--page-pad-tight:34px;
+--page-pad-sm:24px;
+--gutter:24px;
+--container-max:1240px;
+--container-narrow:760px;
+--nav-height:76px;
+}
+:root{
+/* Radii — the booklet is mostly square. Only callouts and
+   web controls round, and never past 14px. */
+--radius-0:0px;
+--radius-sm:6px;
+--radius-md:10px;
+--radius-lg:14px;
+--radius-pill:999px;
+
+/* Weights */
+--border-hairline:1px; /* @kind spacing */
+--rule-weight:1.5px; /* @kind spacing */
+--border-strong:2px; /* @kind spacing */
+
+/* Composed */
+--rule-h:var(--rule-weight) solid var(--rule-accent); /* @kind other */
+--border-card:var(--border-hairline) solid var(--border-subtle); /* @kind other */
+--border-card-accent:var(--border-hairline) solid var(--red-a42); /* @kind other */
+--border-callout:var(--border-strong) solid var(--accent); /* @kind other */
+}
+:root{
+/* The brand does not use drop shadows for hierarchy — it uses
+   hairlines, red glow and protection gradients. */
+--glow-red-sm:0 0 12px rgba(227,30,36,0.30);
+--glow-red:0 0 24px rgba(227,30,36,0.35);
+--glow-red-lg:0 0 48px rgba(227,30,36,0.28);
+--shadow-lift:0 18px 40px rgba(0,0,0,0.55);
+--shadow-inset-top:inset 0 1px 0 rgba(255,255,255,0.05);
+
+/* Protection gradients — laid over photography so display type
+   stays legible. Bottom veil for covers, corner veil for
+   split hero/photo headers. */
+--protect-bottom:linear-gradient(to top,#050506 6%,rgba(5,5,6,0.82) 30%,rgba(5,5,6,0.30) 60%,rgba(5,5,6,0.70) 100%); /* @kind other */
+--protect-corner:radial-gradient(112% 100% at 100% 0%,rgba(5,5,6,0.97) 0%,rgba(5,5,6,0.88) 38%,rgba(5,5,6,0.45) 66%,rgba(5,5,6,0) 88%); /* @kind other */
+--protect-side:linear-gradient(to left,#050506 0%,rgba(5,5,6,0.16) 32%,rgba(5,5,6,0) 74%); /* @kind other */
+
+/* Photo feathering — images are never hard rectangles; they
+   dissolve into the black page through a mask. */
+--mask-feather-corner:linear-gradient(to right,#000 0%,#000 64%,rgba(0,0,0,0) 100%),linear-gradient(to bottom,#000 0%,#000 60%,rgba(0,0,0,0) 100%); /* @kind other */
+--mask-feather-radial:radial-gradient(76% 68% at 44% 46%,#000 34%,rgba(0,0,0,0) 100%); /* @kind other */
+
+/* Textures shipped as assets */
+--texture-page:url("../assets/page-bg.png"); /* @kind other */
+--texture-page-corners:url("../assets/page-bg-corners.png"); /* @kind other */
+
+/* Blur — used only for sticky nav over content */
+--blur-nav:saturate(140%) blur(14px); /* @kind other */
+}
+:root{
+--dur-instant:90ms; /* @kind other */
+--dur-fast:140ms; /* @kind other */
+--dur-base:200ms; /* @kind other */
+--dur-slow:320ms; /* @kind other */
+--ease-out:cubic-bezier(0.2,0.7,0.2,1); /* @kind other */
+--ease-in-out:cubic-bezier(0.6,0,0.2,1); /* @kind other */
+--ease-strike:cubic-bezier(0.12,0.9,0.2,1); /* @kind other */
+--transition-control:color var(--dur-fast) var(--ease-out),background-color var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out),box-shadow var(--dur-base) var(--ease-out),transform var(--dur-fast) var(--ease-out); /* @kind other */
+}
+@media (prefers-reduced-motion:reduce){:root{--dur-instant:0ms; /* @kind other */ --dur-fast:0ms; /* @kind other */ --dur-base:0ms; /* @kind other */ --dur-slow:0ms; /* @kind other */}}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg-page);color:var(--text-body);font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+h1,h2,h3,h4{margin:0;color:var(--text-display);font-family:var(--font-display-he);font-weight:var(--fw-black);line-height:var(--lh-display);letter-spacing:var(--ls-display)}
+p{margin:0}
+img{display:block;max-width:100%}
+a{color:var(--accent);text-decoration:none;transition:color var(--dur-fast) var(--ease-out)}
+a:hover{color:var(--accent-hover)}
+a:active{color:var(--accent-press)}
+::selection{background:var(--red-500);color:var(--white)}
+:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
+/* Eyebrow: the locked footer/kicker lockup used on every surface */
+.ms-eyebrow{font-family:var(--font-body);font-weight:var(--fw-bold);font-size:var(--fs-micro);letter-spacing:var(--ls-eyebrow);color:var(--text-faint);direction:ltr;text-transform:uppercase}
+.ms-eyebrow em{font-style:normal;color:var(--accent)}
+/* Horizontal accent rule that separates every row of content */
+.ms-rule{height:var(--rule-weight);background:var(--rule-accent);border:0;margin:0}
+/* Snake-skin page texture */
+.ms-texture{background-color:var(--bg-page);background-image:var(--texture-page);background-size:cover;background-position:center}

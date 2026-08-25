@@ -304,19 +304,19 @@ html.ms-scroll-lock{overflow:hidden}
 
 /* Media stage */
 .ms-hero-v2__media{position:absolute;inset:0;grid-column:1 / -1;overflow:hidden;background:var(--ink-850);z-index:1}
-.ms-hero-v2__media img,.ms-hero-v2__media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 38%;filter:saturate(.82) contrast(1.14) brightness(.94);transform:scale(1.04);animation:msaV2In 1.8s cubic-bezier(.2,.7,.2,1) 1.6s both}
+.ms-hero-v2__media img,.ms-hero-v2__media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 38%;filter:saturate(.82) contrast(1.14) brightness(.94);transform:scale(1.04);animation:msaV2In 1.8s cubic-bezier(.2,.7,.2,1) .3s both}
 /* Poster shows underneath the video until it starts playing */
 .ms-hero-v2__poster-mobile{display:block;z-index:1}
 .ms-hero-v2__video-desktop{z-index:2}
 .ms-hero-v2__grain{position:absolute;inset:-20%;background:radial-gradient(circle at 20% 40%,rgba(255,255,255,.05),transparent 55%),radial-gradient(circle at 80% 20%,rgba(227,30,36,.10),transparent 60%);mix-blend-mode:screen;pointer-events:none}
 .ms-hero-v2__veil--right{position:absolute;top:0;bottom:0;right:0;width:55%;background:linear-gradient(to left,rgba(5,5,6,.92) 0%,rgba(5,5,6,.72) 35%,rgba(5,5,6,.35) 70%,transparent 100%);pointer-events:none}
 .ms-hero-v2__veil--bottom{position:absolute;left:0;right:0;bottom:0;height:60%;background:linear-gradient(to top,var(--ink-900) 0%,rgba(5,5,6,.85) 22%,rgba(5,5,6,.4) 55%,transparent 100%);pointer-events:none}
-.ms-hero-v2__slash{position:absolute;left:-6%;right:38%;top:62%;height:8px;background:var(--red-500);box-shadow:0 0 0 1px rgba(0,0,0,.35),0 18px 60px rgba(227,30,36,.45);transform:rotate(-8deg);transform-origin:left center;animation:msaV2Slash 1.1s cubic-bezier(.7,.02,.2,1) 2.15s both;pointer-events:none}
+.ms-hero-v2__slash{position:absolute;left:-6%;right:38%;top:62%;height:8px;background:var(--red-500);box-shadow:0 0 0 1px rgba(0,0,0,.35),0 18px 60px rgba(227,30,36,.45);transform:rotate(-8deg);transform-origin:left center;animation:msaV2Slash 1.1s cubic-bezier(.7,.02,.2,1) 1s both;pointer-events:none}
 
 /* Poster typographic layer */
 .ms-hero-v2__poster{position:absolute;inset:0;z-index:2;pointer-events:none;direction:ltr;font-family:var(--font-display);font-weight:700;color:var(--white);line-height:.82;letter-spacing:-.02em}
 /* Wordmark: red-outlined stack at the TOP of the image, above the subjects — no interruption */
-.ms-hero-v2__wordmark{position:absolute;top:clamp(20px,4vh,54px);left:clamp(24px,3.4vw,60px);right:clamp(24px,3.4vw,60px);display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(80px,11vw,180px);line-height:.86;letter-spacing:-.005em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.5px var(--red-500);text-stroke:1.5px var(--red-500);filter:drop-shadow(0 4px 40px rgba(227,30,36,.28));animation:msaV2Type 1.1s cubic-bezier(.2,.7,.2,1) 1.9s both}
+.ms-hero-v2__wordmark{position:absolute;top:clamp(20px,4vh,54px);left:clamp(24px,3.4vw,60px);right:clamp(24px,3.4vw,60px);display:block;font-family:var(--font-display);font-weight:700;font-size:clamp(80px,11vw,180px);line-height:.86;letter-spacing:-.005em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.5px var(--red-500);text-stroke:1.5px var(--red-500);filter:drop-shadow(0 4px 40px rgba(227,30,36,.28));animation:msaV2Type 1.1s cubic-bezier(.2,.7,.2,1) .5s both}
 .ms-hero-v2__wordmark span{display:block}
 .ms-hero-v2__wordmark span:first-child{padding-inline-start:.1em}
 .ms-hero-v2__wordmark span:last-child{padding-inline-start:1.8em}
@@ -326,7 +326,7 @@ html.ms-scroll-lock{overflow:hidden}
 
 /* Right-side content column */
 .ms-hero-v2__content-wrap{position:relative;z-index:3;grid-column:2 / 3;direction:rtl;display:flex;align-items:center;justify-content:flex-start;padding:clamp(70px,7vw,96px) clamp(28px,4vw,56px) clamp(64px,6vw,88px);background:transparent}
-.ms-hero-v2__content{max-width:520px;width:100%;display:flex;flex-direction:column;animation:msaV2Up .8s cubic-bezier(.2,.7,.2,1) 2.15s both}
+.ms-hero-v2__content{max-width:520px;width:100%;display:flex;flex-direction:column;animation:msaV2Up .8s cubic-bezier(.2,.7,.2,1) .75s both}
 .ms-hero-v2__sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 .ms-hero-v2__eyebrow{display:flex;align-items:center;gap:14px;font-family:var(--font-body);font-weight:700;font-size:12px;letter-spacing:.18em;color:var(--gray-300);text-transform:uppercase;margin-bottom:22px}

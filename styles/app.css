@@ -1249,9 +1249,10 @@ html.ms-scroll-lock{overflow:hidden}
     width:100%;
   }
 
-  /* Form */
-  .ms-contact-form{padding:20px 18px !important}
+  /* Form — remove card border on mobile, let fields sit directly on the page */
+  .ms-contact-form{padding:0 !important;background:transparent !important;border:0 !important;border-radius:0 !important}
   .ms-form{gap:12px;padding:0 !important}
+  .ms-form-success{background:transparent !important;border:0 !important;padding:20px 0 !important}
   .ms-field input,
   .ms-field select,
   .ms-field textarea{

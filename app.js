@@ -38,7 +38,7 @@
         sessionStorage.setItem('msaSplashSeen', String(now));
         var startedAt = performance.now();
         var minDuration = reduceMotionSplash ? 500 : 2200;
-        var maxDuration = 8000; // hard cap so splash can't hang forever on slow networks
+        var maxDuration = 3500; // hard cap so splash can't hang forever on slow networks
         var released = false;
         var release = function(){
           if(released) return;
@@ -47,21 +47,67 @@
           var wait = Math.max(0, minDuration - elapsed);
           setTimeout(removeSplash, wait);
         };
-        // Wait for the full page (images + video metadata + fonts) to load
-        var onReady = function(){
-          var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
-          fontsReady.then(release);
-        };
-        if(document.readyState === 'complete'){
-          onReady();
-        } else {
-          window.addEventListener('load', onReady);
-        }
+        // Gate on what the first screen actually needs — the hero still and the
+        // fonts — NOT the window 'load' event. Waiting for 'load' held the splash
+        // up until every other image AND the hero video had finished downloading,
+        // which on mobile data is seconds of dead time behind a black screen.
+        var heroImg = document.querySelector('.ms-hero-v2__poster-mobile');
+        var heroReady = (heroImg && !heroImg.complete)
+          ? new Promise(function(res){
+              heroImg.addEventListener('load', res, {once:true});
+              heroImg.addEventListener('error', res, {once:true});
+            })
+          : Promise.resolve();
+        // The font CSS now loads async, so document.fonts.ready can resolve before
+        // the @font-face rules even exist. Wait for the stylesheet to land first
+        // (bounded — a slow Google must never hold the splash), then for the faces.
+        var fontLink = document.querySelector('link[data-msa="fontcss"]');
+        var fontCssReady = (fontLink && fontLink.rel !== 'stylesheet')
+          ? new Promise(function(res){
+              fontLink.addEventListener('load', res, {once:true});
+              fontLink.addEventListener('error', res, {once:true});
+              setTimeout(res, 1200);
+            })
+          : Promise.resolve();
+        var fontsReady = fontCssReady.then(function(){
+          return (document.fonts && document.fonts.ready) ? document.fonts.ready : null;
+        });
+        Promise.all([heroReady, fontsReady]).then(release);
         // Hard safety cap
         setTimeout(release, maxDuration);
       }
     } catch(e){
       setTimeout(removeSplash, 2500);
+    }
+  }
+
+  // ------ Hero video: desktop only, attached after first paint ------
+  // The <source> ships with data-src instead of src on purpose. With a real src
+  // and preload="auto" the browser fetched the whole ~2.8MB clip on every device
+  // — including phones, where CSS then stacked it on top of the still, which is
+  // what made the hero visibly swap from photo to video mid-load.
+  var heroVideo = document.querySelector('.ms-hero-v2__video-desktop');
+  if(heroVideo){
+    var heroSource = heroVideo.querySelector('source[data-src]');
+    var wantsVideo = heroSource &&
+      window.matchMedia &&
+      window.matchMedia('(min-width:1024px)').matches &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(wantsVideo){
+      // Cross-fade over the still only once frames are actually rendering.
+      heroVideo.addEventListener('playing', function(){
+        heroVideo.classList.add('is-playing');
+      }, {once:true});
+      var attachHeroVideo = function(){
+        heroSource.src = heroSource.dataset.src;
+        heroVideo.load();
+        var played = heroVideo.play();
+        // Autoplay refused (low-power mode, data saver) — the still just stays.
+        if(played && played.catch) played.catch(function(){});
+      };
+      // Defer so the video never competes with the poster, CSS or fonts.
+      if(document.readyState === 'complete') attachHeroVideo();
+      else window.addEventListener('load', attachHeroVideo);
     }
   }
 

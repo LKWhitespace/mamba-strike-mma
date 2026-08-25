@@ -2,6 +2,35 @@
 (function(){
   'use strict';
 
+  // ------ Splash cleanup + skip-if-recent ------
+  var splash = document.querySelector('[data-msa="splash"]');
+  if(splash){
+    var reduceMotionSplash = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Skip splash on internal nav (recent visit within 30 min)
+    try{
+      var last = sessionStorage.getItem('msaSplashSeen');
+      var now = Date.now();
+      if(last && (now - parseInt(last,10)) < 30*60*1000){
+        document.body.classList.add('ms-splash-done');
+        splash.remove();
+      } else {
+        sessionStorage.setItem('msaSplashSeen', String(now));
+        var cleanup = function(){
+          document.body.classList.add('ms-splash-done');
+          if(splash && splash.parentNode) splash.parentNode.removeChild(splash);
+        };
+        var timeout = reduceMotionSplash ? 900 : 2500;
+        setTimeout(cleanup, timeout);
+      }
+    } catch(e){
+      // sessionStorage blocked (private browsing) — just show it
+      setTimeout(function(){
+        document.body.classList.add('ms-splash-done');
+        if(splash && splash.parentNode) splash.parentNode.removeChild(splash);
+      }, 2500);
+    }
+  }
+
   // ------ Scroll progress bar ------
   var scrollBar = document.getElementById('scrollBar');
   function updateScrollBar(){
@@ -41,14 +70,30 @@
     });
   }
 
-  // ------ Reveal-on-scroll (IntersectionObserver) ------
+  // ------ Reveal-on-scroll (IntersectionObserver, with sibling stagger) ------
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var anim = document.querySelectorAll('[data-anim]');
   if(reduceMotion || !('IntersectionObserver' in window)){
-    // Motion-sensitive or unsupported: never hide content.
     anim.forEach(function(el){ el.classList.remove('msa-off'); });
   } else {
-    anim.forEach(function(el){ el.classList.add('msa-off'); });
+    // Pre-compute stagger: siblings-with-data-anim get --anim-delay based on index
+    var seen = new WeakSet();
+    anim.forEach(function(el){
+      if(seen.has(el)) return;
+      var parent = el.parentElement;
+      if(!parent) return;
+      var sibs = Array.prototype.filter.call(parent.children, function(c){ return c.hasAttribute && c.hasAttribute('data-anim'); });
+      if(sibs.length > 1){
+        sibs.forEach(function(sib, i){
+          seen.add(sib);
+          sib.style.setProperty('--anim-delay', (i * 90) + 'ms');
+        });
+      } else {
+        seen.add(el);
+      }
+      el.classList.add('msa-off');
+    });
+    // Observer — reveals each element when it enters; stagger comes from --anim-delay
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
@@ -56,7 +101,7 @@
           io.unobserve(entry.target);
         }
       });
-    }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    }, {rootMargin:'0px 0px -6% 0px', threshold:0.06});
     anim.forEach(function(el){ io.observe(el); });
   }
 
@@ -107,52 +152,99 @@
     });
   }
 
-  // ------ Contact form ------
+  // ------ Contact form — WhatsApp handoff (no backend today) ------
+  // NOTE: The site currently has no server to persist leads. The form composes
+  // a message and opens WhatsApp; the actual send happens from WhatsApp. This
+  // is why we don't say "קיבלנו" — the message is only received once the user
+  // taps Send in WhatsApp.
   var contactForm = document.getElementById('contactForm');
   var contactSuccess = document.getElementById('contactSuccess');
+  var contactResend = document.getElementById('contactResend');
+  var lastWaUrl = '';
+
+  function setError(el, msg){
+    if(!el) return;
+    var wrap = el.closest('.ms-field');
+    if(!wrap) return;
+    el.setAttribute('aria-invalid', 'true');
+    var errId = el.id + 'Err';
+    el.setAttribute('aria-describedby', errId);
+    var err = wrap.querySelector('.ms-field-err');
+    if(!err){
+      err = document.createElement('p');
+      err.className = 'ms-field-err';
+      err.id = errId;
+      wrap.appendChild(err);
+    }
+    err.textContent = msg;
+  }
+  function clearError(el){
+    if(!el) return;
+    el.removeAttribute('aria-invalid');
+    el.removeAttribute('aria-describedby');
+    var wrap = el.closest('.ms-field');
+    var err = wrap && wrap.querySelector('.ms-field-err');
+    if(err) err.remove();
+  }
+  function buildWaUrl(){
+    var name = contactForm.querySelector('#cName');
+    var phone = contactForm.querySelector('#cPhone');
+    var audience = contactForm.querySelector('#cAudience');
+    var interest = contactForm.querySelector('#cInterest');
+    var notes = contactForm.querySelector('#cNotes');
+    var msg = 'שלום, אשמח לתאם אימון ניסיון ב־MAMBA STRIKE.\n';
+    if(name) msg += 'שם: ' + name.value.trim() + '\n';
+    if(phone) msg += 'טלפון: ' + phone.value.trim() + '\n';
+    if(audience && audience.value) msg += 'למי האימון: ' + audience.value + '\n';
+    if(interest && interest.value) msg += 'תחום מעניין: ' + interest.value + '\n';
+    if(notes && notes.value.trim()) msg += 'הערות: ' + notes.value.trim() + '\n';
+    return 'https://wa.me/972524479512?text=' + encodeURIComponent(msg);
+  }
+  function openWa(url){
+    var link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   if(contactForm){
+    contactForm.addEventListener('input', function(e){
+      var el = e.target;
+      if(el.matches('input,select,textarea') && el.value.trim()){
+        clearError(el);
+      }
+    });
     contactForm.addEventListener('submit', function(e){
       e.preventDefault();
       var name = contactForm.querySelector('#cName');
       var phone = contactForm.querySelector('#cPhone');
-      var ok = true;
-      [name, phone].forEach(function(el){
-        if(!el || !el.value.trim()){
-          if(el){ el.style.borderColor = 'var(--accent)'; }
-          ok = false;
+      var firstInvalid = null;
+      [
+        {el:name, msg:'נא להזין שם מלא'},
+        {el:phone, msg:'נא להזין מספר טלפון'}
+      ].forEach(function(f){
+        if(!f.el) return;
+        if(!f.el.value.trim()){
+          setError(f.el, f.msg);
+          if(!firstInvalid) firstInvalid = f.el;
         } else {
-          el.style.borderColor = '';
+          clearError(f.el);
         }
       });
-      if(!ok){
-        var firstInvalid = contactForm.querySelector('input[style*="var(--accent)"]');
-        if(firstInvalid) firstInvalid.focus();
-        return;
-      }
-      // Placeholder submit — hand off to the WhatsApp handoff.
-      var msg = 'שלום, אשמח לתאם אימון ניסיון ב־MAMBA STRIKE.\n';
-      msg += 'שם: ' + name.value.trim() + '\n';
-      msg += 'טלפון: ' + phone.value.trim() + '\n';
-      var age = contactForm.querySelector('#cAge');
-      var audience = contactForm.querySelector('#cAudience');
-      var interest = contactForm.querySelector('#cInterest');
-      var notes = contactForm.querySelector('#cNotes');
-      if(age && age.value) msg += 'גיל: ' + age.value + '\n';
-      if(audience && audience.value) msg += 'למי האימון: ' + audience.value + '\n';
-      if(interest && interest.value) msg += 'תחום מעניין: ' + interest.value + '\n';
-      if(notes && notes.value.trim()) msg += 'הערות: ' + notes.value.trim() + '\n';
-      var waUrl = 'https://wa.me/972524479512?text=' + encodeURIComponent(msg);
+      if(firstInvalid){ firstInvalid.focus(); return; }
+      lastWaUrl = buildWaUrl();
       contactForm.hidden = true;
       if(contactSuccess) contactSuccess.hidden = false;
-      // WhatsApp handoff via a synthesized <a> click — window.open triggers popup-blockers on iOS Safari.
-      var link = document.createElement('a');
-      link.href = waUrl;
-      link.target = '_blank';
-      link.rel = 'noopener';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      setTimeout(function(){ contactForm.reset(); }, 400);
+      openWa(lastWaUrl);
+    });
+  }
+  if(contactResend){
+    contactResend.addEventListener('click', function(e){
+      e.preventDefault();
+      if(lastWaUrl) openWa(lastWaUrl);
     });
   }
 })();

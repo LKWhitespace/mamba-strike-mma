@@ -34,9 +34,9 @@
 --fs-micro-xs:10px;
 
 /* ── Fluid web headline sizes ─────────────────────────── */
---fs-hero:clamp(56px,9vw,120px); /* @kind font */
---fs-section:clamp(38px,5.4vw,76px); /* @kind font */
---fs-sub:clamp(22px,2.6vw,33px); /* @kind font */
+--fs-hero:clamp(64px,9vw,120px); /* @kind font */
+--fs-section:clamp(46px,6vw,84px); /* @kind font */
+--fs-sub:clamp(24px,2.6vw,33px); /* @kind font */
 
 /* ── Line heights ─────────────────────────────────────── */
 --lh-display:0.94; /* @kind font */

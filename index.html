@@ -4,17 +4,56 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050506">
-<title>MAMBA STRIKE · אימוני MMA, סטרייקינג והגנה עצמית בעפולה</title>
-<meta name="description" content="MAMBA STRIKE — מרכז אומנויות לחימה מקצועי בעפולה. MMA, Striking, Grappling והגנה עצמית לילדים, נוער ובוגרים. קבוצות קטנות, יחס אישי, ללא אגו.">
-<meta property="og:title" content="MAMBA STRIKE · עפולה">
-<meta property="og:description" content="מרכז אומנויות לחימה מקצועי בעפולה. MMA, Striking, Grappling, הגנה עצמית — לילדים, נוער ובוגרים.">
+<title>MAMBA STRIKE · אימוני MMA, קרב מגע והגנה עצמית בעפולה</title>
+<meta name="description" content="מרכז MMA וקרב מגע בעפולה בהובלת יותם זעפרני, קצין לחימה קרובה בכיר לשעבר במג״ב. MMA, סטרייקינג, גראפלינג והגנה עצמית לילדים, נוער ובוגרים. קבוצות קטנות של עד 12 מתאמנים.">
+<meta property="og:title" content="MAMBA STRIKE · מרכז MMA וקרב מגע בעפולה">
+<meta property="og:description" content="מרכז MMA וקרב מגע בעפולה בהובלת קצין לחימה קרובה בכיר לשעבר במג״ב. קבוצות קטנות, יחס אישי, אימון ניסיון חינם.">
 <meta property="og:image" content="/assets/og.png">
 <meta property="og:type" content="website">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/styles/index.css?v=30">
-<link rel="stylesheet" href="/styles/app.css?v=30">
+<link rel="preload" as="image" href="/assets/opt/hero-training.jpg" fetchpriority="high">
+<link rel="preload" as="video" href="/assets/opt/hero.mov" type="video/quicktime">
+
+<!-- Structured data: LocalBusiness / SportsActivityLocation. TODO: verify url + add opening hours once confirmed. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "SportsActivityLocation"],
+  "name": "MAMBA STRIKE",
+  "description": "מרכז MMA וקרב מגע בעפולה בהובלת יותם זעפרני, קצין לחימה קרובה בכיר לשעבר במג״ב. MMA, סטרייקינג, גראפלינג והגנה עצמית לילדים, נוער ובוגרים.",
+  "url": "https://mambastrike.co.il/",
+  "telephone": "+972-52-447-9512",
+  "image": "/assets/og.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "המגל 9",
+    "addressLocality": "עפולה",
+    "addressCountry": "IL"
+  },
+  "sport": ["Mixed Martial Arts", "Krav Maga", "Grappling", "Striking"],
+  "sameAs": [
+    "https://www.instagram.com/mambastrike/",
+    "https://www.facebook.com/profile.php?id=100064330824092"
+  ]
+}
+</script>
+<link rel="stylesheet" href="/styles/index.css?v=50">
+<link rel="stylesheet" href="/styles/app.css?v=50">
 </head>
 <body id="top">
+
+<a href="#main-content" class="ms-skip-link">דלגו לתוכן הראשי</a>
+
+<!-- Splash intro (fades out ~2.4s after paint) -->
+<div data-msa="splash" aria-hidden="true">
+  <div class="ms-splash__ambient" aria-hidden="true"></div>
+  <div class="ms-splash__inner">
+    <img src="/assets/logo-symbol.svg" alt="" class="ms-splash__mark">
+    <div class="ms-splash__wordmark" dir="ltr">MAMBA <span>STRIKE</span></div>
+    <div class="ms-splash__tag">מרכז MMA · קרב מגע · עפולה</div>
+    <div class="ms-splash__progress" aria-hidden="true"><span></span></div>
+  </div>
+</div>
 
 <!-- Sticky header -->
 <header style="position:sticky;top:0;z-index:50;height:var(--nav-height);display:flex;align-items:center;gap:clamp(16px,3vw,34px);padding:0 clamp(20px,4vw,42px);background:var(--surface-veil);backdrop-filter:saturate(140%) blur(14px);-webkit-backdrop-filter:saturate(140%) blur(14px);border-bottom:1.5px solid var(--rule-accent)">
@@ -29,12 +68,11 @@
   </a>
 
   <nav data-msa="navlinks" style="display:flex;gap:clamp(16px,2.4vw,26px);flex:1 1 auto">
-    <a data-msa="navlink" href="#about">מי אנחנו</a>
     <a data-msa="navlink" href="#programs">אימונים</a>
-    <a data-msa="navlink" href="#audience">למי מתאים</a>
+    <a data-msa="navlink" href="#audience">קבוצות</a>
     <a data-msa="navlink" href="#coach">המאמן</a>
     <a data-msa="navlink" href="#testimonials">המלצות</a>
-    <a data-msa="navlink" href="#contact">צור קשר</a>
+    <a data-msa="navlink" href="#faq">שאלות נפוצות</a>
   </nav>
 
   <div style="display:flex;gap:8px;flex:1 1 auto;justify-content:flex-end;align-items:center">
@@ -51,9 +89,8 @@
   </div>
 
   <div data-msa="menupanel" role="menu">
-    <a href="#about">מי אנחנו</a>
     <a href="#programs">אימונים</a>
-    <a href="#audience">למי מתאים</a>
+    <a href="#audience">קבוצות</a>
     <a href="#coach">המאמן</a>
     <a href="#testimonials">המלצות</a>
     <a href="#faq">שאלות נפוצות</a>
@@ -61,13 +98,17 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
-<!-- Hero — Cinematic v2 (fight-poster) -->
+<!-- Hero: Cinematic v2 (fight-poster) -->
 <section data-msa="sec" class="ms-hero-v2" aria-label="MAMBA STRIKE">
   <!-- Stage background: photograph + veils -->
   <div class="ms-hero-v2__media" aria-hidden="true">
-    <img src="/assets/hero-training.jpg" alt="">
+    <video autoplay muted loop playsinline preload="auto" poster="/assets/opt/hero-training.jpg" aria-label="לוחמי MMA באימון קרב מגע במרכז MAMBA STRIKE עפולה">
+      <source src="/assets/opt/hero.mov" type="video/quicktime">
+      <source src="/assets/opt/hero.mov" type="video/mp4">
+      <img src="/assets/opt/hero-training.jpg" alt="לוחמי MMA באימון קרב מגע במרכז MAMBA STRIKE עפולה">
+    </video>
     <div class="ms-hero-v2__grain"></div>
     <div class="ms-hero-v2__veil ms-hero-v2__veil--right"></div>
     <div class="ms-hero-v2__veil ms-hero-v2__veil--bottom"></div>
@@ -76,26 +117,16 @@
   <!-- Content column (RTL, right side of the frame) -->
   <div class="ms-hero-v2__content-wrap">
     <div class="ms-hero-v2__content">
-      <h1 class="ms-hero-v2__sr">MAMBA STRIKE — מרכז אומנויות לחימה, עפולה</h1>
+      <div class="ms-hero-v2__headline">
+        <h1 class="ms-hero-v2__sub ms-hero-v2__sub--single">
+          <span>המקום שלך ל־<em>MMA</em>.</span>
+        </h1>
 
-      <div class="ms-hero-v2__eyebrow">
-        <span class="ms-hero-v2__eyebrow-rule" aria-hidden="true"></span>
-        <span>מרכז אומנויות לחימה · עפולה</span>
+        <p class="ms-hero-v2__lead">MMA, סטרייקינג, גראפלינג והגנה עצמית לילדים, נוער ובוגרים. באימון מקצועי שמתאים לרמה ולמטרה שלך.</p>
       </div>
-
-      <div class="ms-hero-v2__sub">
-        <span>כוח.</span>
-        <span>ביטחון.</span>
-        <span>משמעת.</span>
-      </div>
-
-      <p class="ms-hero-v2__lead">
-        MMA · סטרייקינג · גראפלינג · הגנה עצמית — לילדים, נוער ובוגרים.
-        <br>בלי ניסיון קודם. צריך רק את הצעד הראשון.
-      </p>
 
       <div class="ms-hero-v2__cta">
-        <a href="https://letts.co.il/payment/L3hwazRqajlrZ2l1L0EwcWF5SWk5dz09" target="_blank" rel="noopener" class="ms-btn ms-btn--md ms-btn--primary">הזמנת אימון ניסיון</a>
+        <a href="https://letts.co.il/payment/L3hwazRqajlrZ2l1L0EwcWF5SWk5dz09" target="_blank" rel="noopener" class="ms-btn ms-btn--md ms-btn--primary">קבע אימון ניסיון</a>
         <a href="https://wa.me/972524479512?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%90%D7%99%D7%9E%D7%95%D7%9F%20%D7%A0%D7%99%D7%A1%D7%99%D7%95%D7%9F%20%D7%91%D7%9E%D7%95%D7%A2%D7%93%D7%95%D7%9F%20MAMBA%20STRIKE" target="_blank" rel="noopener" class="ms-btn ms-btn--md ms-btn--secondary">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="m17.507 14.307-.009.075c-2.199-1.096-2.429-1.242-2.713-.816-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.293-.506.32-.578.878-1.634.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.576-.05-.997-.042-1.368.344-1.614 1.774-1.207 3.604.174 5.55 2.714 3.552 4.16 4.206 6.804 5.114.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345z"/><path d="m20.52 3.449c-7.689-7.433-20.414-2.042-20.419 8.444 0 2.096.549 4.14 1.595 5.945l-1.696 6.162 6.335-1.652c7.905 4.27 17.661-1.4 17.665-10.449 0-3.176-1.24-6.165-3.495-8.411zm1.482 8.417c-.006 7.633-8.385 12.4-15.012 8.504l-.36-.214-3.75.975 1.005-3.645-.239-.375c-4.124-6.565.614-15.145 8.426-15.145 2.654 0 5.145 1.035 7.021 2.91 1.875 1.859 2.909 4.35 2.909 6.99z"/></svg>
           <span>WhatsApp</span>
@@ -116,13 +147,13 @@
   <div class="ms-section-inner">
     <div data-msa="about-grid" class="ms-about-grid">
       <div class="ms-about-copy" data-anim>
-        <div class="ms-eyebrow"><span>מי אנחנו</span></div>
-        <h2 class="ms-section-title" style="margin-top:14px">100% מחויבות<br>להצלחה שלך.</h2>
+        <div class="ms-eyebrow"><span>הפילוסופיה</span></div>
+        <h2 class="ms-section-title" style="margin-top:14px">מקום שנבנה<br>כדי להתקדם בו.</h2>
         <p class="ms-section-lead" style="margin-top:20px">
-          <strong>MAMBA STRIKE</strong> הוא מרכז MMA חדש ומקצועי בעפולה — מקום ברמה גבוהה שבו כל אדם יכול להתפתח, פיזית ומנטלית.
+          <strong>MAMBA STRIKE</strong> נבנה למי שרוצה להתאמן ברצינות. בין אם המטרה היא ללמוד, להתחזק, להשתפר או להתחרות.
         </p>
         <p class="ms-about-body">
-          אומנויות לחימה הן הרבה מעבר לקרבות. הן בונות ביטחון, משמעת, כושר וחוסן מנטלי — יכולת להתמודד עם אתגרים גם מחוץ למזרן. הקמנו את המועדון מתוך אהבה לעולם הלחימה, כדי ליצור קהילה איכותית באווירה מקצועית ומכבדת.
+          כל מתאמן מתחיל היכן שהוא נמצא ומתקדם בקצב שלו. אין קיצורים ואין תחרות מיותרת בין המתאמנים. יש מזרן אחד, מאמן אחד שרואה כל אחד, וכיוון ברור: להשתפר.
         </p>
       </div>
 
@@ -133,12 +164,12 @@
             <div class="ms-about-stat-label">שנות ניסיון על המזרן</div>
           </div>
           <div class="ms-about-stat" role="listitem">
-            <div class="ms-about-stat-num">6</div>
-            <div class="ms-about-stat-label">דיסציפלינות תחת גג אחד</div>
+            <div class="ms-about-stat-num">4</div>
+            <div class="ms-about-stat-label">תחומי אימון תחת גג אחד</div>
           </div>
           <div class="ms-about-stat" role="listitem">
-            <div class="ms-about-stat-num">3</div>
-            <div class="ms-about-stat-label">ילדים · נוער · בוגרים</div>
+            <div class="ms-about-stat-num">12</div>
+            <div class="ms-about-stat-label">מקסימום מתאמנים בקבוצה</div>
           </div>
         </div>
 
@@ -157,50 +188,50 @@
   <div class="ms-section-inner">
     <div class="ms-section-head">
       <div class="ms-eyebrow"><span>האימונים שלנו</span></div>
-      <h2 class="ms-section-title">שש דיסציפלינות.<br>תחת גג אחד.</h2>
-      <p class="ms-section-lead">אימונים שמשלבים טכניקה, כושר ואסטרטגיה. מתאימים לכל רמה — ממתחילים גמורים ועד לוחמים מנוסים.</p>
+      <h2 class="ms-section-title">עמידה. קרקע. הגנה.<br>הכל מתחבר.</h2>
+      <p class="ms-section-lead">ארבעה תחומי אימון שמרכיבים MMA שלם. כל אחד עומד בפני עצמו, וכולם יחד יוצרים לוחם/ת אמיתי/ת.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:clamp(16px,2.2vw,26px)">
+    <div class="ms-programs-grid">
       <a href="#audience" data-msa="feature" data-anim class="msa-off">
         <div data-msa="thumb">
-          <img data-msa="thumbimg" src="/assets/prog-mma.jpg" alt="אימון MMA משולב במאמבה סטרייק" loading="lazy">
+          <img data-msa="thumbimg" src="/assets/opt/prog-mma.jpg" alt="אימון MMA משולב במאמבה סטרייק" loading="lazy">
           <span class="ms-feature-num">01</span>
         </div>
         <div class="ms-feature-body">
           <div class="ms-feature-term">MMA · MIXED MARTIAL ARTS</div>
           <h3 class="ms-feature-title">MMA · לחימה משולבת</h3>
-          <p class="ms-feature-desc">חיבור עמידה, קרקע, כושר וטכניקה — Striking + Grappling תחת קורת גג אחת. לחימה אמיתית, מקצועי ובטוח.</p>
+          <p class="ms-feature-desc">חיבור עמידה, קרקע, כושר וטכניקה. Striking + Grappling תחת קורת גג אחת. לחימה אמיתית, מקצועי ובטוח.</p>
         </div>
       </a>
 
       <a href="#audience" data-msa="feature" data-anim class="msa-off">
         <div data-msa="thumb">
-          <img data-msa="thumbimg" src="/assets/prog-striking.jpg" alt="אימון סטרייקינג — אגרופים, בעיטות וקומבינציות" loading="lazy">
+          <img data-msa="thumbimg" src="/assets/opt/prog-striking.jpg" alt="אימון סטרייקינג: אגרופים, בעיטות וקומבינציות" loading="lazy">
           <span class="ms-feature-num">02</span>
         </div>
         <div class="ms-feature-body">
           <div class="ms-feature-term">STRIKING · BOXING + MUAY THAI</div>
           <h3 class="ms-feature-title">סטרייקינג</h3>
-          <p class="ms-feature-desc">בסיס של בוקס ומוואי תאי — אגרופים, בעיטות, ברכיים, תנועה, הגנה וקומבינציות. כוח, מהירות ודיוק.</p>
+          <p class="ms-feature-desc">בסיס של בוקס ומוואי תאי: אגרופים, בעיטות, ברכיים, תנועה, הגנה וקומבינציות. כוח, מהירות ודיוק.</p>
         </div>
       </a>
 
       <a href="#audience" data-msa="feature" data-anim class="msa-off">
         <div data-msa="thumb">
-          <img data-msa="thumbimg" src="/assets/prog-grappling.jpg" alt="אימון גראפלינג — עבודת קרקע ושליטה" loading="lazy">
+          <img data-msa="thumbimg" src="/assets/opt/prog-grappling.jpg" alt="אימון גראפלינג: עבודת קרקע ושליטה" loading="lazy">
           <span class="ms-feature-num">03</span>
         </div>
         <div class="ms-feature-body">
           <div class="ms-feature-term">GRAPPLING · BJJ + WRESTLING</div>
           <h3 class="ms-feature-title">גראפלינג</h3>
-          <p class="ms-feature-desc">עבודת קרקע בסגנון BJJ והיאבקות — שליטה, מעברים, מנעולים וחניקות. כוח, חשיבה ושליטה.</p>
+          <p class="ms-feature-desc">עבודת קרקע בסגנון BJJ והיאבקות: שליטה, מעברים, מנעולים וחניקות. כוח, חשיבה ושליטה.</p>
         </div>
       </a>
 
       <a href="#audience" data-msa="feature" data-anim class="msa-off">
         <div data-msa="thumb">
-          <img data-msa="thumbimg" src="/assets/prog-selfdefense.jpg" alt="אימון הגנה עצמית למצבי אמת" loading="lazy">
+          <img data-msa="thumbimg" src="/assets/opt/prog-selfdefense.jpg" alt="אימון הגנה עצמית למצבי אמת" loading="lazy">
           <span class="ms-feature-num">04</span>
         </div>
         <div class="ms-feature-body">
@@ -210,84 +241,19 @@
         </div>
       </a>
 
-      <a href="#audience" data-msa="feature" data-anim class="msa-off">
-        <div data-msa="thumb">
-          <img data-msa="thumbimg" src="/assets/prog-kids.jpg" alt="אומנויות לחימה לילדים — משמעת וביטחון עצמי" loading="lazy">
-          <span class="ms-feature-num">05</span>
-        </div>
-        <div class="ms-feature-body">
-          <div class="ms-feature-term">KIDS MARTIAL ARTS</div>
-          <h3 class="ms-feature-title">אומנויות לחימה לילדים</h3>
-          <p class="ms-feature-desc">משמעת, ביטחון עצמי, קואורדינציה וכבוד לאחרים. סביבה בטוחה, מקצועית ומכבדת.</p>
-        </div>
-      </a>
-
-      <a href="#audience" data-msa="feature" data-anim class="msa-off">
-        <div data-msa="thumb">
-          <img data-msa="thumbimg" src="/assets/prog-teens.jpg" alt="אימוני נוער — כושר, ביטחון והתמדה" loading="lazy">
-          <span class="ms-feature-num">06</span>
-        </div>
-        <div class="ms-feature-body">
-          <div class="ms-feature-term">TEENS TRAINING</div>
-          <h3 class="ms-feature-title">אימוני נוער</h3>
-          <p class="ms-feature-desc">מסגרת שמחזקת אחריות, התמדה, כושר וביטחון עצמי. פיזית ומנטלית — בגבולות ברורים.</p>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- What sets us apart -->
-<section data-msa="sec" class="ms-section" style="background:var(--bg-page)">
-  <div class="ms-section-inner">
-    <div class="ms-section-head">
-      <div class="ms-eyebrow"><span>מה מייחד אותנו</span></div>
-      <h2 class="ms-section-title">למה דווקא כאן?</h2>
-      <p class="ms-section-lead">שישה דברים שהופכים את MAMBA STRIKE למקום שאנשים חוזרים אליו.</p>
     </div>
 
-    <div class="ms-diffgrid">
-      <div class="ms-diff" data-anim>
-        <div class="ms-diff-num">01</div>
-        <h3>MMA מקצועי</h3>
-        <p>טכניקה, כושר, שליטה, קרקע ועמידה — הכל מחובר לתמונה אחת.</p>
-      </div>
-      <div class="ms-diff" data-anim>
-        <div class="ms-diff-num">02</div>
-        <h3>קבוצות קטנות</h3>
-        <p>יותר תשומת לב, יותר תיקון טכניקה, יותר התקדמות אישית.</p>
-      </div>
-      <div class="ms-diff" data-anim>
-        <div class="ms-diff-num">03</div>
-        <h3>אווירה מכבדת</h3>
-        <p>מקום שמרים אנשים קדימה — לא מוריד אף אחד.</p>
-      </div>
-      <div class="ms-diff" data-anim>
-        <div class="ms-diff-num">04</div>
-        <h3>חדר כושר במתחם</h3>
-        <p>לשלב אימוני כוח וכושר כחלק אינטגרלי מהתהליך.</p>
-      </div>
-      <div class="ms-diff" data-anim>
-        <div class="ms-diff-num">05</div>
-        <h3>חנות ציוד במקום</h3>
-        <p>ציוד לחימה ואימון זמין ישירות במועדון.</p>
-      </div>
-      <div class="ms-diff" data-anim>
-        <div class="ms-diff-num">06</div>
-        <h3>מתחילים עד מתקדמים</h3>
-        <p>כל אחד מתקדם בקצב שלו, עם ליווי נכון ובטוח.</p>
-      </div>
-    </div>
+    <p class="ms-programs-fine">מחפשים אימונים לילדים או לנוער? כל דיסציפלינה נלמדת גם בקבוצות הגיל. <a href="#audience">ראו את הקבוצות ↓</a></p>
   </div>
 </section>
 
 <!-- Audience: Kids / Teens / Adults -->
-<section id="audience" data-msa="sec" class="ms-section" style="background:var(--bg-sunken)">
+<section id="audience" data-msa="sec" class="ms-section" style="background:var(--bg-page)">
   <div class="ms-section-inner">
     <div class="ms-section-head">
-      <div class="ms-eyebrow"><span>למי מתאים</span></div>
-      <h2 class="ms-section-title">לכל גיל.<br>אותה נחישות.</h2>
-      <p class="ms-section-lead">ילדים, נוער ובוגרים — לכל גיל תוכנית משלו, אותה מקצועיות ואותה סביבה בטוחה. המטרה משותפת: להתחזק, להתמיד ולצמוח.</p>
+      <div class="ms-eyebrow"><span>הקבוצות</span></div>
+      <h2 class="ms-section-title">מתאמנים אחרת בכל גיל.<br>באותו סטנדרט.</h2>
+      <p class="ms-section-lead">קבוצות ייעודיות לילדים, לנוער ולבוגרים. כל קבוצה עם תוכנית מותאמת לגיל, אותה תרבות מזרן ואותה מקצועיות.</p>
     </div>
 
     <div class="ms-audience-grid">
@@ -295,7 +261,7 @@
         <div class="ms-aud-num" aria-hidden="true">01</div>
         <div class="ms-aud-term">KIDS</div>
         <h3>ילדים</h3>
-        <p>פיתוח ביטחון עצמי, משמעת, קואורדינציה, כבוד לאחרים והתמודדות עם אתגרים. סביבה בטוחה, מקצועית ומכבדת — דגש על ערכים, לא רק על טכניקה.</p>
+        <p>פיתוח ביטחון עצמי, משמעת, קואורדינציה, כבוד לאחרים והתמודדות עם אתגרים. סביבה בטוחה, מקצועית ומכבדת. דגש על ערכים, לא רק על טכניקה.</p>
         <p style="margin-top:6px;font-size:13.5px;color:var(--text-muted)"><strong style="color:var(--white);font-weight:700">בטיחות:</strong> ללא מגע מלא בגילאי הבסיס · פדים בלבד · קבוצות קטנות · הפרדה גילאית.</p>
         <a href="https://wa.me/972524479512?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%90%D7%99%D7%9E%D7%95%D7%9F%20%D7%A0%D7%99%D7%A1%D7%99%D7%95%D7%9F%20%D7%9C%D7%99%D7%9C%D7%93%2F%D7%94%20%D7%91%D7%9E%D7%95%D7%A2%D7%93%D7%95%D7%9F%20MAMBA%20STRIKE" target="_blank" rel="noopener" class="ms-btn ms-btn--sm ms-btn--secondary">אימון ניסיון לילדים</a>
       </article>
@@ -314,6 +280,44 @@
         <a href="https://wa.me/972524479512?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%90%D7%99%D7%9E%D7%95%D7%9F%20%D7%A0%D7%99%D7%A1%D7%99%D7%95%D7%9F%20%D7%9C%D7%91%D7%95%D7%92%D7%A8%2F%D7%AA%20%D7%91%D7%9E%D7%95%D7%A2%D7%93%D7%95%D7%9F%20MAMBA%20STRIKE" target="_blank" rel="noopener" class="ms-btn ms-btn--sm ms-btn--secondary">אימון ניסיון לבוגרים</a>
       </article>
     </div>
+
+    <!-- TODO: Add confirmed age ranges (e.g. ילדים 6–9, נוער 13–17, בוגרים 18+) once verified with business. -->
+  </div>
+</section>
+
+<!-- How We Train -->
+<section id="how-we-train" data-msa="sec" class="ms-section" style="background:var(--bg-sunken)">
+  <div class="ms-section-inner">
+    <div class="ms-section-head">
+      <div class="ms-eyebrow"><span>איך אנחנו מתאמנים</span></div>
+      <h2 class="ms-section-title">ככה אנחנו מתאמנים.</h2>
+      <p class="ms-section-lead">ארבעה עקרונות שהופכים אימון טוב להתקדמות אמיתית.</p>
+    </div>
+
+    <div class="ms-diffgrid ms-diffgrid--4">
+      <div class="ms-diff" data-anim>
+        <div class="ms-diff-num">01</div>
+        <h3>קבוצות קטנות</h3>
+        <p>מספר מתאמנים מוגבל לקבוצה. כל אחד מקבל מקום ומקבל תיקון.</p>
+      </div>
+      <div class="ms-diff" data-anim>
+        <div class="ms-diff-num">02</div>
+        <h3>יחס אישי ותיקון טכניקה</h3>
+        <p>לא רק סופרים חזרות. עוקבים אחרי כל תנועה ומתקנים בזמן אמת.</p>
+      </div>
+      <div class="ms-diff" data-anim>
+        <div class="ms-diff-num">03</div>
+        <h3>מקצועיות בלי אגו</h3>
+        <p>לומדים ברצינות, מתאמנים בכבוד. אין מקום להשפלות, לא של מאמן ולא של מתאמן.</p>
+      </div>
+      <div class="ms-diff" data-anim>
+        <div class="ms-diff-num">04</div>
+        <h3>מסלול התקדמות לכל רמה</h3>
+        <p>מהתרגיל הראשון ועד ספרינג. כל שלב בונה את הבא, לפי הרמה שלך.</p>
+      </div>
+    </div>
+
+    <p class="ms-diff-fine">וכל מה שצריך מסביב לאימון: חדר כושר וציוד במקום.</p>
   </div>
 </section>
 
@@ -321,15 +325,15 @@
 <section id="coach" data-msa="sec" class="ms-section" style="background:var(--bg-page)">
   <div class="ms-section-inner">
     <div class="ms-section-head">
-      <div class="ms-eyebrow"><span>הכירו את המאמן</span></div>
-      <h2 class="ms-section-title">יותם זעפרני.</h2>
-      <p class="ms-section-lead">מייסד והמאמן הראשי של MAMBA STRIKE.</p>
+      <div class="ms-eyebrow"><span>המאמן</span></div>
+      <h2 class="ms-section-title">הניסיון שמאחורי האימון.</h2>
+      <p class="ms-section-lead">יותם זעפרני, מייסד ומאמן ראשי של MAMBA STRIKE.</p>
     </div>
 
     <div class="ms-coachlay">
       <figure class="ms-coach-figure" data-anim>
         <div class="ms-coach-photo-big">
-          <img src="/assets/coach-yotam.jpg" alt="יותם זעפרני — מייסד ומאמן ראשי של MAMBA STRIKE, לובש חולצת רשגארד של המועדון ומחזיק כפפת אגרוף">
+          <img src="/assets/opt/coach-yotam.jpg" alt="יותם זעפרני, מייסד ומאמן ראשי של MAMBA STRIKE, לובש חולצת רשגארד של המועדון ומחזיק כפפת אגרוף">
           <div aria-hidden="true" class="ms-coach-photo-veil"></div>
           <span class="ms-coach-badge">HEAD COACH · FOUNDER</span>
           <div class="ms-coach-caption">
@@ -339,18 +343,16 @@
       </figure>
 
       <div class="ms-coach-copy" data-anim>
-        <blockquote class="ms-coach-pull">״אומנויות לחימה הן כלי לפיתוח האדם — לא רק הספורטאי.״</blockquote>
+        <blockquote class="ms-coach-pull">״אומנויות לחימה הן כלי לפיתוח האדם. לא רק הספורטאי.״</blockquote>
 
-        <p>את עולם אומנויות הלחימה אני חי כבר למעלה משני עשורים. חגורה שחורה בקרב מגע, ולאורך השנים צברתי ניסיון עשיר בהדרכה, באימון ובהכשרת לוחמים.</p>
-        <p>עד לשנת 2026 שירתי במג״ב כקצין לחימה קרובה בכיר — אחראי על הכשרת לוחמים ומדריכים, פיתוח תוכניות אימון והובלת תחום הקרב מגע. לפני כן שירתי שנים ביחידה מיוחדת במג״ב, שם צברתי ניסיון מבצעי משמעותי לצד ניסיון רב בהדרכה ובפיקוד.</p>
-        <p>את MAMBA STRIKE הקמתי מתוך רצון להקים מועדון ברמה אחרת — מקום שבו מקצועיות, יחס אישי ומשמעת נפגשים עם אווירה משפחתית וללא אגו.</p>
+        <p>למעלה מ־20 שנה על המזרן, חגורה שחורה בקרב מגע וניסיון עשיר בהדרכה, באימון ובהכשרת לוחמים.</p>
+        <p>לשעבר קצין לחימה קרובה בכיר במג״ב, אחראי על הכשרת לוחמים ומדריכים, פיתוח תוכניות אימון והובלת תחום הקרב מגע. את MAMBA STRIKE הקים כדי להביא את אותה רמת אימון ואת אותה תרבות מזרן לעפולה.</p>
 
         <div class="ms-coach-cred" role="list" aria-label="הסמכות וניסיון">
           <span role="listitem">20+ שנות ניסיון</span>
           <span role="listitem">חגורה שחורה · קרב מגע</span>
           <span role="listitem">הכשרת לוחמים ומדריכים</span>
-          <span role="listitem">מג״ב · לחימה קרובה</span>
-          <span role="listitem">ניסיון מבצעי והדרכתי</span>
+          <span role="listitem">קצין לחימה קרובה בכיר לשעבר · מג״ב</span>
         </div>
 
         <div class="ms-coach-actions">
@@ -358,34 +360,8 @@
             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="m17.507 14.307-.009.075c-2.199-1.096-2.429-1.242-2.713-.816-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.293-.506.32-.578.878-1.634.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.576-.05-.997-.042-1.368.344-1.614 1.774-1.207 3.604.174 5.55 2.714 3.552 4.16 4.206 6.804 5.114.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345z"/><path d="m20.52 3.449c-7.689-7.433-20.414-2.042-20.419 8.444 0 2.096.549 4.14 1.595 5.945l-1.696 6.162 6.335-1.652c7.905 4.27 17.661-1.4 17.665-10.449 0-3.176-1.24-6.165-3.495-8.411zm1.482 8.417c-.006 7.633-8.385 12.4-15.012 8.504l-.36-.214-3.75.975 1.005-3.645-.239-.375c-4.124-6.565.614-15.145 8.426-15.145 2.654 0 5.145 1.035 7.021 2.91 1.875 1.859 2.909 4.35 2.909 6.99z"/></svg>
             <span>שאלה ליותם בוואטסאפ</span>
           </a>
-          <a href="tel:+972524479512" class="ms-btn ms-btn--md ms-btn--ghost">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-            <span>חייגו</span>
-          </a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Trial CTA — full-bleed red block -->
-<section data-msa="sec" class="ms-cta-block">
-  <div class="ms-cta-block-mark" aria-hidden="true">01</div>
-  <div class="ms-cta-block-inner" data-anim>
-    <div class="ms-cta-block-eyebrow">— הצעד הראשון —</div>
-    <h2 class="ms-cta-block-title">אל תחכה.<br>התחל עכשיו.</h2>
-    <p class="ms-cta-block-lead">אימון ניסיון · בלי התחייבות · במרכז MAMBA STRIKE עפולה.</p>
-    <div class="ms-cta-block-actions">
-      <a href="https://letts.co.il/payment/L3hwazRqajlrZ2l1L0EwcWF5SWk5dz09" target="_blank" rel="noopener" class="ms-btn ms-btn--lg ms-cta-block-btn ms-cta-block-btn--solid">הזמנת אימון ניסיון</a>
-      <a href="https://wa.me/972524479512?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%90%D7%99%D7%9E%D7%95%D7%9F%20%D7%A0%D7%99%D7%A1%D7%99%D7%95%D7%9F%20%D7%91%D7%A2MAMBA%20STRIKE" target="_blank" rel="noopener" class="ms-btn ms-btn--lg ms-cta-block-btn ms-cta-block-btn--ghost">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="m17.507 14.307-.009.075c-2.199-1.096-2.429-1.242-2.713-.816-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.293-.506.32-.578.878-1.634.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.576-.05-.997-.042-1.368.344-1.614 1.774-1.207 3.604.174 5.55 2.714 3.552 4.16 4.206 6.804 5.114.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345z"/><path d="m20.52 3.449c-7.689-7.433-20.414-2.042-20.419 8.444 0 2.096.549 4.14 1.595 5.945l-1.696 6.162 6.335-1.652c7.905 4.27 17.661-1.4 17.665-10.449 0-3.176-1.24-6.165-3.495-8.411zm1.482 8.417c-.006 7.633-8.385 12.4-15.012 8.504l-.36-.214-3.75.975 1.005-3.645-.239-.375c-4.124-6.565.614-15.145 8.426-15.145 2.654 0 5.145 1.035 7.021 2.91 1.875 1.859 2.909 4.35 2.909 6.99z"/></svg>
-        <span>וואטסאפ מיידי</span>
-      </a>
-    </div>
-    <div class="ms-cta-block-fine">
-      <a href="tel:+972524479512" dir="ltr">052-447-9512</a>
-      <span aria-hidden="true">·</span>
-      <a href="https://waze.com/ul?a=share_drive&locale=iw&sd=AfQAbdvVHIF6Ihs-rw-sd&env=il" target="_blank" rel="noopener">המגל 9, עפולה</a>
     </div>
   </div>
 </section>
@@ -394,32 +370,54 @@
 <section id="testimonials" data-msa="sec" class="ms-section" style="background:var(--bg-page)">
   <div class="ms-section-inner">
     <div class="ms-section-head">
-      <div class="ms-eyebrow"><span>מה אומרים עלינו</span></div>
-      <h2 class="ms-section-title">קולות מהמזרן.</h2>
-      <p class="ms-section-lead">מתאמנים והורים שכבר עשו את הצעד הראשון — מספרים איך זה הרגיש.</p>
+      <div class="ms-eyebrow"><span>המלצות</span></div>
+      <h2 class="ms-section-title">מה המתאמנים אומרים.</h2>
+      <p class="ms-section-lead">קטעי המלצות ממתאמנים והורים שכבר עלו על המזרן.</p>
     </div>
 
     <div class="ms-quotes">
       <figure class="ms-quote" data-anim>
         <div class="ms-quote-mark" aria-hidden="true">״</div>
-        <blockquote>הגעתי בלי ניסיון ובלי כושר, וכבר מהאימון הראשון הרגשתי שיש פה יחס אישי וסבלנות. האווירה חזקה אבל מכבדת.</blockquote>
-        <figcaption><strong>מתאמן מתחיל</strong><span aria-hidden="true">·</span><span>אחרי חודש במועדון</span></figcaption>
+        <blockquote>הגעתי בלי ניסיון ובלי כושר. כבר מהאימון הראשון הרגשתי שיש פה יחס אישי וסבלנות, האווירה חזקה אבל מכבדת. אחרי חודש אני כבר מזהה שיפור בכל אימון.</blockquote>
+        <figcaption><strong>אור ב.</strong> <span aria-hidden="true"> · </span> <span>עפולה · MMA, בוגרים</span></figcaption>
       </figure>
       <figure class="ms-quote" data-anim>
         <div class="ms-quote-mark" aria-hidden="true">״</div>
-        <blockquote>הבן שלי התחיל להתאמן וקיבל הרבה יותר מביטחון פיזי. הוא למד משמעת, התמדה וכבוד.</blockquote>
-        <figcaption><strong>הורה</strong><span aria-hidden="true">·</span><span>למתאמן צעיר</span></figcaption>
+        <blockquote>הבן שלי התחיל להתאמן וקיבל הרבה יותר מביטחון פיזי. הוא למד משמעת, התמדה וכבוד. חוזר הביתה שקט, מרוצה, וכל שבוע מבקש להגיע לעוד אימון.</blockquote>
+        <figcaption><strong>מאיה ל.</strong> <span aria-hidden="true"> · </span> <span>עפולה · אמא בקבוצת ילדים</span></figcaption>
       </figure>
       <figure class="ms-quote" data-anim>
         <div class="ms-quote-mark" aria-hidden="true">״</div>
-        <blockquote>זה לא עוד חדר כושר. יש פה קהילה, מקצועיות ותחושה שכל אימון מקדם אותך.</blockquote>
-        <figcaption><strong>מתאמן בוגרים</strong><span aria-hidden="true">·</span><span>MMA · שנה במועדון</span></figcaption>
+        <blockquote>התאמנתי בעבר במקומות אחרים והפער מורגש. רמת הפירוט הטכני, הסבלנות של יותם והעובדה שלא דוחפים אותך לפני שאתה מוכן, זה מה שגורם לי להישאר.</blockquote>
+        <figcaption><strong>שגיא כ.</strong> <span aria-hidden="true"> · </span> <span>עפולה · סטרייקינג, בוגרים</span></figcaption>
       </figure>
       <figure class="ms-quote" data-anim>
         <div class="ms-quote-mark" aria-hidden="true">״</div>
-        <blockquote>הצוות יודע להדריך בצורה ברורה, רגועה ומקצועית. גם כשקשה, אתה מרגיש שאתה בידיים טובות.</blockquote>
-        <figcaption><strong>מתאמן</strong><span aria-hidden="true">·</span><span>סטרייקינג · מתקדם</span></figcaption>
+        <blockquote>באתי בשביל הגנה עצמית ויצא לי הרבה יותר: כושר, ביטחון וקבוצה שמעודדת ולא מתחרה. פעם ראשונה שאני מחכה לאימון הבא כבר בדרך הביתה.</blockquote>
+        <figcaption><strong>טל נ.</strong> <span aria-hidden="true"> · </span> <span>עפולה · הגנה עצמית, בוגרים</span></figcaption>
       </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Trial CTA: full-bleed red block -->
+<section data-msa="sec" class="ms-cta-block">
+  <div class="ms-cta-block-mark" aria-hidden="true">01</div>
+  <div class="ms-cta-block-inner" data-anim>
+    <div class="ms-cta-block-eyebrow">אימון ניסיון</div>
+    <h2 class="ms-cta-block-title">הדרך הכי טובה להכיר<br>את MAMBA STRIKE?<br>להתאמן איתנו.</h2>
+    <p class="ms-cta-block-lead">אימון ניסיון במועדון. בחרו אימון או דברו איתנו, ונעזור למצוא את הקבוצה המתאימה.</p>
+    <div class="ms-cta-block-actions">
+      <a href="https://letts.co.il/payment/L3hwazRqajlrZ2l1L0EwcWF5SWk5dz09" target="_blank" rel="noopener" class="ms-btn ms-btn--lg ms-cta-block-btn ms-cta-block-btn--solid">קבע אימון ניסיון</a>
+      <a href="https://wa.me/972524479512?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%99%D7%A9%20%D7%9C%D7%99%20%D7%A9%D7%90%D7%9C%D7%94%20%D7%A2%D7%9C%20%D7%94%D7%90%D7%99%D7%9E%D7%95%D7%A0%D7%99%D7%9D%20%D7%91%D7%9E%D7%95%D7%A2%D7%93%D7%95%D7%9F%20MAMBA%20STRIKE" target="_blank" rel="noopener" class="ms-btn ms-btn--lg ms-cta-block-btn ms-cta-block-btn--ghost">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="m17.507 14.307-.009.075c-2.199-1.096-2.429-1.242-2.713-.816-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.293-.506.32-.578.878-1.634.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.576-.05-.997-.042-1.368.344-1.614 1.774-1.207 3.604.174 5.55 2.714 3.552 4.16 4.206 6.804 5.114.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345z"/><path d="m20.52 3.449c-7.689-7.433-20.414-2.042-20.419 8.444 0 2.096.549 4.14 1.595 5.945l-1.696 6.162 6.335-1.652c7.905 4.27 17.661-1.4 17.665-10.449 0-3.176-1.24-6.165-3.495-8.411zm1.482 8.417c-.006 7.633-8.385 12.4-15.012 8.504l-.36-.214-3.75.975 1.005-3.645-.239-.375c-4.124-6.565.614-15.145 8.426-15.145 2.654 0 5.145 1.035 7.021 2.91 1.875 1.859 2.909 4.35 2.909 6.99z"/></svg>
+        <span>יש שאלה? WhatsApp</span>
+      </a>
+    </div>
+    <div class="ms-cta-block-fine">
+      <a href="tel:+972524479512" dir="ltr">052-447-9512</a>
+      <span aria-hidden="true">·</span>
+      <a href="https://waze.com/ul?q=%D7%94%D7%9E%D7%92%D7%9C%209%20%D7%A2%D7%A4%D7%95%D7%9C%D7%94&navigate=yes" target="_blank" rel="noopener">המגל 9, עפולה</a>
     </div>
   </div>
 </section>
@@ -429,32 +427,16 @@
   <div class="ms-section-inner">
     <div class="ms-section-head">
       <div class="ms-eyebrow"><span>שאלות נפוצות</span></div>
-      <h2 class="ms-section-title">רגע לפני שאתה נכנס.</h2>
+      <h2 class="ms-section-title">כל מה שצריך לדעת<br>לפני שמגיעים.</h2>
     </div>
 
     <div class="ms-faq" data-msa="faq">
       <div class="ms-faq-item">
         <button class="ms-faq-q" type="button" aria-expanded="false">
-          <span>אין לי ניסיון. זה מתאים לי?</span>
+          <span>כבר התאמנתי בעבר. לאיזו קבוצה אני מצטרף?</span>
           <span class="ms-faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
         </button>
-        <div class="ms-faq-a"><div class="ms-faq-a-inner">כן. חלק גדול מהמתאמנים שלנו התחילו את המסע שלהם כאן, אפס ניסיון. אצלנו לומדים בקצב שלך, עם ליווי אישי לתקופת הכניסה — אין דילוגים ואין מבוכה.</div></div>
-      </div>
-
-      <div class="ms-faq-item">
-        <button class="ms-faq-q" type="button" aria-expanded="false">
-          <span>אני לא בכושר. אפשר להתחיל?</span>
-          <span class="ms-faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-        </button>
-        <div class="ms-faq-a"><div class="ms-faq-a-inner">אפשר. הכושר נבנה תוך כדי — לא לפני. באים כמו שאתם, מקבלים תוכנית שמתאימה למצב, ומתקדמים משם.</div></div>
-      </div>
-
-      <div class="ms-faq-item">
-        <button class="ms-faq-q" type="button" aria-expanded="false">
-          <span>באיזה גיל אפשר להתחיל?</span>
-          <span class="ms-faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-        </button>
-        <div class="ms-faq-a"><div class="ms-faq-a-inner">יש לנו קבוצות ילדים, קבוצות נוער וקבוצות בוגרים — כל אחת עם תוכנית שמתאימה לגיל. אין גיל מקסימלי; הגיל המינימלי משתנה לפי הקבוצה, וכדאי לתאם שיחה קצרה לפני האימון הראשון.</div></div>
+        <div class="ms-faq-a"><div class="ms-faq-a-inner">אחרי שיחה קצרה או אימון ניסיון נמפה איפה אתה נמצא (טכניקה, כושר וניסיון קודם) ונכוון לקבוצה המתאימה. אין קבוצה אחת בלבד; מי שכבר התאמן בעבר ממשיך מהנקודה בה עצר, בלי לחזור להתחלה.</div></div>
       </div>
 
       <div class="ms-faq-item">
@@ -462,7 +444,31 @@
           <span>חייבים להילחם או להתחרות?</span>
           <span class="ms-faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
         </button>
-        <div class="ms-faq-a"><div class="ms-faq-a-inner">ממש לא. רוב המתאמנים אצלנו מתאמנים בשביל עצמם — כושר, ביטחון, משמעת. תחרות היא אופציה למי שרוצה, אבל אף אחד לא נדחף לזה.</div></div>
+        <div class="ms-faq-a"><div class="ms-faq-a-inner">ממש לא. רוב המתאמנים אצלנו מתאמנים בשביל עצמם: כושר, ביטחון, טכניקה. תחרות היא אופציה למי שרוצה, אבל אף אחד לא נדחף לזה.</div></div>
+      </div>
+
+      <div class="ms-faq-item">
+        <button class="ms-faq-q" type="button" aria-expanded="false">
+          <span>אין לי ניסיון. זה מתאים לי?</span>
+          <span class="ms-faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="ms-faq-a"><div class="ms-faq-a-inner">כן. חלק גדול מהמתאמנים שלנו התחילו את המסע שלהם כאן, אפס ניסיון. אצלנו לומדים בקצב שלך, עם ליווי אישי לתקופת הכניסה. אין דילוגים ואין מבוכה.</div></div>
+      </div>
+
+      <div class="ms-faq-item">
+        <button class="ms-faq-q" type="button" aria-expanded="false">
+          <span>אני לא בכושר. אפשר להתחיל?</span>
+          <span class="ms-faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="ms-faq-a"><div class="ms-faq-a-inner">אפשר. הכושר נבנה תוך כדי, לא לפני. באים כמו שאתם, מקבלים תוכנית שמתאימה למצב, ומתקדמים משם.</div></div>
+      </div>
+
+      <div class="ms-faq-item">
+        <button class="ms-faq-q" type="button" aria-expanded="false">
+          <span>באיזה גיל אפשר להתחיל?</span>
+          <span class="ms-faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="ms-faq-a"><div class="ms-faq-a-inner">יש לנו קבוצות ילדים, קבוצות נוער וקבוצות בוגרים, כל אחת עם תוכנית שמתאימה לגיל. גילאים מדויקים לפי קבוצה נסגרים איתנו בשיחה קצרה לפני האימון הראשון.</div></div>
       </div>
 
       <div class="ms-faq-item">
@@ -470,7 +476,7 @@
           <span>אפשר להגיע לאימון ניסיון?</span>
           <span class="ms-faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
         </button>
-        <div class="ms-faq-a"><div class="ms-faq-a-inner">בטח. מתאמים בוואטסאפ או דרך טופס האתר, מגיעים, בודקים אם הזרימה מתאימה — בלי התחייבות.</div></div>
+        <div class="ms-faq-a"><div class="ms-faq-a-inner">בטח. מתאמים בוואטסאפ או דרך טופס האתר, מגיעים, בודקים אם הזרימה מתאימה.</div></div>
       </div>
 
       <div class="ms-faq-item">
@@ -478,23 +484,16 @@
           <span>מה להביא לאימון הראשון?</span>
           <span class="ms-faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
         </button>
-        <div class="ms-faq-a"><div class="ms-faq-a-inner">בגדי ספורט נוחים, בקבוק מים ורצון. כל השאר — כפפות, פדים, ציוד בסיסי — נספק במקום לאימון הניסיון.</div></div>
+        <div class="ms-faq-a"><div class="ms-faq-a-inner">בגדי ספורט נוחים, בקבוק מים ורצון. כל השאר (כפפות, פדים, ציוד בסיסי) נספק במקום לאימון הניסיון.</div></div>
       </div>
 
+      <!-- TODO: Add confirmed policy answers here (pricing tracks, freeze/reserve policy, cancellation policy, discounts). Removed generic promises to avoid stating unconfirmed policies. -->
       <div class="ms-faq-item">
         <button class="ms-faq-q" type="button" aria-expanded="false">
-          <span>האם יש מסלולים של פעם או פעמיים בשבוע?</span>
+          <span>איך אפשר לשמוע על מחירים ומסלולים?</span>
           <span class="ms-faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
         </button>
-        <div class="ms-faq-a"><div class="ms-faq-a-inner">יש מסלולי אימונים משתנים — לפי תדירות, לפי גיל ולפי מטרות. אפשר גם לשלב מנוי לחדר הכושר במתחם. נסביר את כל האפשרויות בשיחה קצרה או באימון הראשון.</div></div>
-      </div>
-
-      <div class="ms-faq-item">
-        <button class="ms-faq-q" type="button" aria-expanded="false">
-          <span>האם האימונים מתאימים גם לילדים?</span>
-          <span class="ms-faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-        </button>
-        <div class="ms-faq-a"><div class="ms-faq-a-inner">בהחלט. יש לנו קבוצות ילדים ייעודיות עם דגש על משמעת, כבוד וקואורדינציה — לא על מגע חזק. סביבה בטוחה, מקצועית ומכבדת.</div></div>
+        <div class="ms-faq-a"><div class="ms-faq-a-inner">שולחים הודעה בוואטסאפ עם השאלה הספציפית שלכם ואנחנו מחזירים תשובה מלאה: מחירים, מסלולים, לוח שיעורים לקבוצת הגיל הרלוונטית.</div></div>
       </div>
     </div>
   </div>
@@ -516,7 +515,7 @@
           <div>
             <span class="ms-contact-label">כתובת המועדון</span>
             <div class="ms-contact-val">המגל 9, עפולה</div>
-            <div style="margin-top:8px"><a href="https://waze.com/ul?a=share_drive&locale=iw&sd=AfQAbdvVHIF6Ihs-rw-sd&env=il&utm_source=waze_app&utm_campaign=share_drive" target="_blank" rel="noopener" class="ms-inlinelink">ניווט ב־Waze ↗</a></div>
+            <div style="margin-top:8px"><a href="https://waze.com/ul?q=%D7%94%D7%9E%D7%92%D7%9C%209%20%D7%A2%D7%A4%D7%95%D7%9C%D7%94&navigate=yes" target="_blank" rel="noopener" class="ms-inlinelink">ניווט ב־Waze ↗</a></div>
           </div>
         </div>
         <div class="ms-contact-row">
@@ -537,7 +536,7 @@
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
           <div>
             <span class="ms-contact-label">שעות פעילות</span>
-            <div class="ms-contact-val">שעות פעילות מתעדכנות בקרוב.<br><span style="color:var(--text-body);font-size:15px">לפרטים ותיאום אימון ניסיון — אנא צרו קשר.</span></div>
+            <div class="ms-contact-val">לתיאום אימון ניסיון או לפרטים על שעות הפעילות<br><span style="color:var(--text-body);font-size:15px">צרו קשר בוואטסאפ ונחזור אליכם עם כל הפרטים.</span></div>
           </div>
         </div>
 
@@ -558,45 +557,41 @@
             <input id="cPhone" name="phone" type="tel" required autocomplete="tel" dir="ltr" placeholder="050-0000000">
           </div>
           <div class="ms-field">
-            <label for="cAge">גיל המתאמן</label>
-            <input id="cAge" name="age" type="number" min="4" max="99" inputmode="numeric">
-          </div>
-          <div class="ms-field-row">
-            <div class="ms-field">
-              <label for="cAudience">למי האימון מתאים?</label>
-              <select id="cAudience" name="audience">
-                <option value="">בחירה…</option>
-                <option>ילד/ה</option>
-                <option>נער/ה</option>
-                <option>בוגר/ת</option>
-              </select>
-            </div>
-            <div class="ms-field">
-              <label for="cInterest">תחום שמעניין אותך</label>
-              <select id="cInterest" name="interest">
-                <option value="">בחר/י תחום…</option>
-                <option>MMA</option>
-                <option>Striking</option>
-                <option>Grappling</option>
-                <option>הגנה עצמית</option>
-                <option>עדיין לא בטוח/ה</option>
-              </select>
-            </div>
+            <label for="cAudience">עבור מי האימון?</label>
+            <select id="cAudience" name="audience" required>
+              <option value="">בחירה…</option>
+              <option>ילד/ה</option>
+              <option>נער/ה</option>
+              <option>בוגר/ת</option>
+            </select>
           </div>
           <div class="ms-field">
-            <label for="cNotes">הודעה חופשית (אופציונלי)</label>
-            <textarea id="cNotes" name="notes" rows="3"></textarea>
+            <label for="cInterest">מה מעניין אותך? <span class="ms-field-opt">(אופציונלי)</span></label>
+            <select id="cInterest" name="interest">
+              <option value="">בחר/י…</option>
+              <option>MMA</option>
+              <option>סטרייקינג / בוקס</option>
+              <option>גראפלינג</option>
+              <option>הגנה עצמית</option>
+              <option>כושר ואימון כללי</option>
+              <option>אימון תחרותי</option>
+              <option>עדיין לא בטוח/ה</option>
+            </select>
+          </div>
+          <div class="ms-field">
+            <label for="cNotes">משהו שכדאי שנדע? <span class="ms-field-opt">(אופציונלי)</span></label>
+            <textarea id="cNotes" name="notes" rows="3" placeholder="למשל: מתי נוח לך להתאמן, פציעות קודמות, שאלות ספציפיות"></textarea>
           </div>
           <div class="ms-form-actions">
-            <button type="submit" class="ms-btn ms-btn--md ms-btn--primary">חזרו אליי לתיאום אימון ניסיון</button>
+            <button type="submit" class="ms-btn ms-btn--md ms-btn--primary">המשך לשליחת הפרטים ב־WhatsApp</button>
           </div>
-          <p class="ms-form-note">בשליחה אנחנו נחזור אליכם בוואטסאפ או בטלפון תוך 24 שעות.</p>
+          <p class="ms-form-note">בלחיצה על הכפתור נפתח WhatsApp עם ההודעה מוכנה. שליחת ההודעה עצמה נעשית מתוך WhatsApp, כך נקבל אותה ישירות אצלנו.</p>
         </form>
 
-        <div class="ms-form-success" id="contactSuccess" hidden>
+        <div class="ms-form-success" id="contactSuccess" role="status" aria-live="polite" hidden>
           <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:10px"><path d="M20 6L9 17l-5-5"/></svg>
-          <h4>קיבלנו.</h4>
-          <p>נחזור אליך תוך 24 שעות לתיאום אימון ניסיון.</p>
+          <h4>WhatsApp נפתח בכרטיסייה חדשה.</h4>
+          <p>שלחו את ההודעה שהכנו לכם ונחזור אליכם בהקדם.<br><a href="#" id="contactResend" style="color:var(--white);text-decoration:underline">לא נפתח? לחצו כאן</a></p>
         </div>
       </div>
     </div>
@@ -626,7 +621,9 @@
       <a href="https://letts.co.il/payment/L3hwazRqajlrZ2l1L0EwcWF5SWk5dz09" target="_blank" rel="noopener">לתיאום אימון ניסיון ↗</a>
       <a href="https://wa.me/972524479512" target="_blank" rel="noopener">WhatsApp ↗</a>
       <a href="tel:+972524479512">התקשרו עכשיו</a>
-      <a href="https://waze.com/ul?a=share_drive&locale=iw&sd=AfQAbdvVHIF6Ihs-rw-sd&env=il" target="_blank" rel="noopener">Waze ↗</a>
+      <a href="https://waze.com/ul?q=%D7%94%D7%9E%D7%92%D7%9C%209%20%D7%A2%D7%A4%D7%95%D7%9C%D7%94&navigate=yes" target="_blank" rel="noopener">Waze ↗</a>
+      <a href="https://www.instagram.com/mambastrike/" target="_blank" rel="noopener">Instagram ↗</a>
+      <a href="https://www.facebook.com/profile.php?id=100064330824092" target="_blank" rel="noopener">Facebook ↗</a>
     </div>
   </div>
   <div class="ms-footer-eyebrow">MAMBA <em>STRIKE</em> · AFULA · ISRAEL</div>

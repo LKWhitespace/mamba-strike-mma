@@ -997,6 +997,11 @@ html.ms-scroll-lock{overflow:hidden}
 }
 
 /* ---- 3. About — stat trio + quote card --------------------------------- */
+/* Hide the pull-quote card on mobile — redundant with the coach section quote */
+@media (max-width:767px){
+  .ms-about-quote{display:none !important}
+}
+
 @media (max-width:767px){
   /* Mobile stats — proper 3-col scoreboard with punchy numbers over subdued labels.
      Numbers are the design; labels support. Vertical red hairline between cells,

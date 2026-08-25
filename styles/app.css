@@ -1857,3 +1857,18 @@ html,body{overflow-x:clip}
   .ms-legal p{font-size:15.5px}
   .ms-legal li{font-size:15.5px}
 }
+
+/* ---- K · Trial price note (v69) ------------------------------------------
+   The trial is 50 ₪, credited on joining. Stated next to both primary
+   "קבע אימון ניסיון" buttons so the page confirms what the share card says. */
+.ms-price-note{
+  margin:14px 0 0;
+  font-family:var(--font-body);font-weight:700;
+  font-size:13px;line-height:1.5;letter-spacing:.01em;
+  color:var(--text-body);
+}
+.ms-hero-v2__cta + .ms-price-note{margin-top:16px}
+.ms-price-note--onred{margin-top:18px;color:rgba(255,255,255,.9)}
+@media (max-width:640px){
+  .ms-price-note{font-size:12.5px;margin-top:12px}
+}

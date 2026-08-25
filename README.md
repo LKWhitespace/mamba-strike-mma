@@ -50,14 +50,16 @@ issues, pasted into `<head>`).
 
 Client-approved wording — do not "improve" these back:
 
-- The coach bio in `#coach` is supplied verbatim by the client. No shortening, no
-  re-ordering, no credentials/achievements chips alongside it.
+- The coach bio in `#coach` is supplied verbatim by the client, with one deletion
+  the client asked for afterwards ("והקרב מגע"). No shortening, no re-ordering, no
+  credentials/achievements chips alongside it.
 - The only approved phrasing for the מג״ב role is **ראש תחום הלחימה הקרובה במג״ב**.
   Never "קצין לחימה קרובה בכיר לשעבר".
-- The trial session is **not free** (50 ₪, credited if the trainee joins). No copy,
-  meta tag or share card may say "אימון ניסיון חינם".
-- "קרב מגע" is not used as a marketing label for the club anywhere (title, meta,
-  share card, splash, schema). It appears only inside the client's own bio text.
+- The trial session is **not free**: 50 ₪, credited on joining. That is stated next
+  to both "קבע אימון ניסיון" buttons and in the FAQ, and must stay consistent with
+  the share card. No copy may say "אימון ניסיון חינם".
+- **"קרב מגע" appears nowhere on the site** — not as a marketing label (title, meta,
+  share card, splash, schema) and not in the bio.
 - Group cap is 16, not 12.
 - "למחוק את הפחדים" must not come back.
 

@@ -23,7 +23,7 @@
 <link rel="preload" as="style" data-msa="fontcss" href="https://fonts.googleapis.com/css2?family=Karantina:wght@700&family=Heebo:wght@400;700;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karantina:wght@700&family=Heebo:wght@400;700;900&display=swap"></noscript>
 
-<link rel="preload" as="image" href="/assets/opt/hero-training.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/opt/hero-poster.jpg" fetchpriority="high">
 
 <!-- Structured data: LocalBusiness / SportsActivityLocation. TODO: verify url + add opening hours once confirmed. -->
 <script type="application/ld+json">
@@ -48,8 +48,8 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="/styles/index.css?v=65">
-<link rel="stylesheet" href="/styles/app.css?v=65">
+<link rel="stylesheet" href="/styles/index.css?v=66">
+<link rel="stylesheet" href="/styles/app.css?v=66">
 </head>
 <body id="top">
 
@@ -115,11 +115,14 @@
 <section data-msa="sec" class="ms-hero-v2" aria-label="MAMBA STRIKE">
   <!-- Stage background: photograph + veils -->
   <div class="ms-hero-v2__media" aria-hidden="true">
-    <img class="ms-hero-v2__poster-mobile" src="/assets/opt/hero-training.jpg" alt="לוחמי MMA באימון קרב מגע במרכז MAMBA STRIKE עפולה" fetchpriority="high" decoding="async">
-    <!-- data-src, not src: preload="auto" + a real src made every device download
-         the full 2.8MB clip, phones included. app.js attaches it on desktop only. -->
-    <video class="ms-hero-v2__video-desktop" autoplay muted loop playsinline preload="none" poster="/assets/opt/hero-training.jpg" aria-hidden="true">
-      <source data-src="/assets/opt/hero.mp4" type="video/mp4">
+    <!-- This still is frame 0 of the clip, so the first paint already shows what the
+         video shows — the old poster was completely different footage, which is what
+         made the handoff read as a jump rather than a fade. -->
+    <img class="ms-hero-v2__still" src="/assets/opt/hero-poster.jpg" alt="לוחמי MMA באימון קרב מגע במרכז MAMBA STRIKE עפולה" fetchpriority="high" decoding="async">
+    <!-- Sources are attached by app.js so each viewport gets its own encode. Both
+         files are faststart, so playback starts on the first chunk. -->
+    <video class="ms-hero-v2__video" autoplay muted loop playsinline preload="none" poster="/assets/opt/hero-poster.jpg" aria-hidden="true">
+      <source data-src-mobile="/assets/opt/hero-mobile.mp4" data-src-desktop="/assets/opt/hero-desktop.mp4" type="video/mp4">
     </video>
     <div class="ms-hero-v2__grain"></div>
     <div class="ms-hero-v2__veil ms-hero-v2__veil--right"></div>
@@ -646,6 +649,6 @@
   <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="m17.507 14.307-.009.075c-2.199-1.096-2.429-1.242-2.713-.816-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.293-.506.32-.578.878-1.634.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.576-.05-.997-.042-1.368.344-1.614 1.774-1.207 3.604.174 5.55 2.714 3.552 4.16 4.206 6.804 5.114.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345z"/><path d="m20.52 3.449c-7.689-7.433-20.414-2.042-20.419 8.444 0 2.096.549 4.14 1.595 5.945l-1.696 6.162 6.335-1.652c7.905 4.27 17.661-1.4 17.665-10.449 0-3.176-1.24-6.165-3.495-8.411zm1.482 8.417c-.006 7.633-8.385 12.4-15.012 8.504l-.36-.214-3.75.975 1.005-3.645-.239-.375c-4.124-6.565.614-15.145 8.426-15.145 2.654 0 5.145 1.035 7.021 2.91 1.875 1.859 2.909 4.35 2.909 6.99z"/></svg>
 </a>
 
-<script src="/app.js?v=65" defer></script>
+<script src="/app.js?v=66" defer></script>
 </body>
 </html>

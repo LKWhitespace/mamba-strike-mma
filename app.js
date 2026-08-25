@@ -51,7 +51,7 @@
         // fonts — NOT the window 'load' event. Waiting for 'load' held the splash
         // up until every other image AND the hero video had finished downloading,
         // which on mobile data is seconds of dead time behind a black screen.
-        var heroImg = document.querySelector('.ms-hero-v2__poster-mobile');
+        var heroImg = document.querySelector('.ms-hero-v2__still');
         var heroReady = (heroImg && !heroImg.complete)
           ? new Promise(function(res){
               heroImg.addEventListener('load', res, {once:true});
@@ -81,33 +81,28 @@
     }
   }
 
-  // ------ Hero video: desktop only, attached after first paint ------
-  // The <source> ships with data-src instead of src on purpose. With a real src
-  // and preload="auto" the browser fetched the whole ~2.8MB clip on every device
-  // — including phones, where CSS then stacked it on top of the still, which is
-  // what made the hero visibly swap from photo to video mid-load.
-  var heroVideo = document.querySelector('.ms-hero-v2__video-desktop');
+  // ------ Hero video ------
+  // The source is attached here rather than in markup for two reasons: each viewport
+  // gets its own encode (960x540 / 540KB on phones, 1280x720 / 950KB above 1024), and
+  // the 40KB still keeps first paint to itself. Both encodes are faststart — the moov
+  // atom leads the file — so playback begins on the first chunk instead of waiting for
+  // the whole download, which is what the original 2.8MB moov-at-the-end file required.
+  var heroVideo = document.querySelector('.ms-hero-v2__video');
   if(heroVideo){
-    var heroSource = heroVideo.querySelector('source[data-src]');
-    var wantsVideo = heroSource &&
-      window.matchMedia &&
-      window.matchMedia('(min-width:1024px)').matches &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(wantsVideo){
-      // Cross-fade over the still only once frames are actually rendering.
+    var heroSource = heroVideo.querySelector('source[data-src-mobile]');
+    var reduceMotionHero = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(heroSource && !reduceMotionHero){
+      // Cross-fade over the still only once frames are actually rendering. The still is
+      // frame 0 of this clip, so there is nothing to see in the handoff.
       heroVideo.addEventListener('playing', function(){
         heroVideo.classList.add('is-playing');
       }, {once:true});
-      var attachHeroVideo = function(){
-        heroSource.src = heroSource.dataset.src;
-        heroVideo.load();
-        var played = heroVideo.play();
-        // Autoplay refused (low-power mode, data saver) — the still just stays.
-        if(played && played.catch) played.catch(function(){});
-      };
-      // Defer so the video never competes with the poster, CSS or fonts.
-      if(document.readyState === 'complete') attachHeroVideo();
-      else window.addEventListener('load', attachHeroVideo);
+      var wideHero = window.matchMedia && window.matchMedia('(min-width:1024px)').matches;
+      heroSource.src = wideHero ? heroSource.dataset.srcDesktop : heroSource.dataset.srcMobile;
+      heroVideo.load();
+      var played = heroVideo.play();
+      // Autoplay refused (low-power mode, data saver) — the still just stays.
+      if(played && played.catch) played.catch(function(){});
     }
   }
 

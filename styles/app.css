@@ -305,14 +305,13 @@ html.ms-scroll-lock{overflow:hidden}
 /* Media stage */
 .ms-hero-v2__media{position:absolute;inset:0;grid-column:1 / -1;overflow:hidden;background:var(--ink-850);z-index:1}
 .ms-hero-v2__media img,.ms-hero-v2__media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 38%;filter:saturate(.82) contrast(1.14) brightness(.94);transform:scale(1.04);animation:msaV2In 1.8s cubic-bezier(.2,.7,.2,1) .3s both}
-/* The still poster is the hero's first paint and stays as the base layer on every
-   device. The video is a desktop-only enhancement: it never renders below 1024px
-   (where the hero is stacked anyway) and app.js cross-fades it in only once it is
-   really playing, so there is no hard pop from photo to first video frame. */
-.ms-hero-v2__poster-mobile{display:block;z-index:1}
-.ms-hero-v2__video-desktop{display:none;z-index:2;opacity:0;transition:opacity .7s var(--ease-out)}
-@media (min-width:1024px){.ms-hero-v2__video-desktop{display:block}}
-.ms-hero-v2__video-desktop.is-playing{opacity:1}
+/* The still is frame 0 of the clip and carries the first paint on every viewport.
+   The video sits above it and app.js fades it in on its own 'playing' event, so the
+   handoff is a true cross-fade between identical frames rather than a visible cut.
+   The still also stays as the fallback if autoplay is refused. */
+.ms-hero-v2__still{display:block;z-index:1}
+.ms-hero-v2__video{z-index:2;opacity:0;transition:opacity .7s var(--ease-out)}
+.ms-hero-v2__video.is-playing{opacity:1}
 .ms-hero-v2__grain{position:absolute;inset:-20%;background:radial-gradient(circle at 20% 40%,rgba(255,255,255,.05),transparent 55%),radial-gradient(circle at 80% 20%,rgba(227,30,36,.10),transparent 60%);mix-blend-mode:screen;pointer-events:none}
 .ms-hero-v2__veil--right{position:absolute;top:0;bottom:0;right:0;width:55%;background:linear-gradient(to left,rgba(5,5,6,.92) 0%,rgba(5,5,6,.72) 35%,rgba(5,5,6,.35) 70%,transparent 100%);pointer-events:none}
 .ms-hero-v2__veil--bottom{position:absolute;left:0;right:0;bottom:0;height:60%;background:linear-gradient(to top,var(--ink-900) 0%,rgba(5,5,6,.85) 22%,rgba(5,5,6,.4) 55%,transparent 100%);pointer-events:none}

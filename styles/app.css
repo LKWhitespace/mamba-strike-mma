@@ -526,7 +526,10 @@ html.ms-scroll-lock{overflow:hidden}
 .ms-field input:focus,.ms-field select:focus,.ms-field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--red-a16)}
 .ms-field-row{display:flex;gap:14px;flex-wrap:wrap}
 .ms-form-actions{display:flex;justify-content:flex-end;margin-top:6px}
-.ms-form-note{margin:8px 0 0;font-size:12.5px;color:var(--text-muted);text-align:end}
+/* text-align:start — in RTL that is the right edge, matching the labels, the
+   fields and the note below it. This was `end`, which flushed the note left
+   while the privacy note under it sat right; the two disagreed on desktop. */
+.ms-form-note{margin:8px 0 0;font-size:10.5px;color:var(--text-muted);text-align:start}
 .ms-form-success{padding:24px 32px 28px;text-align:center;background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md)}
 .ms-form-success h4{margin:0 0 6px;font-family:var(--font-display-he);font-weight:700;font-size:33px;color:var(--white)}
 .ms-form-success p{margin:0;color:var(--text-body)}
@@ -1776,7 +1779,7 @@ html,body{overflow-x:clip}
 @media (max-width:640px){.ms-coach-lead{font-size:18px !important}}
 
 /* ---- E · Form privacy notice --------------------------------------------- */
-.ms-form-privacy{margin-top:6px;color:var(--text-muted);text-align:start}
+.ms-form-privacy{margin-top:6px;color:var(--text-muted)}
 .ms-form-privacy a{color:var(--white);text-decoration:underline;text-underline-offset:2px}
 .ms-form-privacy a:hover{color:var(--red-300)}
 

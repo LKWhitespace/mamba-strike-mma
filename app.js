@@ -25,14 +25,27 @@
         sessionStorage.setItem('msaSplashSeen', String(now));
         var startedAt = performance.now();
         var minDuration = reduceMotionSplash ? 500 : 2200;
-        var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
-        fontsReady.then(function(){
+        var maxDuration = 8000; // hard cap so splash can't hang forever on slow networks
+        var released = false;
+        var release = function(){
+          if(released) return;
+          released = true;
           var elapsed = performance.now() - startedAt;
           var wait = Math.max(0, minDuration - elapsed);
           setTimeout(removeSplash, wait);
-        });
-        // Safety net: never leave splash up longer than 5s even if fonts hang
-        setTimeout(removeSplash, 5000);
+        };
+        // Wait for the full page (images + video metadata + fonts) to load
+        var onReady = function(){
+          var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+          fontsReady.then(release);
+        };
+        if(document.readyState === 'complete'){
+          onReady();
+        } else {
+          window.addEventListener('load', onReady);
+        }
+        // Hard safety cap
+        setTimeout(release, maxDuration);
       }
     } catch(e){
       setTimeout(removeSplash, 2500);

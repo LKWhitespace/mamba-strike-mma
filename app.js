@@ -107,16 +107,29 @@
   }
 
   // ------ Scroll progress bar ------
+  // scrollHeight/clientHeight are geometry reads — cheap on their own, but any style
+  // mutation elsewhere (e.g. the FAB observer flipping a body class) invalidates layout,
+  // and reading them on every scroll frame then forces a synchronous reflow. Cache the
+  // max value and only recompute on resize / load, and write to the DOM inside rAF.
   var scrollBar = document.getElementById('scrollBar');
-  function updateScrollBar(){
-    if(!scrollBar) return;
+  var scrollMax = 0;
+  var scrollRaf = 0;
+  function measureScrollMax(){
     var doc = document.documentElement;
-    var max = doc.scrollHeight - doc.clientHeight;
-    var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-    scrollBar.style.width = pct + '%';
+    scrollMax = doc.scrollHeight - doc.clientHeight;
   }
+  function updateScrollBar(){
+    if(!scrollBar || scrollRaf) return;
+    scrollRaf = requestAnimationFrame(function(){
+      scrollRaf = 0;
+      var pct = scrollMax > 0 ? (window.scrollY / scrollMax) * 100 : 0;
+      scrollBar.style.width = pct + '%';
+    });
+  }
+  measureScrollMax();
   window.addEventListener('scroll', updateScrollBar, {passive:true});
-  window.addEventListener('resize', updateScrollBar);
+  window.addEventListener('resize', function(){ measureScrollMax(); updateScrollBar(); });
+  window.addEventListener('load', function(){ measureScrollMax(); updateScrollBar(); });
   updateScrollBar();
 
   // ------ Mobile menu toggle ------
@@ -146,17 +159,19 @@
   }
 
   // ------ FAB visibility: only show after user scrolls past hero ------
+  // The class flip is deferred to rAF so the layout invalidation lands in the same
+  // frame as the paint, not mid-scroll where it would force any subsequent geometry
+  // read (see updateScrollBar above) to reflow synchronously.
   var heroSec = document.querySelector('.ms-hero-v2');
   if(heroSec && 'IntersectionObserver' in window){
+    var fabState = null;
     var fabObs = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        // If hero is at least 10% visible → hide FAB (hero already has WhatsApp CTA)
-        // If hero is out of view → show FAB
-        if(entry.intersectionRatio > 0.1){
-          document.body.classList.remove('ms-fab-visible');
-        } else {
-          document.body.classList.add('ms-fab-visible');
-        }
+      var visible = entries[entries.length - 1].intersectionRatio > 0.1;
+      var next = visible ? 'hide' : 'show';
+      if(next === fabState) return;
+      fabState = next;
+      requestAnimationFrame(function(){
+        document.body.classList.toggle('ms-fab-visible', !visible);
       });
     }, {threshold:[0, 0.1, 0.5]});
     fabObs.observe(heroSec);

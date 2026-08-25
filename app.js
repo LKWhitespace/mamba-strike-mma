@@ -3,10 +3,18 @@
   'use strict';
 
   // ------ Splash cleanup + skip-if-recent ------
+  // Coordinates: (a) sessionStorage skip, (b) document.fonts.ready so no FOUT flash
+  // between splash and hero, (c) minimum display time so it doesn't feel jarring.
   var splash = document.querySelector('[data-msa="splash"]');
   if(splash){
     var reduceMotionSplash = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // Skip splash on internal nav (recent visit within 30 min)
+    var removeSplash = function(){
+      splash.classList.add('ms-splash--out');
+      document.body.classList.add('ms-splash-done');
+      setTimeout(function(){
+        if(splash && splash.parentNode) splash.parentNode.removeChild(splash);
+      }, 500); // matches the CSS fade-out transition
+    };
     try{
       var last = sessionStorage.getItem('msaSplashSeen');
       var now = Date.now();
@@ -15,19 +23,19 @@
         splash.remove();
       } else {
         sessionStorage.setItem('msaSplashSeen', String(now));
-        var cleanup = function(){
-          document.body.classList.add('ms-splash-done');
-          if(splash && splash.parentNode) splash.parentNode.removeChild(splash);
-        };
-        var timeout = reduceMotionSplash ? 900 : 2500;
-        setTimeout(cleanup, timeout);
+        var startedAt = performance.now();
+        var minDuration = reduceMotionSplash ? 500 : 2200;
+        var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+        fontsReady.then(function(){
+          var elapsed = performance.now() - startedAt;
+          var wait = Math.max(0, minDuration - elapsed);
+          setTimeout(removeSplash, wait);
+        });
+        // Safety net: never leave splash up longer than 5s even if fonts hang
+        setTimeout(removeSplash, 5000);
       }
     } catch(e){
-      // sessionStorage blocked (private browsing) — just show it
-      setTimeout(function(){
-        document.body.classList.add('ms-splash-done');
-        if(splash && splash.parentNode) splash.parentNode.removeChild(splash);
-      }, 2500);
+      setTimeout(removeSplash, 2500);
     }
   }
 

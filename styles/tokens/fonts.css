@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&family=Heebo:wght@300;400;500;700;900&display=swap");
-/* Webfonts are served from Google Fonts — no local binaries.
-   Karantina → substitute for Barlev (condensed display, Hebrew + Latin), weight 700
-   Heebo     → substitute for Almoni DL AAA (bilingual body / UI)
-   See readme.md § Typography for the substitution note. */
+/* Google Fonts loaded via <link rel="preconnect"> + preload in <head>.
+   Kept here for token reference. Font families:
+   - Karantina 700 (condensed display, Hebrew + Latin)
+   - Heebo 400/700/900 (bilingual body / UI) */

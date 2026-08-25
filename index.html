@@ -11,8 +11,14 @@
 <meta property="og:image" content="/assets/og.png">
 <meta property="og:type" content="website">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Fonts: parallel preconnect + preload swap for fast first paint (kills FOUT flash) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Karantina:wght@700&family=Heebo:wght@400;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karantina:wght@700&family=Heebo:wght@400;700;900&display=swap">
+
 <link rel="preload" as="image" href="/assets/opt/hero-training.jpg" fetchpriority="high">
-<link rel="preload" as="video" href="/assets/opt/hero.mov" type="video/quicktime">
 
 <!-- Structured data: LocalBusiness / SportsActivityLocation. TODO: verify url + add opening hours once confirmed. -->
 <script type="application/ld+json">
@@ -37,8 +43,8 @@
   ]
 }
 </script>
-<link rel="stylesheet" href="/styles/index.css?v=50">
-<link rel="stylesheet" href="/styles/app.css?v=50">
+<link rel="stylesheet" href="/styles/index.css?v=52">
+<link rel="stylesheet" href="/styles/app.css?v=52">
 </head>
 <body id="top">
 
@@ -104,10 +110,10 @@
 <section data-msa="sec" class="ms-hero-v2" aria-label="MAMBA STRIKE">
   <!-- Stage background: photograph + veils -->
   <div class="ms-hero-v2__media" aria-hidden="true">
-    <video autoplay muted loop playsinline preload="auto" poster="/assets/opt/hero-training.jpg" aria-label="לוחמי MMA באימון קרב מגע במרכז MAMBA STRIKE עפולה">
+    <img class="ms-hero-v2__poster-mobile" src="/assets/opt/hero-training.jpg" alt="לוחמי MMA באימון קרב מגע במרכז MAMBA STRIKE עפולה" fetchpriority="high" decoding="async">
+    <video class="ms-hero-v2__video-desktop" autoplay muted loop playsinline preload="metadata" poster="/assets/opt/hero-training.jpg" aria-hidden="true">
       <source src="/assets/opt/hero.mov" type="video/quicktime">
       <source src="/assets/opt/hero.mov" type="video/mp4">
-      <img src="/assets/opt/hero-training.jpg" alt="לוחמי MMA באימון קרב מגע במרכז MAMBA STRIKE עפולה">
     </video>
     <div class="ms-hero-v2__grain"></div>
     <div class="ms-hero-v2__veil ms-hero-v2__veil--right"></div>

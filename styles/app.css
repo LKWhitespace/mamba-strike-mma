@@ -34,8 +34,9 @@ a:hover{color:var(--accent-hover)}
 .ms-splash__wordmark{font-family:var(--font-display);font-weight:700;font-size:clamp(44px,7vw,96px);line-height:1;color:var(--white);letter-spacing:-.008em;opacity:0;animation:msaSplashText 2.4s cubic-bezier(.2,.7,.2,1) forwards}
 .ms-splash__wordmark span{color:var(--red-500);text-shadow:0 0 32px rgba(227,30,36,.55)}
 .ms-splash__tag{font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--gray-300);opacity:0;animation:msaSplashTag 2.4s ease-out forwards}
-.ms-splash__progress{width:clamp(120px,18vw,200px);height:2px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:8px;opacity:0;animation:msaSplashProgWrap 2.4s ease-out forwards}
-.ms-splash__progress span{display:block;height:100%;width:0;background:linear-gradient(to right,var(--red-500),#ff5a63);box-shadow:0 0 10px rgba(227,30,36,.8);animation:msaSplashProg 2.0s cubic-bezier(.7,.02,.2,1) .3s forwards}
+.ms-splash__progress{width:clamp(120px,18vw,200px);height:2px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:8px;opacity:0;animation:msaSplashProgWrap 1s ease-out forwards}
+.ms-splash__progress span{display:block;height:100%;width:0;background:linear-gradient(to right,var(--red-500),#ff5a63);box-shadow:0 0 10px rgba(227,30,36,.8);transition:width 4s cubic-bezier(.15,.9,.3,1)}
+.ms-splash__progress span.ms-splash__progress--complete{transition:width .5s ease-out;width:100% !important}
 
 /* msaSplashOut kept for legacy but the splash now uses .ms-splash--out class fade-out */
 @keyframes msaSplashAmbient{0%{opacity:0;transform:scale(.6)}20%{opacity:1;transform:scale(1)}80%{opacity:.95;transform:scale(1.04)}100%{opacity:.95;transform:scale(1.06)}}
@@ -43,8 +44,7 @@ a:hover{color:var(--accent-hover)}
 @keyframes msaSplashSlash{0%{transform:scaleX(0);opacity:0}12%{opacity:0}22%{transform:scaleX(1);opacity:1}62%{transform:scaleX(1);opacity:.9}80%{transform:scaleX(1.06);opacity:0}100%{opacity:0}}
 @keyframes msaSplashText{0%,22%{opacity:0;transform:translateY(18px);letter-spacing:.06em}30%{opacity:1;transform:translateY(0);letter-spacing:-.008em}62%{opacity:1;transform:translateY(0)}72%{opacity:.4;transform:translateY(-6px)}100%{opacity:0;transform:translateY(-14px)}}
 @keyframes msaSplashTag{0%,34%{opacity:0}44%{opacity:.7}62%{opacity:.7}72%,100%{opacity:0}}
-@keyframes msaSplashProgWrap{0%,26%{opacity:0}34%{opacity:1}66%{opacity:1}72%,100%{opacity:0}}
-@keyframes msaSplashProg{0%{width:0}100%{width:100%}}
+@keyframes msaSplashProgWrap{0%{opacity:0}30%,100%{opacity:1}}
 
 @media (prefers-reduced-motion:reduce){
   [data-msa="splash"]{animation:msaSplashOutFast .5s ease-out .3s forwards}
@@ -381,7 +381,9 @@ html.ms-scroll-lock{overflow:hidden}
   .ms-hero-v2{grid-template-columns:1fr;grid-template-rows:minmax(440px,58vh) auto;direction:rtl;height:auto;min-height:auto;max-height:none;position:relative}
   .ms-hero-v2__media{position:relative;grid-column:1;grid-row:1;inset:auto;width:100%;height:100%;z-index:1;overflow:hidden}
   .ms-hero-v2__media img,.ms-hero-v2__media video{position:absolute;inset:0;width:100%;height:100%;object-position:50% 28%}
-  .ms-hero-v2__veil--right{top:auto;right:0;left:0;bottom:0;width:auto;height:70%;background:linear-gradient(to bottom,transparent 0%,rgba(5,5,6,.15) 25%,rgba(5,5,6,.55) 55%,rgba(5,5,6,.9) 82%,var(--ink-900) 100%)}
+  /* Kill the desktop right-side veil on mobile, use only a full-height bottom fade */
+  .ms-hero-v2__veil--right{display:none}
+  .ms-hero-v2__veil--bottom{top:auto;left:0;right:0;bottom:0;width:auto;height:75%;background:linear-gradient(to top,var(--ink-900) 0%,rgba(5,5,6,.98) 12%,rgba(5,5,6,.85) 30%,rgba(5,5,6,.6) 50%,rgba(5,5,6,.3) 72%,rgba(5,5,6,.1) 88%,transparent 100%)}
   .ms-hero-v2__content-wrap{position:relative;grid-column:1;grid-row:2;z-index:3;padding:clamp(28px,6vw,44px) clamp(24px,6vw,36px) clamp(72px,14vw,100px);align-items:flex-start;background:var(--ink-900)}
   .ms-hero-v2__content{max-width:100%}
   .ms-hero-v2__wordmark{top:16px;left:16px;right:16px;font-size:clamp(48px,13vw,96px)}

@@ -8,13 +8,26 @@
   var splash = document.querySelector('[data-msa="splash"]');
   if(splash){
     var reduceMotionSplash = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var progressBar = splash.querySelector('.ms-splash__progress span');
     var removeSplash = function(){
-      splash.classList.add('ms-splash--out');
-      document.body.classList.add('ms-splash-done');
+      // Complete the progress bar (85% -> 100%) before fading splash out
+      if(progressBar){
+        progressBar.classList.add('ms-splash__progress--complete');
+      }
       setTimeout(function(){
-        if(splash && splash.parentNode) splash.parentNode.removeChild(splash);
-      }, 500); // matches the CSS fade-out transition
+        splash.classList.add('ms-splash--out');
+        document.body.classList.add('ms-splash-done');
+        setTimeout(function(){
+          if(splash && splash.parentNode) splash.parentNode.removeChild(splash);
+        }, 500);
+      }, 350); // wait for the fill-to-100% to render
     };
+    // Kick off the slow "loading" fill to 85%
+    if(progressBar && !reduceMotionSplash){
+      requestAnimationFrame(function(){
+        progressBar.style.width = '85%';
+      });
+    }
     try{
       var last = sessionStorage.getItem('msaSplashSeen');
       var now = Date.now();

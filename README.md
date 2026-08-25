@@ -9,6 +9,9 @@ Head coach: Yotam Zafrani.
 Zero-build static HTML/CSS/JS. Deployed on **GitHub Pages** from `main` / root.
 
 - `index.html` — single-page site (Hebrew RTL)
+- `accessibility.html` — הצהרת נגישות (linked from the footer of every page)
+- `privacy.html` — מדיניות פרטיות (linked from the footer and from the contact form)
+- `robots.txt` / `sitemap.xml` — both were 404 before; the sitemap lists the three pages
 - `styles/` — design tokens + component CSS
 - `app.js` — vanilla-JS interactions (scroll bar, mobile menu, reveal-on-scroll, FAQ accordion, contact form → WhatsApp handoff)
 - `assets/` — photography, logo, favicon
@@ -23,6 +26,40 @@ python3 -m http.server 4321 --bind 127.0.0.1
 ```
 
 Then open http://127.0.0.1:4321/
+
+## Analytics (not live yet)
+
+`app.js` pushes one `window.dataLayer` event per conversion tap, delegated off the
+link's href, so no markup attributes are needed:
+
+| event | fires on |
+| --- | --- |
+| `ms_trial_click` | any link to the letts.co.il trial booking |
+| `ms_whatsapp_click` | any `wa.me` link (header, hero, cards, coach, CTA block, FAB) |
+| `ms_phone_click` | any `tel:` link |
+| `ms_waze_click` / `ms_map_click` | the Waze and Google Maps links |
+| `ms_form_submit` | the contact form, on successful validation |
+
+With no tag on the page these just queue in the array and nothing leaves the
+browser. To start reporting: put the real GA4 Measurement ID into the commented
+gtag block at the bottom of `index.html` and uncomment it. Google Search Console
+needs the property verified separately (DNS TXT record, or the meta tag GSC
+issues, pasted into `<head>`).
+
+## Content rules that must not regress
+
+Client-approved wording — do not "improve" these back:
+
+- The coach bio in `#coach` is supplied verbatim by the client. No shortening, no
+  re-ordering, no credentials/achievements chips alongside it.
+- The only approved phrasing for the מג״ב role is **ראש תחום הלחימה הקרובה במג״ב**.
+  Never "קצין לחימה קרובה בכיר לשעבר".
+- The trial session is **not free** (50 ₪, credited if the trainee joins). No copy,
+  meta tag or share card may say "אימון ניסיון חינם".
+- "קרב מגע" is not used as a marketing label for the club anywhere (title, meta,
+  share card, splash, schema). It appears only inside the client's own bio text.
+- Group cap is 16, not 12.
+- "למחוק את הפחדים" must not come back.
 
 ## Contact
 

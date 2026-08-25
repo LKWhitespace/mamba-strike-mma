@@ -4,12 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050506">
-<title>MAMBA STRIKE · אימוני MMA, קרב מגע והגנה עצמית בעפולה</title>
-<meta name="description" content="מרכז MMA וקרב מגע בעפולה בהובלת יותם זעפרני, קצין לחימה קרובה בכיר לשעבר במג״ב. MMA, סטרייקינג, גראפלינג והגנה עצמית לילדים, נוער ובוגרים. קבוצות קטנות של עד 12 מתאמנים.">
-<meta property="og:title" content="MAMBA STRIKE · מרכז MMA וקרב מגע בעפולה">
-<meta property="og:description" content="מרכז MMA וקרב מגע בעפולה בהובלת קצין לחימה קרובה בכיר לשעבר במג״ב. קבוצות קטנות, יחס אישי, אימון ניסיון חינם.">
-<meta property="og:image" content="/assets/og.png">
+<title>MAMBA STRIKE · אימוני MMA, סטרייקינג, גראפלינג והגנה עצמית בעפולה</title>
+<meta name="description" content="מרכז MMA בעפולה בהובלת יותם זעפרני, שכיהן כראש תחום הלחימה הקרובה במג״ב. MMA, סטרייקינג, גראפלינג והגנה עצמית לילדים, נוער ובוגרים. קבוצות קטנות של עד 16 מתאמנים.">
+<link rel="canonical" href="https://mambastrike.co.il/">
+
+<!-- Share card (WhatsApp / Facebook / Telegram). og:image must be an ABSOLUTE url —
+     scrapers do not resolve site-relative paths, which is why the old card came
+     through without an image. -->
+<meta property="og:title" content="MAMBA STRIKE · מרכז MMA בעפולה">
+<meta property="og:description" content="מרכז MMA בעפולה בהובלת יותם זעפרני, שכיהן כראש תחום הלחימה הקרובה במג״ב. קבוצות קטנות, יחס אישי, אימון ניסיון ב־50 ₪ שמתקזז בהצטרפות.">
+<meta property="og:image" content="https://mambastrike.co.il/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://mambastrike.co.il/">
+<meta property="og:site_name" content="MAMBA STRIKE">
+<meta property="og:locale" content="he_IL">
 <meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 
 <!-- Fonts: preconnect, then load the stylesheet asynchronously (preload + rel swap).
@@ -25,30 +36,31 @@
 
 <link rel="preload" as="image" href="/assets/opt/hero-poster.jpg" fetchpriority="high">
 
-<!-- Structured data: LocalBusiness / SportsActivityLocation. TODO: verify url + add opening hours once confirmed. -->
+<!-- Structured data: LocalBusiness / SportsActivityLocation. TODO: add opening hours once confirmed. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": ["LocalBusiness", "SportsActivityLocation"],
   "name": "MAMBA STRIKE",
-  "description": "מרכז MMA וקרב מגע בעפולה בהובלת יותם זעפרני, קצין לחימה קרובה בכיר לשעבר במג״ב. MMA, סטרייקינג, גראפלינג והגנה עצמית לילדים, נוער ובוגרים.",
+  "description": "מרכז MMA בעפולה בהובלת יותם זעפרני, שכיהן כראש תחום הלחימה הקרובה במג״ב. MMA, סטרייקינג, גראפלינג והגנה עצמית לילדים, נוער ובוגרים.",
   "url": "https://mambastrike.co.il/",
   "telephone": "+972-52-447-9512",
-  "image": "/assets/og.png",
+  "image": "https://mambastrike.co.il/assets/og.png",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "המגל 9",
     "addressLocality": "עפולה",
     "addressCountry": "IL"
   },
-  "sport": ["Mixed Martial Arts", "Krav Maga", "Grappling", "Striking"],
+  "hasMap": "https://www.google.com/maps/search/?api=1&query=%D7%94%D7%9E%D7%92%D7%9C%209%2C%20%D7%A2%D7%A4%D7%95%D7%9C%D7%94",
+  "sport": ["Mixed Martial Arts", "Grappling", "Striking", "Self Defense"],
   "sameAs": [
     "https://www.instagram.com/mambastrike/",
     "https://www.facebook.com/profile.php?id=100064330824092"
   ]
 }
 </script>
-<link rel="stylesheet" href="/styles/app.css?v=67">
+<link rel="stylesheet" href="/styles/app.css?v=68">
 </head>
 <body id="top">
 
@@ -60,7 +72,7 @@
   <div class="ms-splash__inner">
     <img src="/assets/logo-symbol.svg" alt="" class="ms-splash__mark">
     <div class="ms-splash__wordmark" dir="ltr">MAMBA <span>STRIKE</span></div>
-    <div class="ms-splash__tag">מרכז MMA · קרב מגע · עפולה</div>
+    <div class="ms-splash__tag">מרכז MMA · עפולה</div>
     <div class="ms-splash__progress" aria-hidden="true"><span></span></div>
   </div>
 </div>
@@ -77,7 +89,7 @@
     </span>
   </a>
 
-  <nav data-msa="navlinks" style="display:flex;gap:clamp(16px,2.4vw,26px);flex:1 1 auto">
+  <nav data-msa="navlinks" aria-label="ניווט ראשי" style="display:flex;gap:clamp(16px,2.4vw,26px);flex:1 1 auto">
     <a data-msa="navlink" href="#programs">אימונים</a>
     <a data-msa="navlink" href="#audience">קבוצות</a>
     <a data-msa="navlink" href="#coach">המאמן</a>
@@ -93,19 +105,23 @@
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
     </a>
     <a href="https://letts.co.il/payment/L3hwazRqajlrZ2l1L0EwcWF5SWk5dz09" target="_blank" rel="noopener" class="ms-btn ms-btn--sm ms-btn--primary">אימון ניסיון</a>
-    <button data-msa="menubtn" type="button" aria-label="פתיחת תפריט" aria-expanded="false" style="width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--radius-md);background:transparent;color:var(--white);border:2px solid var(--white-a12);cursor:pointer;transition:var(--transition-control)">
+    <button data-msa="menubtn" type="button" aria-label="פתיחת תפריט" aria-expanded="false" aria-controls="msaMenu" style="width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--radius-md);background:transparent;color:var(--white);border:2px solid var(--white-a12);cursor:pointer;transition:var(--transition-control)">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
     </button>
   </div>
 
-  <div data-msa="menupanel" role="menu">
+  <!-- Plain nav rather than role="menu": role=menu promises the desktop-application
+       keyboard model (arrow-key roving focus, menuitem children). These are ordinary
+       links, so a labelled <nav> is what screen readers should hear. app.js moves
+       focus into the panel on open and back to the button on close/Escape. -->
+  <nav data-msa="menupanel" id="msaMenu" aria-label="תפריט ניווט">
     <a href="#programs">אימונים</a>
     <a href="#audience">קבוצות</a>
     <a href="#coach">המאמן</a>
     <a href="#testimonials">המלצות</a>
     <a href="#faq">שאלות נפוצות</a>
     <a href="#contact">צור קשר</a>
-  </div>
+  </nav>
 </header>
 
 <main id="main-content">
@@ -117,7 +133,7 @@
     <!-- This still is frame 0 of the clip, so the first paint already shows what the
          video shows — the old poster was completely different footage, which is what
          made the handoff read as a jump rather than a fade. -->
-    <img class="ms-hero-v2__still" src="/assets/opt/hero-poster.jpg" alt="לוחמי MMA באימון קרב מגע במרכז MAMBA STRIKE עפולה" fetchpriority="high" decoding="async">
+    <img class="ms-hero-v2__still" src="/assets/opt/hero-poster.jpg" alt="לוחמי MMA באימון במרכז MAMBA STRIKE עפולה" fetchpriority="high" decoding="async">
     <!-- Sources are attached by app.js so each viewport gets its own encode. Both
          files are faststart, so playback starts on the first chunk. -->
     <video class="ms-hero-v2__video" autoplay muted loop playsinline preload="none" poster="/assets/opt/hero-poster.jpg" aria-hidden="true">
@@ -136,7 +152,7 @@
           <span>המקום שלך ל־<em>MMA</em>.</span>
         </h1>
 
-        <p class="ms-hero-v2__lead">MMA, סטרייקינג, גראפלינג והגנה עצמית לילדים, נוער ובוגרים. באימון מקצועי שמתאים לרמה ולמטרה שלך.</p>
+        <p class="ms-hero-v2__lead">MMA, סטרייקינג, גראפלינג והגנה עצמית לילדים, נוער ובוגרים. עם אימון מקצועי המותאם לרמה ולמטרה שלך.</p>
       </div>
 
       <div class="ms-hero-v2__cta">
@@ -182,7 +198,7 @@
             <div class="ms-about-stat-label">תחומי אימון תחת גג אחד</div>
           </div>
           <div class="ms-about-stat" role="listitem">
-            <div class="ms-about-stat-num">12</div>
+            <div class="ms-about-stat-num">16</div>
             <div class="ms-about-stat-label">מקסימום מתאמנים בקבוצה</div>
           </div>
         </div>
@@ -203,7 +219,7 @@
     <div class="ms-section-head">
       <div class="ms-eyebrow"><span>האימונים שלנו</span></div>
       <h2 class="ms-section-title">עמידה. קרקע. הגנה.<br>הכל מתחבר.</h2>
-      <p class="ms-section-lead">ארבעה תחומי אימון שמרכיבים MMA שלם. כל אחד עומד בפני עצמו, וכולם יחד יוצרים לוחם/ת אמיתי/ת.</p>
+      <p class="ms-section-lead">ארבעה תחומי אימון שמתחברים יחד ל־MMA. כל אחד עומד בפני עצמו, וכולם יחד מפתחים יכולת לחימה שלמה ומאוזנת.</p>
     </div>
 
     <div class="ms-programs-grid">
@@ -215,7 +231,7 @@
         <div class="ms-feature-body">
           <div class="ms-feature-term">MMA · MIXED MARTIAL ARTS</div>
           <h3 class="ms-feature-title">MMA · לחימה משולבת</h3>
-          <p class="ms-feature-desc">חיבור עמידה, קרקע, כושר וטכניקה. Striking + Grappling תחת קורת גג אחת. לחימה אמיתית, מקצועי ובטוח.</p>
+          <p class="ms-feature-desc">חיבור עמידה, קרקע, כושר וטכניקה. Striking + Grappling תחת קורת גג אחת. אימון שמשלב עמידה וקרקע בצורה מקצועית, הדרגתית ובטוחה.</p>
         </div>
       </a>
 
@@ -227,7 +243,7 @@
         <div class="ms-feature-body">
           <div class="ms-feature-term">STRIKING · BOXING + MUAY THAI</div>
           <h3 class="ms-feature-title">סטרייקינג</h3>
-          <p class="ms-feature-desc">בסיס של בוקס ומוואי תאי: אגרופים, בעיטות, ברכיים, תנועה, הגנה וקומבינציות. כוח, מהירות ודיוק.</p>
+          <p class="ms-feature-desc">יסודות אגרוף ומואי תאי: אגרופים, בעיטות, ברכיים, תנועה, הגנה וקומבינציות. כוח, מהירות ודיוק.</p>
         </div>
       </a>
 
@@ -239,7 +255,7 @@
         <div class="ms-feature-body">
           <div class="ms-feature-term">GRAPPLING · BJJ + WRESTLING</div>
           <h3 class="ms-feature-title">גראפלינג</h3>
-          <p class="ms-feature-desc">עבודת קרקע בסגנון BJJ והיאבקות: שליטה, מעברים, מנעולים וחניקות. כוח, חשיבה ושליטה.</p>
+          <p class="ms-feature-desc">עבודת קרקע בסגנון BJJ והיאבקות: שליטה, מעברים, בריחים וחניקות. כוח, חשיבה ושליטה.</p>
         </div>
       </a>
 
@@ -327,7 +343,7 @@
       <div class="ms-diff" data-anim>
         <div class="ms-diff-num">04</div>
         <h3>מסלול התקדמות לכל רמה</h3>
-        <p>מהתרגיל הראשון ועד ספרינג. כל שלב בונה את הבא, לפי הרמה שלך.</p>
+        <p>מהתרגיל הראשון ועד ספארינג. כל שלב בונה את הבא, לפי הרמה שלך.</p>
       </div>
     </div>
 
@@ -341,7 +357,6 @@
     <div class="ms-section-head">
       <div class="ms-eyebrow"><span>המאמן</span></div>
       <h2 class="ms-section-title">הניסיון שמאחורי האימון.</h2>
-      <p class="ms-section-lead">יותם זעפרני, מייסד ומאמן ראשי של MAMBA STRIKE.</p>
     </div>
 
     <div class="ms-coachlay">
@@ -357,17 +372,13 @@
       </figure>
 
       <div class="ms-coach-copy" data-anim>
-        <blockquote class="ms-coach-pull">״אומנויות לחימה הן כלי לפיתוח האדם. לא רק הספורטאי.״</blockquote>
-
-        <p>למעלה מ־20 שנה על המזרן, חגורה שחורה בקרב מגע וניסיון עשיר בהדרכה, באימון ובהכשרת לוחמים.</p>
-        <p>לשעבר קצין לחימה קרובה בכיר במג״ב, אחראי על הכשרת לוחמים ומדריכים, פיתוח תוכניות אימון והובלת תחום הקרב מגע. את MAMBA STRIKE הקים כדי להביא את אותה רמת אימון ואת אותה תרבות מזרן לעפולה.</p>
-
-        <div class="ms-coach-cred" role="list" aria-label="הסמכות וניסיון">
-          <span role="listitem">20+ שנות ניסיון</span>
-          <span role="listitem">חגורה שחורה · קרב מגע</span>
-          <span role="listitem">הכשרת לוחמים ומדריכים</span>
-          <span role="listitem">קצין לחימה קרובה בכיר לשעבר · מג״ב</span>
-        </div>
+        <!-- Client-approved bio, verbatim. Do not shorten, re-order, add a credentials
+             list, or re-introduce the old "קצין לחימה קרובה בכיר" phrasing. -->
+        <p class="ms-coach-lead">שמי יותם זעפרני, מייסד והמאמן הראשי של MAMBA STRIKE.</p>
+        <p>את עולם אומנויות הלחימה אני חי כבר למעלה משני עשורים. אני חגורה שחורה דאן 3 ולאורך השנים צברתי ניסיון עשיר בהדרכה, באימון ובהכשרת לוחמים, מתוך אמונה שאומנויות לחימה הן כלי לפיתוח האדם - לא רק הספורטאי.</p>
+        <p>עד לשנת 2026 שירתי כראש תחום הלחימה הקרובה במג״ב. במסגרת תפקידי הייתי אחראי על הכשרת לוחמים ומדריכים, פיתוח תוכניות אימון והובלת תחום הלחימה הקרובה והקרב מגע. לפני כן שירתי במשך שנים ביחידה מיוחדת במג״ב, שם צברתי ניסיון מבצעי משמעותי לצד ניסיון רב בהדרכה ובפיקוד.</p>
+        <p>את MAMBA STRIKE הקמתי מתוך רצון להקים מועדון ברמה אחרת - מקום שבו מקצועיות, יחס אישי ומשמעת נפגשים עם אווירה משפחתית וללא אגו. אני מאמין שכל אדם, ללא קשר לגיל או לניסיון, יכול להשתפר כשיש לו את הסביבה הנכונה והליווי המתאים.</p>
+        <p>המטרה שלי היא שכל מתאמן שייכנס למועדון ייצא ממנו חזק יותר, בטוח יותר בעצמו ומוכן יותר להתמודד עם אתגרי החיים - על המזרן ומחוצה לו.</p>
 
         <div class="ms-coach-actions">
           <a href="https://wa.me/972524479512?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%99%D7%95%D7%AA%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%90%D7%95%D7%9C%20%D7%9B%D7%9E%D7%94%20%D7%A9%D7%90%D7%9C%D7%95%D7%AA%20%D7%A2%D7%9C%20%D7%94%D7%9E%D7%95%D7%A2%D7%93%D7%95%D7%9F" target="_blank" rel="noopener" class="ms-btn ms-btn--md ms-btn--secondary">
@@ -490,7 +501,7 @@
           <span>אפשר להגיע לאימון ניסיון?</span>
           <span class="ms-faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
         </button>
-        <div class="ms-faq-a"><div class="ms-faq-a-inner">בטח. מתאמים בוואטסאפ או דרך טופס האתר, מגיעים, בודקים אם הזרימה מתאימה.</div></div>
+        <div class="ms-faq-a"><div class="ms-faq-a-inner">בטח. מתאמים בוואטסאפ או דרך טופס האתר, מגיעים, מכירים את המאמן, את הקבוצה ואת אופי האימון ובודקים אם זה מתאים לכם.</div></div>
       </div>
 
       <div class="ms-faq-item">
@@ -529,7 +540,10 @@
           <div>
             <span class="ms-contact-label">כתובת המועדון</span>
             <div class="ms-contact-val">המגל 9, עפולה</div>
-            <div style="margin-top:8px"><a href="https://waze.com/ul?q=%D7%94%D7%9E%D7%92%D7%9C%209%20%D7%A2%D7%A4%D7%95%D7%9C%D7%94&navigate=yes" target="_blank" rel="noopener" class="ms-inlinelink">ניווט ב־Waze ↗</a></div>
+            <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px 16px">
+              <a href="https://waze.com/ul?q=%D7%94%D7%9E%D7%92%D7%9C%209%20%D7%A2%D7%A4%D7%95%D7%9C%D7%94&navigate=yes" target="_blank" rel="noopener" class="ms-inlinelink">ניווט ב־Waze ↗</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=%D7%94%D7%9E%D7%92%D7%9C%209%2C%20%D7%A2%D7%A4%D7%95%D7%9C%D7%94" target="_blank" rel="noopener" class="ms-inlinelink">Google Maps ↗</a>
+            </div>
           </div>
         </div>
         <div class="ms-contact-row">
@@ -600,6 +614,7 @@
             <button type="submit" class="ms-btn ms-btn--md ms-btn--primary">המשך לשליחת הפרטים ב־WhatsApp</button>
           </div>
           <p class="ms-form-note">בלחיצה על הכפתור נפתח WhatsApp עם ההודעה מוכנה. שליחת ההודעה עצמה נעשית מתוך WhatsApp, כך נקבל אותה ישירות אצלנו.</p>
+          <p class="ms-form-note ms-form-privacy">הפרטים שתמלאו (שם, טלפון והמידע שתבחרו לשתף) נשלחים אלינו כהודעת WhatsApp ומשמשים ליצירת קשר בנוגע לפנייתכם בלבד. האתר עצמו אינו שומר את הפרטים. פרטים נוספים ב<a href="/privacy.html">מדיניות הפרטיות</a>.</p>
         </form>
 
         <div class="ms-form-success" id="contactSuccess" role="status" aria-live="polite" hidden>
@@ -636,8 +651,14 @@
       <a href="https://wa.me/972524479512" target="_blank" rel="noopener">WhatsApp ↗</a>
       <a href="tel:+972524479512">התקשרו עכשיו</a>
       <a href="https://waze.com/ul?q=%D7%94%D7%9E%D7%92%D7%9C%209%20%D7%A2%D7%A4%D7%95%D7%9C%D7%94&navigate=yes" target="_blank" rel="noopener">Waze ↗</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=%D7%94%D7%9E%D7%92%D7%9C%209%2C%20%D7%A2%D7%A4%D7%95%D7%9C%D7%94" target="_blank" rel="noopener">Google Maps ↗</a>
       <a href="https://www.instagram.com/mambastrike/" target="_blank" rel="noopener">Instagram ↗</a>
       <a href="https://www.facebook.com/profile.php?id=100064330824092" target="_blank" rel="noopener">Facebook ↗</a>
+    </div>
+
+    <div class="ms-footer-links">
+      <a href="/accessibility.html">הצהרת נגישות</a>
+      <a href="/privacy.html">מדיניות פרטיות</a>
     </div>
   </div>
   <div class="ms-footer-eyebrow">MAMBA <em>STRIKE</em> · AFULA · ISRAEL</div>
@@ -648,6 +669,24 @@
   <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true"><path d="m17.507 14.307-.009.075c-2.199-1.096-2.429-1.242-2.713-.816-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.293-.506.32-.578.878-1.634.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.576-.05-.997-.042-1.368.344-1.614 1.774-1.207 3.604.174 5.55 2.714 3.552 4.16 4.206 6.804 5.114.714.227 1.365.195 1.88.121.574-.091 1.767-.721 2.016-1.426.255-.705.255-1.29.18-1.425-.074-.135-.27-.21-.57-.345z"/><path d="m20.52 3.449c-7.689-7.433-20.414-2.042-20.419 8.444 0 2.096.549 4.14 1.595 5.945l-1.696 6.162 6.335-1.652c7.905 4.27 17.661-1.4 17.665-10.449 0-3.176-1.24-6.165-3.495-8.411zm1.482 8.417c-.006 7.633-8.385 12.4-15.012 8.504l-.36-.214-3.75.975 1.005-3.645-.239-.375c-4.124-6.565.614-15.145 8.426-15.145 2.654 0 5.145 1.035 7.021 2.91 1.875 1.859 2.909 4.35 2.909 6.99z"/></svg>
 </a>
 
-<script src="/app.js?v=67" defer></script>
+<script src="/app.js?v=68" defer></script>
+
+<!-- GA4 — NOT active yet. app.js already pushes a dataLayer event for every
+     conversion tap (ms_trial_click, ms_whatsapp_click, ms_phone_click,
+     ms_waze_click, ms_map_click, ms_form_submit); those pushes queue harmlessly
+     with no tag on the page. To turn measurement on, paste the property's real
+     Measurement ID (G-XXXXXXXXXX) below and uncomment. Nothing else changes.
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+
+<!-- Google Search Console: verification is per-property. If the DNS TXT record
+     method is not used, paste the meta tag GSC hands you into <head>. -->
+
 </body>
 </html>

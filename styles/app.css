@@ -58,7 +58,9 @@
 --text-body:var(--gray-350);
 --text-body-dim:var(--gray-400);
 --text-muted:var(--gray-500);
---text-faint:var(--gray-700);
+/* Was --gray-700 (#5A5A62): 3.0:1 on the page black, which fails WCAG AA for the
+   11–14px labels, eyebrows and fine print this token drives. #7E7E86 is 4.9:1. */
+--text-faint:#7E7E86;
 --text-accent:var(--red-500);
 --text-on-accent:var(--white);
 
@@ -1736,3 +1738,122 @@ html,body{overflow-x:clip}
   main,section{max-width:100%;overflow-x:clip}
 }
 
+
+/* =========================================================
+   ACCESSIBILITY + CLIENT FEEDBACK PASS (v68)
+   ========================================================= */
+
+/* ---- A · Focus visibility -------------------------------------------------
+   The old ring was 2px of --focus-ring (red-400). On the black page that is
+   readable, but on the full-bleed red CTA block red-on-red is invisible, so
+   keyboard users lost the caret exactly where the primary conversion lives.
+   A white ring with a red halo reads on black, on red and on photography. */
+:focus-visible{outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 6px rgba(227,30,36,.55)}
+.ms-hero-v2__btn:focus-visible,.ms-btn:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px rgba(227,30,36,.55)}
+.ms-cta-block .ms-btn:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px rgba(0,0,0,.45)}
+.ms-field input:focus-visible,.ms-field select:focus-visible,.ms-field textarea:focus-visible{outline:3px solid #fff;outline-offset:1px}
+.ms-faq-q:focus-visible{outline:3px solid #fff;outline-offset:-3px}
+/* The skip link already reveals on :focus; keep it visible for :focus-visible too. */
+.ms-skip-link:focus,.ms-skip-link:focus-visible{top:12px}
+
+/* ---- B · Small red text contrast -----------------------------------------
+   --accent (#E31E24) is 4.28:1 on the page black: fine for display type
+   (large-text threshold is 3:1) but short of 4.5:1 for the small labels
+   below. red-400 is 5.7:1 and reads as the same brand red at these sizes. */
+.ms-inlinelink,
+.ms-aud-term,
+.ms-coach-caption-role,
+.ms-tier-eyebrow,
+.ms-about-quote figcaption{color:var(--red-400)}
+.ms-inlinelink:hover{color:var(--red-300)}
+
+/* ---- C · Mobile menu panel ------------------------------------------------ */
+[data-msa=menupanel] a:focus-visible{background:var(--red-a08);color:var(--white)}
+
+/* ---- D · Coach section — client-approved bio ----------------------------- */
+.ms-coach-lead{font-family:var(--font-body);font-weight:700;font-size:clamp(19px,1.7vw,23px) !important;line-height:1.4 !important;color:var(--white) !important}
+.ms-coach-copy p + p{margin-top:0}
+@media (max-width:640px){.ms-coach-lead{font-size:18px !important}}
+
+/* ---- E · Form privacy notice --------------------------------------------- */
+.ms-form-privacy{margin-top:6px;color:var(--text-muted);text-align:start}
+.ms-form-privacy a{color:var(--white);text-decoration:underline;text-underline-offset:2px}
+.ms-form-privacy a:hover{color:var(--red-300)}
+
+/* ---- F · Audience cards: equal height, buttons on one baseline ----------- */
+.ms-audience-grid{align-items:stretch}
+.ms-aud{height:100%}
+.ms-aud .ms-btn{margin-top:auto}
+.ms-aud > p:last-of-type{margin-bottom:4px}
+
+/* ---- G · Header: shorter bar, bigger mark, balanced controls (≤640px) ----
+   Client: the top area was too tall, the logo too small, and the burger /
+   wordmark / trial pill were visually unbalanced. */
+@media (max-width:640px){
+  :root{--nav-height:62px}
+  [data-msa=sec]{scroll-margin-top:70px}
+  header a[href="#top"]{gap:9px !important}
+  header a[href="#top"] img{width:40px !important}
+  header a[href="#top"] span[dir="ltr"] > span:first-child{font-size:11.5px !important;letter-spacing:.16em !important}
+  header a[href="#top"] span[dir="ltr"] > span:last-child{font-size:8.5px !important;letter-spacing:.34em !important}
+  header .ms-btn.ms-btn--sm{height:40px;padding:0 13px;font-size:12.5px}
+  [data-msa=menubtn]{border-width:1.5px !important}
+}
+@media (max-width:380px){
+  header a[href="#top"] img{width:36px !important}
+  header .ms-btn.ms-btn--sm{height:38px;padding:0 11px;font-size:11.5px}
+}
+@media (max-width:320px){
+  :root{--nav-height:58px}
+  header a[href="#top"] img{width:32px !important}
+  /* iPhone SE 1st-gen: logo + trial pill + burger were 1px wider than the
+     padding box, which pushed the burger onto the viewport edge. */
+  header[style*="position:sticky"]{padding:0 8px !important;gap:6px !important}
+  header a[href="#top"]{gap:6px !important}
+  header .ms-btn.ms-btn--sm{height:36px;padding:0 9px;font-size:11px}
+}
+
+/* ---- H · Hero: trim the dead vertical space above the fold (≤640px) ------ */
+@media (max-width:640px){
+  .ms-hero-v2__content-wrap{padding:20px 18px calc(96px + env(safe-area-inset-bottom)) !important}
+  .ms-hero-v2__headline .ms-hero-v2__sub--single{margin-bottom:16px}
+  .ms-hero-v2__lead{margin-bottom:20px}
+  .ms-hero-v2__fine{margin-top:18px}
+}
+
+/* ---- I · Floating WhatsApp button ----------------------------------------
+   Smaller, pulled in from the edge and lifted clear of the iOS Safari
+   toolbar; body gets enough bottom padding that no content is permanently
+   parked underneath it. */
+@media (max-width:860px){
+  .ms-fab{width:52px;height:52px;right:calc(12px + env(safe-area-inset-right));bottom:calc(28px + env(safe-area-inset-bottom))}
+  .ms-fab svg{width:26px;height:26px}
+  body{padding-bottom:calc(96px + env(safe-area-inset-bottom)) !important}
+}
+@media (max-width:380px){
+  .ms-fab{width:48px;height:48px}
+  .ms-fab svg{width:24px;height:24px}
+}
+
+/* ---- J · Legal pages (accessibility statement / privacy policy) ---------- */
+.ms-legal-header{position:sticky;top:0;z-index:50;height:var(--nav-height);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 clamp(16px,4vw,42px);background:var(--surface-veil);backdrop-filter:var(--blur-nav);-webkit-backdrop-filter:var(--blur-nav);border-bottom:var(--rule-weight) solid var(--rule-accent)}
+.ms-legal-home{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--font-body);font-weight:700;font-size:12px;letter-spacing:.18em;color:var(--white)}
+.ms-legal-home span span{color:var(--accent)}
+.ms-legal{padding:clamp(40px,6vw,84px) clamp(18px,4vw,42px) clamp(56px,7vw,96px)}
+.ms-legal-inner{max-width:760px;margin:0 auto}
+.ms-legal h1{margin:14px 0 0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(44px,7vw,72px);line-height:.96;letter-spacing:-.01em;color:var(--text-display)}
+.ms-legal-updated{margin:14px 0 0;font-family:var(--font-body);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint)}
+.ms-legal h2{margin:clamp(30px,3.4vw,44px) 0 0;font-family:var(--font-body);font-weight:700;font-size:clamp(21px,2vw,26px);line-height:1.3;letter-spacing:0;color:var(--white)}
+.ms-legal h2::before{content:"";display:block;width:34px;height:2px;background:var(--accent);margin-bottom:14px}
+.ms-legal p{margin:14px 0 0;font-size:16.5px;line-height:1.7;color:var(--text-body)}
+.ms-legal ul{margin:14px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.ms-legal li{position:relative;padding-inline-start:20px;font-size:16px;line-height:1.65;color:var(--text-body)}
+.ms-legal li::before{content:"";position:absolute;inset-inline-start:0;top:.62em;width:9px;height:2px;background:var(--accent)}
+.ms-legal li strong,.ms-legal p strong{color:var(--white);font-weight:700}
+.ms-legal a{color:var(--red-400);text-decoration:underline;text-underline-offset:3px}
+.ms-legal a:hover{color:var(--red-300)}
+.ms-legal-contact li{font-size:16.5px}
+@media (max-width:640px){
+  .ms-legal p{font-size:15.5px}
+  .ms-legal li{font-size:15.5px}
+}

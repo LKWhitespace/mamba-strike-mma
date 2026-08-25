@@ -133,48 +133,116 @@
   updateScrollBar();
 
   // ------ Mobile menu toggle ------
+  // Keyboard contract: the burger toggles on Enter/Space (it's a real <button>),
+  // opening moves focus to the first link so the panel is reachable without
+  // tabbing back through the header, Escape closes and returns focus to the
+  // burger, and tabbing past the last link closes it instead of leaving an open
+  // panel behind the caret.
   var menuBtn = document.querySelector('[data-msa="menubtn"]');
   var menuPanel = document.querySelector('[data-msa="menupanel"]');
-  function setMenu(open){
+  function menuIsOpen(){
+    return !!menuPanel && menuPanel.dataset.open === '1';
+  }
+  function setMenu(open, opts){
     if(!menuPanel || !menuBtn) return;
+    var wasOpen = menuIsOpen();
     menuPanel.dataset.open = open ? '1' : '0';
     menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.setAttribute('aria-label', open ? 'סגירת תפריט' : 'פתיחת תפריט');
+    if(!opts || !opts.silent){
+      if(open){
+        var first = menuPanel.querySelector('a');
+        if(first) first.focus();
+      } else if(wasOpen && opts && opts.restoreFocus){
+        menuBtn.focus();
+      }
+    }
   }
   if(menuBtn && menuPanel){
     menuBtn.addEventListener('click', function(){
-      setMenu(menuPanel.dataset.open !== '1');
+      setMenu(!menuIsOpen());
     });
     menuPanel.addEventListener('click', function(e){
       var a = e.target.closest('a');
-      if(a) setMenu(false);
+      if(a) setMenu(false, {silent:true});
     });
     document.addEventListener('click', function(e){
-      if(menuPanel.dataset.open !== '1') return;
+      if(!menuIsOpen()) return;
       if(menuBtn.contains(e.target) || menuPanel.contains(e.target)) return;
-      setMenu(false);
+      setMenu(false, {silent:true});
     });
     document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape') setMenu(false);
+      if(e.key !== 'Escape' || !menuIsOpen()) return;
+      setMenu(false, {restoreFocus:true});
+    });
+    // Tab out of the panel (either edge) closes it. focusout fires before the
+    // new element is focused, so relatedTarget is what we have to test.
+    menuPanel.addEventListener('focusout', function(e){
+      if(!menuIsOpen()) return;
+      var next = e.relatedTarget;
+      if(next && (menuPanel.contains(next) || menuBtn.contains(next))) return;
+      setMenu(false, {silent:true});
     });
   }
 
-  // ------ FAB visibility: only show after user scrolls past hero ------
+  // ------ Conversion event layer ------
+  // Fires one dataLayer event per conversion tap. It is deliberately
+  // analytics-agnostic: with no GA4 snippet on the page the pushes just queue on
+  // window.dataLayer and nothing leaves the browser. The moment a GA4
+  // Measurement ID is added to index.html, every event below starts reporting
+  // with no further code changes. Delegated off href so the markup stays clean.
+  window.dataLayer = window.dataLayer || [];
+  function track(action, label){
+    try{
+      window.dataLayer.push({event:'ms_' + action, ms_action:action, ms_label:label || ''});
+    } catch(e){}
+  }
+  function actionForHref(href){
+    if(!href) return '';
+    if(href.indexOf('tel:') === 0) return 'phone_click';
+    if(href.indexOf('wa.me') > -1 || href.indexOf('whatsapp.com') > -1) return 'whatsapp_click';
+    if(href.indexOf('letts.co.il') > -1) return 'trial_click';
+    if(href.indexOf('waze.com') > -1) return 'waze_click';
+    if(href.indexOf('google.com/maps') > -1) return 'map_click';
+    return '';
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href]');
+    if(!a || a.hasAttribute('data-ms-notrack')) return;
+    var action = actionForHref(a.getAttribute('href') || '');
+    if(!action) return;
+    var label = (a.getAttribute('aria-label') || a.textContent || '').trim().slice(0, 60);
+    track(action, label);
+  }, true);
+
+  // ------ FAB visibility ------
+  // The floating button is suppressed over every band that carries its own
+  // WhatsApp / trial CTA: the hero, the audience cards, the red trial block and
+  // the contact section. That is what stops it sitting on top of the adults card
+  // button and the contact buttons — a floating control can't be nudged out of
+  // the way of a full-width button, so it steps aside instead. Everywhere else
+  // (about / programs / how-we-train / coach / testimonials / FAQ) it shows.
+  //
   // The class flip is deferred to rAF so the layout invalidation lands in the same
   // frame as the paint, not mid-scroll where it would force any subsequent geometry
   // read (see updateScrollBar above) to reflow synchronously.
-  var heroSec = document.querySelector('.ms-hero-v2');
-  if(heroSec && 'IntersectionObserver' in window){
+  var fabBlockers = document.querySelectorAll('.ms-hero-v2, #audience, .ms-cta-block, #contact');
+  if(fabBlockers.length && 'IntersectionObserver' in window){
+    var blocked = new Set();
     var fabState = null;
     var fabObs = new IntersectionObserver(function(entries){
-      var visible = entries[entries.length - 1].intersectionRatio > 0.1;
-      var next = visible ? 'hide' : 'show';
+      entries.forEach(function(entry){
+        if(entry.intersectionRatio > 0.06) blocked.add(entry.target);
+        else blocked.delete(entry.target);
+      });
+      var next = blocked.size ? 'hide' : 'show';
       if(next === fabState) return;
       fabState = next;
       requestAnimationFrame(function(){
-        document.body.classList.toggle('ms-fab-visible', !visible);
+        document.body.classList.toggle('ms-fab-visible', next === 'show');
       });
-    }, {threshold:[0, 0.1, 0.5]});
-    fabObs.observe(heroSec);
+    }, {threshold:[0, 0.06, 0.3]});
+    fabBlockers.forEach(function(el){ fabObs.observe(el); });
   }
 
   // ------ Reveal-on-scroll (IntersectionObserver, with sibling stagger) ------
@@ -309,6 +377,9 @@
   }
   function openWa(url){
     var link = document.createElement('a');
+    // Marked so the click delegator doesn't also log a whatsapp_click for the
+    // synthetic anchor — a form send is one conversion, not two.
+    link.setAttribute('data-ms-notrack', '');
     link.href = url;
     link.target = '_blank';
     link.rel = 'noopener';
@@ -343,8 +414,18 @@
       });
       if(firstInvalid){ firstInvalid.focus(); return; }
       lastWaUrl = buildWaUrl();
+      track('form_submit', 'contact');
       contactForm.hidden = true;
-      if(contactSuccess) contactSuccess.hidden = false;
+      if(contactSuccess){
+        contactSuccess.hidden = false;
+        // Move the caret to the confirmation so keyboard and screen-reader users
+        // land on it — the form they were in has just been removed from the flow.
+        var successHeading = contactSuccess.querySelector('h4');
+        if(successHeading){
+          successHeading.setAttribute('tabindex', '-1');
+          successHeading.focus();
+        }
+      }
       openWa(lastWaUrl);
     });
   }

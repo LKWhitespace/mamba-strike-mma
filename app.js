@@ -204,6 +204,7 @@
     if(href.indexOf('letts.co.il') > -1) return 'trial_click';
     if(href.indexOf('waze.com') > -1) return 'waze_click';
     if(href.indexOf('google.com/maps') > -1) return 'map_click';
+    if(href.indexOf('share.google') > -1) return 'gbp_click';
     return '';
   }
   document.addEventListener('click', function(e){

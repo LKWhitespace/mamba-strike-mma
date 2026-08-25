@@ -37,7 +37,7 @@ link's href, so no markup attributes are needed:
 | `ms_trial_click` | any link to the letts.co.il trial booking |
 | `ms_whatsapp_click` | any `wa.me` link (header, hero, cards, coach, CTA block, FAB) |
 | `ms_phone_click` | any `tel:` link |
-| `ms_waze_click` / `ms_map_click` | the Waze and Google Maps links |
+| `ms_waze_click` / `ms_map_click` / `ms_gbp_click` | the Waze, Google Maps and Google Business Profile links |
 | `ms_form_submit` | the contact form, on successful validation |
 
 With no tag on the page these just queue in the array and nothing leaves the

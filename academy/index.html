@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mamba Strike Academy — קורס MMA למתחילים</title>
+<meta name="description" content="קורס דיגיטלי בעברית ללחימה בעמידה — 11 סרטוני וידאו קצרים על עמידה, אגרופים, הגנה ובעיטות. בלי ניסיון קודם, בקצב שלכם.">
+<meta name="theme-color" content="#050506">
+<link rel="canonical" href="https://mambastrike.co.il/academy/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mambastrike.co.il/academy/">
+<meta property="og:site_name" content="Mamba Strike Academy">
+<meta property="og:title" content="Mamba Strike Academy — קורס MMA למתחילים">
+<meta property="og:description" content="11 שיעורי וידאו קצרים. עמידה, אגרופים, הגנה ובעיטות. בקצב שלכם.">
+<meta property="og:image" content="https://mambastrike.co.il/academy/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="אולם האימונים של Mamba Strike Academy">
+<meta property="og:locale" content="he_IL">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mamba Strike Academy — קורס MMA למתחילים">
+<meta name="twitter:description" content="11 שיעורי וידאו קצרים. עמידה, אגרופים, הגנה ובעיטות. בקצב שלכם.">
+<meta name="twitter:image" content="https://mambastrike.co.il/academy/assets/og.png">
+
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link rel="stylesheet" href="styles/index.css">
+<link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+
+<div data-msa="splash" aria-hidden="true" style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:#050506;animation:msaSplashOut 1.85s cubic-bezier(0.2,0.7,0.2,1) forwards">
+  <img src="assets/logo-symbol.svg" alt="" style="width:clamp(90px,14vw,150px);height:auto;animation:msaMarkGrow 1.85s cubic-bezier(0.5,0,0.2,1) forwards">
+</div>
+
+<div style="position:relative;min-height:100vh;background:var(--bg-page);font-family:var(--font-body);color:var(--text-body)">
+
+<header style="position:sticky;top:0;z-index:50;height:var(--nav-height);display:flex;align-items:center;gap:clamp(16px,3vw,34px);padding:0 clamp(20px,4vw,42px);background:var(--surface-veil);backdrop-filter:saturate(140%) blur(14px);-webkit-backdrop-filter:saturate(140%) blur(14px);border-bottom:1.5px solid var(--rule-accent)">
+  <div id="scrollBar" aria-hidden="true" style="position:absolute;bottom:-1.5px;inset-inline-start:0;height:2px;width:0%;background:var(--accent);box-shadow:var(--glow-red-sm)"></div>
+  <a href="#top" aria-label="Mamba Strike Academy — לראש העמוד" style="display:flex;align-items:center;gap:12px;flex:0 0 auto;line-height:0">
+    <img src="assets/logo-symbol.svg" alt="" aria-hidden="true" style="width:40px;height:auto;display:block">
+    <span dir="ltr" style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;white-space:nowrap">
+      <span dir="ltr" style="display:block;text-align:right;font-family:var(--font-body);font-weight:700;font-size:12px;letter-spacing:0.18em;color:var(--white);line-height:1.1">MAMBA <span style="color:var(--accent)">STRIKE</span></span>
+      <span dir="ltr" style="display:block;text-align:right;font-family:var(--font-body);font-weight:700;font-size:9px;letter-spacing:0.42em;color:var(--text-faint);line-height:1.1;padding-inline-end:2px">ACADEMY</span>
+    </span>
+  </a>
+  <nav data-msa="navlinks" aria-label="ניווט ראשי" style="display:flex;align-items:center;gap:clamp(16px,2.4vw,26px);flex:1 1 auto">
+    <a data-msa="navlink" href="#intro">סרטון המבוא</a>
+    <a data-msa="navlink" href="#about">על הקורס</a>
+    <a data-msa="navlink" href="#lessons">ספריית השיעורים</a>
+  </nav>
+  <div style="display:flex;align-items:center;gap:10px;flex:1 1 auto;justify-content:flex-end">
+    <a id="startCourseBtn" href="#lessons" class="ms-btn ms-btn--sm ms-btn--primary" style="height:36px">לספריית השיעורים</a>
+    <button data-msa="menubtn" id="menuBtn" type="button" aria-label="פתיחת תפריט הניווט" aria-expanded="false" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--radius-md);background:transparent;border:2px solid var(--white-a08);color:var(--white);cursor:pointer">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></svg>
+    </button>
+  </div>
+  <div id="menuPanel" data-msa="menupanel" hidden style="position:absolute;top:var(--nav-height);inset-inline:0;background:var(--bg-surface);border-bottom:1.5px solid var(--rule-accent);padding:14px clamp(20px,4vw,42px) 20px;flex-direction:column;gap:2px;animation:msaFade var(--dur-fast) var(--ease-out)">
+    <a href="#intro" data-menu-link style="padding:14px 0;font-family:var(--font-body);font-weight:700;font-size:17px;color:var(--white);border-bottom:1px solid var(--white-a08)">סרטון המבוא</a>
+    <a href="#about" data-menu-link style="padding:14px 0;font-family:var(--font-body);font-weight:700;font-size:17px;color:var(--white);border-bottom:1px solid var(--white-a08)">על הקורס</a>
+    <a href="#lessons" data-menu-link style="padding:14px 0;font-family:var(--font-body);font-weight:700;font-size:17px;color:var(--white)">ספריית השיעורים</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section data-msa="sec" style="position:relative;overflow:hidden;min-height:min(90vh,880px);display:flex;align-items:flex-end;border-bottom:1.5px solid var(--rule-accent)">
+  <img data-msa="heroimg" src="assets/hero-gym.png" alt="אולם האימונים של ממבה סטרייק — שק אגרוף וכלוב אימונים" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:38% 52%;filter:saturate(0.82) contrast(1.05);animation:msaHeroIn 2.1s cubic-bezier(0.2,0.7,0.2,1) both;animation-delay:0.55s">
+  <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(to left,rgba(5,5,6,0.96) 0%,rgba(5,5,6,0.8) 32%,rgba(5,5,6,0.28) 64%,rgba(5,5,6,0.5) 100%),linear-gradient(to top,#050506 0%,rgba(5,5,6,0.18) 40%,rgba(5,5,6,0.5) 100%);pointer-events:none"></div>
+  <div style="position:relative;z-index:2;width:100%;max-width:1240px;margin:0 auto;padding:clamp(96px,14vw,190px) clamp(20px,4vw,42px) clamp(52px,6vw,92px)">
+    <div style="max-width:min(760px,100%)">
+      <div data-msa="heroline" style="display:flex;align-items:center;gap:12px;font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:0.18em;color:var(--gray-300);animation:msaUp 0.7s var(--ease-out) both;animation-delay:1.05s">
+        <span style="flex:0 0 auto;width:26px;height:2px;background:var(--accent)"></span>
+        <span style="white-space:nowrap">קורס דיגיטלי · 11 סרטוני וידאו</span>
+      </div>
+      <h1 data-msa="heroline" style="margin:16px 0 0;font-family:var(--font-display);font-weight:700;font-size:clamp(56px,9vw,132px);line-height:0.86;letter-spacing:-0.01em;color:var(--text-display);animation:msaUp 0.75s var(--ease-out) both;animation-delay:1.15s">
+        <span dir="ltr" style="display:block;text-align:right">MAMBA STRIKE</span>
+        <span dir="ltr" style="display:block;text-align:right">ACADEMY</span>
+      </h1>
+      <div data-msa="heroline" style="margin-top:4px;font-family:var(--font-display-he);font-weight:700;font-size:clamp(30px,4.6vw,60px);line-height:1.02;color:var(--accent);animation:msaUp 0.75s var(--ease-out) both;animation-delay:1.25s">קורס <span dir="ltr">MMA</span> למתחילים</div>
+      <img data-msa="heroline" src="assets/swoosh.png" alt="" aria-hidden="true" style="display:block;width:min(560px,86%);height:auto;margin:10px 0 0 auto;animation:msaUp 0.75s var(--ease-out) both;animation-delay:1.32s">
+      <p data-msa="heroline" style="margin:22px 0 0;max-width:44ch;font-family:var(--font-body);font-size:clamp(16px,1.4vw,19px);line-height:1.5;color:var(--gray-300);animation:msaUp 0.75s var(--ease-out) both;animation-delay:1.4s">עשרה שיעורי וידאו קצרים: עמידה, אגרופים, הגנה ובעיטות. בלי ניסיון קודם, בקצב שלכם.</p>
+      <div data-msa="heroline" style="margin-top:30px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;animation:msaUp 0.75s var(--ease-out) both;animation-delay:1.5s">
+        <a href="#lessons" class="ms-btn ms-btn--md ms-btn--primary">לספריית השיעורים</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section id="intro" data-msa="sec" style="position:relative;overflow:hidden;background:var(--bg-sunken);padding:clamp(60px,7.5vw,116px) clamp(20px,4vw,42px)">
+  <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(90% 70% at 0% 0%,rgba(227,30,36,0.10) 0%,rgba(5,5,6,0) 60%);pointer-events:none"></div>
+  <div data-msa="feature-grid" style="position:relative;z-index:2;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(28px,4vw,60px);align-items:center">
+    <button data-anim data-msa="feature" type="button" data-open-lesson="0" aria-label="נגן את סרטון המבוא של האקדמיה" style="position:relative;display:block;width:100%;padding:0;margin:0;border:1px solid var(--white-a08);border-radius:var(--radius-md);overflow:hidden;background:var(--bg-surface);cursor:pointer">
+      <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#000">
+        <img data-msa="thumbimg" data-yt-fallback src="https://i.ytimg.com/vi/Wq3JAyT-N2I/maxresdefault.jpg" alt="פריים מתוך סרטון המבוא של Mamba Strike Academy" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.78) contrast(1.06);transition:transform var(--dur-slow) var(--ease-out)">
+        <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,6,0.88) 0%,rgba(5,5,6,0.18) 52%,rgba(5,5,6,0.06) 100%)"></div>
+        <span data-msa="play" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:clamp(64px,7vw,92px);height:clamp(64px,7vw,92px);border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(5,5,6,0.5);border:2px solid rgba(255,255,255,0.55);color:var(--white)">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M7 4.5l13 7.5-13 7.5z"></path></svg>
+        </span>
+        <span style="position:absolute;bottom:14px;inset-inline-start:16px;display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--radius-sm);background:var(--accent);color:var(--white);font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:0.14em">התחילו כאן</span>
+      </div>
+    </button>
+    <div data-anim>
+      <div style="display:flex;align-items:center;gap:12px;font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:0.18em;color:var(--text-muted)">
+        <span style="flex:0 0 auto;width:26px;height:2px;background:var(--accent)"></span>
+        <span style="white-space:nowrap">לפני שיעור 01</span>
+      </div>
+      <h2 style="margin:14px 0 0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(42px,5.2vw,76px);line-height:0.94;letter-spacing:-0.01em;color:var(--text-display)">סרטון המבוא</h2>
+      <div style="margin-top:3px;font-family:var(--font-display-he);font-weight:700;font-size:clamp(24px,2.7vw,33px);line-height:1.04;color:var(--accent)">הכניסה לאקדמיה</div>
+      <img src="assets/swoosh.png" alt="" aria-hidden="true" style="display:block;width:88%;height:auto;margin:8px 0 0 auto">
+      <p style="margin:18px 0 0;max-width:40ch;font-family:var(--font-body);font-size:16px;line-height:1.5;color:var(--text-body)">מה כולל הקורס, איך בנויים השיעורים ואיך מתרגלים נכון בבית. צפו בו לפני שיעור 01.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" data-msa="sec" style="position:relative;padding:clamp(60px,7.5vw,116px) clamp(20px,4vw,42px);border-top:1.5px solid var(--rule-accent)">
+  <div data-msa="about-grid" style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px)">
+    <div data-anim>
+      <h2 style="margin:0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(38px,5vw,72px);line-height:0.94;letter-spacing:-0.01em;color:var(--text-display)">על הקורס</h2>
+      <div style="margin-top:3px;font-family:var(--font-display-he);font-weight:700;font-size:clamp(24px,2.7vw,33px);line-height:1.04;color:var(--accent)">למי זה מיועד</div>
+      <img src="assets/swoosh.png" alt="" aria-hidden="true" style="display:block;width:88%;height:auto;margin:8px 0 0 auto">
+      <p style="margin:18px 0 0;max-width:44ch;font-family:var(--font-body);font-size:16px;line-height:1.5;color:var(--text-body)">האקדמיה מלמדת את הבסיס של הלחימה בעמידה, שיעור אחרי שיעור. כל שיעור מתמקד בטכניקה אחת — לאט, ואז בקצב אימון.</p>
+      <div style="margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));column-gap:clamp(16px,2.4vw,32px);border-top:1.5px solid var(--rule-accent)">
+        <div style="padding:18px 0;border-bottom:1.5px solid var(--rule-accent)"><div style="font-family:var(--font-display);font-weight:700;font-size:40px;line-height:0.9;color:var(--accent)">11</div><div style="margin-top:4px;font-family:var(--font-body);font-size:14px;line-height:1.35;color:var(--text-muted)">סרטונים באקדמיה</div></div>
+        <div style="padding:18px 0;border-bottom:1.5px solid var(--rule-accent)"><div style="font-family:var(--font-display);font-weight:700;font-size:40px;line-height:0.9;color:var(--accent)">∞</div><div style="margin-top:4px;font-family:var(--font-body);font-size:14px;line-height:1.35;color:var(--text-muted)">צפייה חוזרת, בכל זמן</div></div>
+        <a href="#glossary" data-open-glossary="1" style="padding:18px 0;border-bottom:1.5px solid var(--rule-accent);text-decoration:none;display:block;cursor:pointer"><div style="font-family:var(--font-display);font-weight:700;font-size:40px;line-height:0.9;color:var(--accent)">96</div><div style="margin-top:4px;font-family:var(--font-body);font-size:14px;line-height:1.35;color:var(--text-muted)">מושגים במילון הבונוס</div></a>
+      </div>
+    </div>
+    <div data-anim style="display:flex;flex-direction:column;justify-content:center;gap:clamp(26px,3vw,42px)">
+      <div>
+        <div style="font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:0.18em;color:var(--text-muted)">למי הקורס מיועד</div>
+        <ul style="margin:14px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:minmax(0,1fr);gap:10px">
+          <li style="padding:16px 18px;background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;line-height:1.45;color:var(--text-body)">מתחילים בלי רקע קודם באומנויות לחימה</li>
+          <li style="padding:16px 18px;background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;line-height:1.45;color:var(--text-body)">מתאמנים שרוצים לחזור על היסודות בין אימון לאימון</li>
+          <li style="padding:16px 18px;background:var(--bg-surface);border:1px solid var(--white-a08);border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;line-height:1.45;color:var(--text-body)">כל מי שרוצה להבין איך נראה אימון <span dir="ltr">MMA</span> לפני הצעד הראשון</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSONS -->
+<section id="lessons" data-msa="sec" data-density="cards" style="position:relative;padding:clamp(60px,7.5vw,116px) clamp(20px,4vw,42px);border-top:1.5px solid var(--rule-accent);background:var(--bg-sunken)">
+  <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto">
+    <div data-anim style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:clamp(24px,3vw,48px)">
+      <div style="flex:1 1 420px;min-width:0">
+        <h2 style="margin:0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(38px,5.4vw,76px);line-height:0.94;letter-spacing:-0.01em;color:var(--text-display)">ספריית השיעורים</h2>
+        <div style="margin-top:3px;font-family:var(--font-display-he);font-weight:700;font-size:clamp(24px,2.7vw,33px);line-height:1.04;color:var(--accent)">עשרה שיעורים · לפי הסדר</div>
+        <img src="assets/swoosh.png" alt="" aria-hidden="true" style="display:block;width:78%;height:auto;margin:8px 0 0 auto">
+        <p style="margin:16px 0 0;max-width:52ch;font-family:var(--font-body);font-size:16px;line-height:1.5;color:var(--text-body)">כל שיעור בנוי על זה שלפניו. התחילו מ־01 והתקדמו לפי הסדר.</p>
+      </div>
+      <div id="progressPanel" style="flex:0 1 340px;min-width:250px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+          <span style="font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:0.18em;color:var(--text-muted)">ההתקדמות שלך</span>
+          <span id="progressLabel" dir="ltr" style="font-family:var(--font-display);font-weight:700;font-size:30px;line-height:1;color:var(--accent)">0/10</span>
+        </div>
+        <div style="margin-top:10px;height:6px;border-radius:999px;background:var(--white-a08);overflow:hidden">
+          <div id="progressBar" style="height:100%;background:var(--accent);width:0%;transition:width var(--dur-slow) var(--ease-out)"></div>
+        </div>
+        <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:10px">
+          <button id="continueBtn" type="button" class="ms-btn ms-btn--sm ms-btn--secondary" style="height:36px">התחילו משיעור 01</button>
+          <button id="resetBtn" type="button" class="ms-btn ms-btn--sm ms-btn--ghost" hidden style="height:36px">איפוס התקדמות</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="lessonGroups"></div>
+
+    <div data-anim style="margin-top:clamp(38px,5vw,68px)">
+      <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:16px;margin-bottom:20px">
+        <span style="font-family:var(--font-display-he);font-weight:700;font-size:33px;line-height:0.9;color:var(--accent)">ד׳</span>
+        <h3 style="margin:0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(26px,2.6vw,33px);line-height:1.04;letter-spacing:-0.01em;white-space:nowrap;color:var(--white)">סיום הקורס</h3>
+        <span aria-hidden="true" style="flex:1 1 40px;height:1.5px;background:var(--rule-accent)"></span>
+        <span data-msa="grouphint" style="flex:0 0 auto;white-space:nowrap;font-family:var(--font-body);font-size:13px;color:var(--text-muted)">חיבור של כל מה שנלמד לסדרה אחת</span>
+      </div>
+      <article data-msa="finale" id="finaleCard" role="button" tabindex="0" aria-label="נגן שיעור 10 — תרגול מסכם" data-open-lesson="10" style="position:relative;display:flex;background:var(--bg-surface);border:1px solid var(--red-a42);border-radius:var(--radius-md);overflow:hidden;cursor:pointer">
+        <div data-msa="finalethumb" style="position:relative;flex:0 0 42%;overflow:hidden;background:#000;min-height:220px">
+          <img data-msa="thumbimg" data-yt-fallback src="https://i.ytimg.com/vi/GYUrn0hUbmI/maxresdefault.jpg" alt="פריים מתוך שיעור 10 — תרגול מסכם" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.75) contrast(1.06);transition:transform var(--dur-slow) var(--ease-out)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(to right,rgba(5,5,6,0.86) 0%,rgba(5,5,6,0.2) 60%,rgba(5,5,6,0.06) 100%)"></div>
+          <span data-msa="play" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(5,5,6,0.5);border:2px solid rgba(255,255,255,0.5);color:var(--white)">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M7 4.5l13 7.5-13 7.5z"></path></svg>
+          </span>
+          <span id="finaleCheck" title="הושלם" hidden style="position:absolute;top:14px;inset-inline-end:14px;width:28px;height:28px;border-radius:999px;align-items:center;justify-content:center;background:var(--accent);color:var(--white);display:none">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"></path></svg>
+          </span>
+        </div>
+        <div style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:clamp(20px,3vw,40px)">
+          <div style="display:flex;align-items:baseline;gap:14px">
+            <span dir="ltr" style="font-family:var(--font-display);font-weight:700;font-size:clamp(44px,5vw,64px);line-height:0.9;color:var(--accent)">10</span>
+            <span dir="ltr" style="font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:0.18em;color:var(--text-faint)">COMBINATION</span>
+          </div>
+          <h4 style="margin:0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(33px,3.6vw,48px);line-height:1;letter-spacing:-0.01em;color:var(--white)">תרגול מסכם</h4>
+          <p style="margin:2px 0 0;max-width:44ch;font-family:var(--font-body);font-size:16px;line-height:1.5;color:var(--text-body)">חיבור של כל מה שנלמד לסדרה אחת רציפה.</p>
+        </div>
+      </article>
+    </div>
+
+    <div data-anim style="margin-top:clamp(38px,5vw,64px);max-width:760px;margin-inline:auto">
+      <div class="ms-remember" dir="rtl">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto;display:block"><path d="M9 18h6"></path><path d="M10 21h4"></path><path d="M12 3a6 6 0 0 0-3.6 10.8c.5.4.8.9.9 1.5l.1.7h5.2l.1-.7c.1-.6.4-1.1.9-1.5A6 6 0 0 0 12 3z"></path></svg>
+        <div class="ms-remember-text"><span>זכור:</span> השיעורים בנויים אחד על השני. אל תדלגו — כל אגרוף מתחיל מהעמידה.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BONUS: GLOSSARY CTA -->
+<section id="glossary" data-msa="sec" style="position:relative;overflow:hidden;padding:clamp(60px,7.5vw,116px) clamp(20px,4vw,42px);border-top:1.5px solid var(--rule-accent);background:var(--bg-page)">
+  <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(80% 60% at 100% 0%,rgba(227,30,36,0.12) 0%,rgba(5,5,6,0) 55%);pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:center">
+    <div data-anim>
+      <div style="display:flex;align-items:center;gap:12px;font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:0.18em;color:var(--text-muted)">
+        <span style="flex:0 0 auto;width:26px;height:2px;background:var(--accent)"></span>
+        <span style="white-space:nowrap">בונוס · 96 מושגים · 12 פרקים</span>
+      </div>
+      <h2 style="margin:14px 0 0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(42px,5.4vw,84px);line-height:0.94;letter-spacing:-0.01em;color:var(--text-display)">מילון מושגים למתאמן המתחיל</h2>
+      <div style="margin-top:3px;font-family:var(--font-display-he);font-weight:700;font-size:clamp(24px,2.7vw,33px);line-height:1.04;color:var(--accent)">השפה שמאחורי כל אימון</div>
+      <img src="assets/swoosh.png" alt="" aria-hidden="true" style="display:block;width:min(500px,78%);height:auto;margin:8px 0 0 auto">
+      <p style="margin:18px 0 0;max-width:52ch;font-family:var(--font-body);font-size:16px;line-height:1.5;color:var(--text-body)">כל המושגים שהמאמן ישתמש בהם — עמידות, מכות, הגנות, היאבקות, קרקע, הכנעות ותוצאות קרב. חוברת קצרה, 12 פרקים, מוכנה לצפייה.</p>
+      <div style="margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+        <button id="openGlossaryBtn" type="button" class="ms-btn ms-btn--md ms-btn--primary">
+          <span>למילון המושגים</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7"></path><path d="M10 14L21 3"></path><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"></path></svg>
+        </button>
+        <a href="assets/glossary.pdf" download="Mamba-Strike-Glossary.pdf" class="ms-btn ms-btn--md ms-btn--secondary">
+          <span>הורדה כ־PDF</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
+        </a>
+      </div>
+    </div>
+    <button data-anim id="openGlossaryTile" type="button" aria-label="פתיחת מילון המושגים" style="position:relative;display:block;width:100%;padding:0;margin:0;border:1px solid var(--red-a42);border-radius:var(--radius-md);overflow:hidden;background:var(--bg-surface);cursor:pointer;transition:var(--transition-control);aspect-ratio:3/4;max-height:520px">
+      <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(135deg,#0A0A0C 0%,#111113 60%,#050506 100%)"></div>
+      <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(60% 70% at 20% 0%,rgba(227,30,36,0.28) 0%,rgba(5,5,6,0) 70%)"></div>
+      <img src="assets/logo-symbol.svg" alt="" aria-hidden="true" style="position:absolute;top:14%;inset-inline-start:8%;width:38%;height:auto;opacity:0.9;filter:drop-shadow(0 0 40px rgba(227,30,36,0.35))">
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(22px,3vw,36px);text-align:right">
+        <div dir="ltr" style="font-family:var(--font-body);font-weight:700;font-size:11px;letter-spacing:0.18em;color:var(--text-faint);text-align:right">MAMBA STRIKE · GLOSSARY</div>
+        <h3 style="margin:8px 0 0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(38px,4.6vw,68px);line-height:0.9;letter-spacing:-0.01em;color:var(--white)">מילון ה־<span style="color:var(--accent)">MMA</span></h3>
+        <div style="margin-top:6px;font-family:var(--font-display-he);font-weight:700;font-size:clamp(22px,2.4vw,30px);line-height:1;color:var(--accent)">כל המושגים</div>
+        <div style="margin-top:16px;display:inline-flex;align-items:center;gap:10px;font-family:var(--font-body);font-weight:700;font-size:12px;letter-spacing:0.14em;color:var(--white);align-self:flex-end">
+          <span>לחצו לפתיחה</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+        </div>
+      </div>
+    </button>
+  </div>
+</section>
+
+</main>
+
+<footer class="ms-footer" dir="rtl">
+  <div class="ms-footer-inner">
+    <div class="ms-footer-brand">
+      <a href="#top" style="display:inline-block;line-height:0" aria-label="Mamba Strike Academy">
+        <img src="assets/logo-symbol.svg" alt="Mamba Strike" style="width:120px;height:auto;display:block">
+      </a>
+      <p class="ms-footer-tagline">משמעת. כוח. נחישות. דרך חיים.</p>
+    </div>
+    <div class="ms-footer-links">
+      <a href="#intro">סרטון המבוא</a>
+      <a href="#about">על הקורס</a>
+      <a href="#lessons">ספריית השיעורים</a>
+      <a href="#glossary">מילון מושגים</a>
+    </div>
+  </div>
+  <div class="ms-footer-eyebrow">MAMBA <em>STRIKE</em> MMA</div>
+</footer>
+
+<!-- Modal -->
+<div id="modalWrap" data-msa="modalwrap" role="presentation" hidden style="position:fixed;inset:0;z-index:100;background:rgba(5,5,6,0.94);align-items:center;justify-content:center;padding:clamp(12px,3vw,40px);animation:msaFade var(--dur-base) var(--ease-out)">
+  <div id="modalPanel" data-msa="modal" role="dialog" aria-modal="true" aria-labelledby="msa-modal-title" tabindex="-1" dir="rtl" style="position:relative;width:min(1160px,100%);max-height:100%;overflow-x:hidden;overflow-y:auto;display:flex;flex-direction:column;background:var(--bg-surface);border:1px solid var(--red-a42);border-radius:var(--radius-lg);box-shadow:var(--shadow-lift);outline:none;animation:msaRise var(--dur-slow) var(--ease-out)">
+    <div data-msa="modalhead" style="display:flex;align-items:center;gap:clamp(12px,2vw,20px);padding:14px clamp(16px,2.4vw,26px);border-bottom:1.5px solid var(--rule-accent)">
+      <span id="modalNum" dir="ltr" style="flex:0 0 auto;font-family:var(--font-display);font-weight:700;font-size:38px;line-height:0.9;color:var(--accent)">00</span>
+      <div style="flex:1 1 auto;min-width:0">
+        <h2 id="msa-modal-title" style="margin:0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(26px,3vw,33px);line-height:1.02;letter-spacing:-0.01em;color:var(--white)"></h2>
+        <div id="modalTerm" dir="ltr" style="text-align:right;margin-top:2px;font-family:var(--font-body);font-weight:700;font-size:10px;letter-spacing:0.18em;color:var(--text-faint)"></div>
+      </div>
+      <button id="modalClose" class="ms-iconbtn" type="button" aria-label="סגירת נגן הווידאו">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div style="position:relative;width:100%;aspect-ratio:16/9;background:#000">
+      <iframe id="modalIframe" title="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block"></iframe>
+    </div>
+    <div data-msa="modalbody" style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(14px,2vw,26px);padding:20px clamp(16px,2.4vw,26px) 24px">
+      <p id="modalDesc" style="flex:1 1 300px;margin:0;font-family:var(--font-body);font-size:15px;line-height:1.45;color:var(--text-body)"></p>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;flex:0 0 auto">
+        <button id="modalPrev" type="button" class="ms-btn ms-btn--sm ms-btn--ghost" style="height:36px">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+          <span>הקודם</span>
+        </button>
+        <button id="modalNext" type="button" class="ms-btn ms-btn--sm ms-btn--ghost" style="height:36px">
+          <span>הבא</span>
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+        </button>
+        <button id="modalMark" type="button" class="ms-btn ms-btn--sm ms-btn--secondary" style="height:36px"><span>סמן כהושלם</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PDF Modal -->
+<div id="pdfWrap" data-msa="modalwrap" role="presentation" hidden style="position:fixed;inset:0;z-index:100;background:rgba(5,5,6,0.94);align-items:center;justify-content:center;padding:clamp(12px,3vw,40px);animation:msaFade var(--dur-base) var(--ease-out)">
+  <div id="pdfPanel" data-msa="modal" role="dialog" aria-modal="true" aria-labelledby="msa-pdf-title" tabindex="-1" dir="rtl" style="position:relative;width:min(1080px,100%);height:min(92vh,1080px);max-height:100%;display:flex;flex-direction:column;background:var(--bg-surface);border:1px solid var(--red-a42);border-radius:var(--radius-lg);box-shadow:var(--shadow-lift);outline:none;overflow:hidden;animation:msaRise var(--dur-slow) var(--ease-out)">
+    <div data-msa="modalhead" style="display:flex;align-items:center;gap:clamp(12px,2vw,20px);padding:14px clamp(16px,2.4vw,26px);border-bottom:1.5px solid var(--rule-accent);flex:0 0 auto">
+      <div style="flex:1 1 auto;min-width:0">
+        <div dir="ltr" style="text-align:right;font-family:var(--font-body);font-weight:700;font-size:10px;letter-spacing:0.18em;color:var(--text-faint)">BONUS · GLOSSARY</div>
+        <h2 id="msa-pdf-title" style="margin:2px 0 0;font-family:var(--font-display-he);font-weight:700;font-size:clamp(22px,2.6vw,30px);line-height:1.02;letter-spacing:-0.01em;color:var(--white)">מילון מושגים למתאמן המתחיל</h2>
+      </div>
+      <a href="assets/glossary.pdf" download="Mamba-Strike-Glossary.pdf" class="ms-btn ms-btn--sm ms-btn--secondary" aria-label="הורדת המילון כ־PDF" style="height:36px">
+        <span>הורדה</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
+      </a>
+      <button id="pdfClose" class="ms-iconbtn" type="button" aria-label="סגירת המילון">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
+      </button>
+    </div>
+    <div style="position:relative;flex:1 1 auto;min-height:0;background:#111">
+      <iframe id="pdfIframe" title="מילון מושגים למתאמן המתחיל" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#111"></iframe>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

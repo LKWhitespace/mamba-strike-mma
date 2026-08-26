@@ -1,0 +1,76 @@
+:root{
+/* ── Base ink ─────────────────────────────────────────── */
+--ink-1000:#000000;
+--ink-900:#050506;
+--ink-850:#0A0A0C;
+--ink-800:#111113;
+--ink-750:#17171A;
+--ink-700:#1E1E22;
+--ink-600:#232327;
+
+/* ── Mamba red ────────────────────────────────────────── */
+--red-300:#FF6167;
+--red-400:#FF3B42;
+--red-500:#E31E24;
+--red-600:#B3161B;
+--red-700:#7E1013;
+
+/* ── Neutrals ─────────────────────────────────────────── */
+--white:#FFFFFF;
+--gray-050:#F2F2F2;
+--gray-100:#EDEDF0;
+--gray-300:#B4B4BC;
+--gray-350:#AEAEB6;
+--gray-400:#A8A8B0;
+--gray-500:#8E8E96;
+--gray-600:#6E6E76;
+--gray-700:#5A5A62;
+
+/* ── Alphas (rules, washes, veils) ────────────────────── */
+--red-a42:rgba(227,30,36,0.42);
+--red-a30:rgba(227,30,36,0.30);
+--red-a16:rgba(227,30,36,0.16);
+--red-a08:rgba(227,30,36,0.08);
+--red-a05:rgba(227,30,36,0.05);
+--white-a12:rgba(255,255,255,0.12);
+--white-a08:rgba(255,255,255,0.08);
+--white-a04:rgba(255,255,255,0.04);
+--ink-a82:rgba(5,5,6,0.82);
+--ink-a45:rgba(5,5,6,0.45);
+
+/* ── Semantic surfaces ────────────────────────────────── */
+--bg-page:var(--ink-900);
+--bg-surface:var(--ink-850);
+--bg-raised:var(--ink-800);
+--bg-sunken:var(--ink-1000);
+--surface-callout:linear-gradient(180deg,var(--red-a16) 0%,var(--red-a05) 100%);
+--surface-accent:var(--red-500);
+--surface-veil:var(--ink-a82);
+
+/* ── Semantic text ────────────────────────────────────── */
+--text-display:var(--white);
+--text-heading:var(--gray-050);
+--text-term:var(--gray-100);
+--text-body:var(--gray-350);
+--text-body-dim:var(--gray-400);
+--text-muted:var(--gray-500);
+--text-faint:var(--gray-700);
+--text-accent:var(--red-500);
+--text-on-accent:var(--white);
+
+/* ── Semantic lines & accents ─────────────────────────── */
+--accent:var(--red-500);
+--accent-hover:var(--red-400);
+--accent-press:var(--red-600);
+--rule-accent:var(--red-a42);
+--border-subtle:var(--white-a08);
+--border-accent:var(--red-500);
+--focus-ring:var(--red-400);
+
+/* ── Status. Intentional addition: the print source only
+      uses red/white/black. Kept muted so red stays the
+      loudest colour on any screen. ────────────────────── */
+--status-danger:var(--red-500);
+--status-success:#35C46B;
+--status-warning:#F2A93B;
+}

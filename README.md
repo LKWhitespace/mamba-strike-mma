@@ -12,6 +12,15 @@ Zero-build static HTML/CSS/JS. Deployed on **GitHub Pages** from `main` / root.
 - `accessibility.html` — הצהרת נגישות (linked from the footer of every page)
 - `privacy.html` — מדיניות פרטיות (linked from the footer and from the contact form)
 - `robots.txt` / `sitemap.xml` — both were 404 before; the sitemap lists the three pages
+- `academy/` — the Academy course site, served at `mambastrike.co.il/academy/`. Vendored
+  from the `mamba-strike-academy` repo, which was previously deployed on its own Vercel
+  host. Its asset paths were rewritten from root-absolute (`/assets/…`) to **relative**
+  (`assets/…`) so the folder works at any mount point; keep them relative or the page
+  breaks the moment it is not at a domain root. Its canonical and OG urls point at
+  `https://mambastrike.co.il/academy/`.
+  **This copy is the one that ships.** Edits made in the `mamba-strike-academy` repo do
+  not reach the live site — either treat this folder as the source of truth, or re-vendor
+  from there and re-run the path rewrite.
 - `styles/` — design tokens + component CSS
 - `app.js` — vanilla-JS interactions (scroll bar, mobile menu, reveal-on-scroll, FAQ accordion, contact form → WhatsApp handoff)
 - `assets/` — photography, logo, favicon

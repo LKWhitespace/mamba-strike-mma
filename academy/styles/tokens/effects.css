@@ -1,0 +1,28 @@
+:root{
+/* The brand does not use drop shadows for hierarchy — it uses
+   hairlines, red glow and protection gradients. */
+--glow-red-sm:0 0 12px rgba(227,30,36,0.30);
+--glow-red:0 0 24px rgba(227,30,36,0.35);
+--glow-red-lg:0 0 48px rgba(227,30,36,0.28);
+--shadow-lift:0 18px 40px rgba(0,0,0,0.55);
+--shadow-inset-top:inset 0 1px 0 rgba(255,255,255,0.05);
+
+/* Protection gradients — laid over photography so display type
+   stays legible. Bottom veil for covers, corner veil for
+   split hero/photo headers. */
+--protect-bottom:linear-gradient(to top,#050506 6%,rgba(5,5,6,0.82) 30%,rgba(5,5,6,0.30) 60%,rgba(5,5,6,0.70) 100%); /* @kind other */
+--protect-corner:radial-gradient(112% 100% at 100% 0%,rgba(5,5,6,0.97) 0%,rgba(5,5,6,0.88) 38%,rgba(5,5,6,0.45) 66%,rgba(5,5,6,0) 88%); /* @kind other */
+--protect-side:linear-gradient(to left,#050506 0%,rgba(5,5,6,0.16) 32%,rgba(5,5,6,0) 74%); /* @kind other */
+
+/* Photo feathering — images are never hard rectangles; they
+   dissolve into the black page through a mask. */
+--mask-feather-corner:linear-gradient(to right,#000 0%,#000 64%,rgba(0,0,0,0) 100%),linear-gradient(to bottom,#000 0%,#000 60%,rgba(0,0,0,0) 100%); /* @kind other */
+--mask-feather-radial:radial-gradient(76% 68% at 44% 46%,#000 34%,rgba(0,0,0,0) 100%); /* @kind other */
+
+/* Textures shipped as assets */
+--texture-page:url("../assets/page-bg.png"); /* @kind other */
+--texture-page-corners:url("../assets/page-bg-corners.png"); /* @kind other */
+
+/* Blur — used only for sticky nav over content */
+--blur-nav:saturate(140%) blur(14px); /* @kind other */
+}

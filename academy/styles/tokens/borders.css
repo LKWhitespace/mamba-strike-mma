@@ -1,0 +1,20 @@
+:root{
+/* Radii — the booklet is mostly square. Only callouts and
+   web controls round, and never past 14px. */
+--radius-0:0px;
+--radius-sm:6px;
+--radius-md:10px;
+--radius-lg:14px;
+--radius-pill:999px;
+
+/* Weights */
+--border-hairline:1px; /* @kind spacing */
+--rule-weight:1.5px; /* @kind spacing */
+--border-strong:2px; /* @kind spacing */
+
+/* Composed */
+--rule-h:var(--rule-weight) solid var(--rule-accent); /* @kind other */
+--border-card:var(--border-hairline) solid var(--border-subtle); /* @kind other */
+--border-card-accent:var(--border-hairline) solid var(--red-a42); /* @kind other */
+--border-callout:var(--border-strong) solid var(--accent); /* @kind other */
+}
